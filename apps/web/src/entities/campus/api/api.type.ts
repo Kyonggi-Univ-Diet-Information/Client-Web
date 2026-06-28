@@ -1,10 +1,7 @@
-import type { FoodCourt } from '@/api/config';
-
-import { SET } from '@/constants/campus/menu';
-import type { SubRestaurant } from '@/constants/campus/restaurant';
-import { FOOD_COURT_RESTAURANTS } from '@/constants/campus/restaurant';
-
-export type { SubRestaurant } from '@/constants/campus/restaurant';
+import type { FoodCourt } from '@/shared/api';
+import { SET } from '@/shared/constants/campus/menu';
+import type { SubRestaurant } from '@/shared/constants/campus/restaurant';
+import { FOOD_COURT_RESTAURANTS } from '@/shared/constants/campus/restaurant';
 
 export type RestaurantsOfFoodCourt<T extends FoodCourt> =
   (typeof FOOD_COURT_RESTAURANTS)[T][number];

@@ -1,4 +1,4 @@
-import { FoodCourt } from '@/api/config';
+import { FoodCourt } from '@/shared/api';
 
 export type Review = {
   id: number;

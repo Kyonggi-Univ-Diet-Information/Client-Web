@@ -1,4 +1,4 @@
-import type { FoodCourt } from '@/api/config';
+import type { FoodCourt } from '@/shared/api';
 
 import type { Rating, RecentReview, ReportReason, Review } from './api.type';
 

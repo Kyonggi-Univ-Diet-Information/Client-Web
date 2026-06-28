@@ -1,4 +1,5 @@
-import type { FoodCourt } from '@/api/config';
+import type { FoodCourt } from '@/shared/api';
+import type { SubRestaurant } from '@/shared/constants/campus/restaurant';
 
 import type {
   CampusMenu,
@@ -6,7 +7,6 @@ import type {
   CampusMenuWithCategory,
   CampusSetMenu,
   CampusTopMenu,
-  SubRestaurant,
 } from './api.type';
 
 

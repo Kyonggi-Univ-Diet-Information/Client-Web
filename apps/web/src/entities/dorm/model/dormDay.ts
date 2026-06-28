@@ -1,6 +1,8 @@
-export type DormDay = keyof typeof DORM_DAY;
+import type { DormDay } from '@/shared/types/dorm';
 
-export const DORM_DAY = {
+export type { DormDay };
+
+export const DORM_DAY: Record<DormDay, string> = {
   MONDAY: '월요일',
   TUESDAY: '화요일',
   WEDNESDAY: '수요일',
@@ -10,7 +12,7 @@ export const DORM_DAY = {
   SUNDAY: '일요일',
 };
 
-export const DORM_DAY_SHORT = {
+export const DORM_DAY_SHORT: Record<DormDay, string> = {
   MONDAY: '월',
   TUESDAY: '화',
   WEDNESDAY: '수',
@@ -20,7 +22,7 @@ export const DORM_DAY_SHORT = {
   SUNDAY: '일',
 };
 
-export const DORM_DAY_SHORT_EN = {
+export const DORM_DAY_SHORT_EN: Record<DormDay, string> = {
   MONDAY: 'Mon',
   TUESDAY: 'Tue',
   WEDNESDAY: 'Wed',
@@ -30,7 +32,7 @@ export const DORM_DAY_SHORT_EN = {
   SUNDAY: 'Sun',
 };
 
-export const DORM_DAY_EN = {
+export const DORM_DAY_EN: Record<DormDay, string> = {
   MONDAY: 'Monday',
   TUESDAY: 'Tuesday',
   WEDNESDAY: 'Wednesday',

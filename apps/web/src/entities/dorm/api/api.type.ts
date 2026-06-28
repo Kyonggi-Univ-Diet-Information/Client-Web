@@ -1,4 +1,6 @@
-export type DormDay = 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+import type { DormDay } from '@/shared/types/dorm';
+
+export type { DormDay };
 
 export type DormTime = 'BREAKFAST' | 'LUNCH' | 'DINNER';
 
