@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-import { cn } from '@/model/common';
+import { cn } from '@/shared/lib';
 
 interface TabNavigationProps {
   tabs: Array<{

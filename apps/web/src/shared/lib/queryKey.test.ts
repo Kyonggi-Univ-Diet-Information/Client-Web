@@ -1,4 +1,4 @@
-import { FOOD_COURT } from '@/api/config';
+import { FOOD_COURT } from '@/shared/api';
 
 import {
   authKeys,

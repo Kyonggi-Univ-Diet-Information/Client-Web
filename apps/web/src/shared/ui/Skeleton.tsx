@@ -1,4 +1,4 @@
-import { cn } from '@/model/common/index';
+import { cn } from '@/shared/lib';
 
 export default function Skeleton({
   className,

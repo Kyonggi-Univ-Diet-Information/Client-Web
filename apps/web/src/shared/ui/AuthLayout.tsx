@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import React from 'react';
 
-import { cn } from '@/model/common';
+import { cn } from '@/shared/lib';
 
 interface AuthPageWrapperProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import type { FoodCourt } from '@/api/config';
+import type { FoodCourt } from '@/shared/api';
 
 export type SubRestaurant = keyof typeof CAMPUS_RESTAURANT;
 
@@ -50,10 +50,6 @@ export const CAMPUS_FOOD_COURTS = [
   'E_SQUARE',
   'SALLY_BOX',
 ] as const;
-export type CampusFoodCourt = (typeof CAMPUS_FOOD_COURTS)[number];
-
-export type RestaurantsOfFoodCourt<T extends FoodCourt> =
-  (typeof FOOD_COURT_RESTAURANTS)[T][number];
 
 export const hasSubRestaurants = (foodCourt: FoodCourt): boolean => {
   return FOOD_COURT_RESTAURANTS[foodCourt].length > 0;

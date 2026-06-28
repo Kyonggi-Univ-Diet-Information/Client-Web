@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn } from '@/model/common';
+import { cn } from '@/shared/lib';
 
 interface StaticTabNavigationProps {
   tabs: Array<{

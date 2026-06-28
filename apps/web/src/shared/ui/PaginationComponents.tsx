@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import * as React from 'react';
 
-import { cn } from '@/model/common';
+import { cn } from '@/shared/lib';
 
 import { Button, buttonVariants } from './Button';
 

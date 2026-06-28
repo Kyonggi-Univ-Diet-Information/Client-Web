@@ -3,7 +3,7 @@
 import React from 'react';
 
 
-import { cn } from '@/model/common';
+import { cn } from '@/shared/lib';
 import {
   WEEKDAYS,
   getCurrentDate,
@@ -11,7 +11,7 @@ import {
   getWeekDates,
   formatKoreanDate,
   isSameDay,
-} from '@/model/common/date';
+} from '@/shared/lib/date';
 
 import { Button } from './Button';
 

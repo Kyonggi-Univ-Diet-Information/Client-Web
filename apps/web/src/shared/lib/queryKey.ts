@@ -7,7 +7,7 @@
  * 하나의 팩토리에서 키를 관리하며, 두 캐시 계층 모두에 대응합니다.
  */
 
-import type { CampusFoodCourt, FoodCourt } from '@/api/config';
+import type { CampusFoodCourt, FoodCourt } from '@/shared/api';
 
 export type QueryKey = readonly unknown[];
 

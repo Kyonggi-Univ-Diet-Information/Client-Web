@@ -1,4 +1,4 @@
-import type { GA4EventName, GA4EventParamsMap } from '@/types/ga4';
+import type { GA4EventName, GA4EventParamsMap } from '@/shared/types/ga4';
 
 /** GA4 Measurement ID */
 export const GA4_MEASUREMENT_ID = 'G-NKEL4R473V';
@@ -113,4 +113,4 @@ export type {
   GA4AccountRevokeParams,
   GA4UserTabClickParams,
   GA4DormDayTabClickParams,
-} from '@/types/ga4';
+} from '@/shared/types/ga4';

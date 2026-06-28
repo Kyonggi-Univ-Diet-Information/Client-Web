@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { PUBLIC_API_URL } from '@/api/config/api-endpoints';
+import { PUBLIC_API_URL } from '@/shared/api/api-endpoints';
 
 export interface RequestBase {
   request: string;
