@@ -1,9 +1,8 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { COOKIE_KEYS } from '@/api/config';
-
-import { getCookieOptions } from '@/model/common/cookie';
+import { COOKIE_KEYS } from '@/shared/api';
+import { getCookieOptions } from '@/shared/lib/cookie';
 
 
 export async function POST(request: NextRequest) {

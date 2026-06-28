@@ -3,17 +3,20 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 
-import { Section } from '@/components/common';
-import DormMenuAll from '@/components/dorm/DormMenuAll';
-import DormMenuAnimatedWrapper from '@/components/dorm/DormMenuAnimatedWrapper';
+import DormMenuAll from '@/widgets/dorm/DormMenuAll';
+import DormMenuAnimatedWrapper from '@/widgets/dorm/DormMenuAnimatedWrapper';
 
-import type { FetchDormMenuResponse } from '@/api/dorm/api.model';
+import type { FetchDormMenuResponse } from '@/entities/dorm/api/api.model';
+import { getAdjacentDates, isSaturday, isSunday } from '@/entities/dorm/model';
+import { DORM_DAY, DORM_DAY_KEY, type DormDay } from '@/entities/dorm/model/dormDay';
 
-import { getCurrentDate } from '@/model/common/date';
-import { getAdjacentDates, isSaturday, isSunday } from '@/model/dorm';
-import { DORM_DAY, DORM_DAY_KEY, type DormDay } from '@/model/dorm/dormDay';
+import { getCurrentDate } from '@/shared/lib/date';
+import { Section } from '@/shared/ui';
 
 import DaySelectModal from './DaySelectModal';
+
+
+
 
 const getWeekDateString = (date?: DormDay) => {
   if (!date) return '오늘';

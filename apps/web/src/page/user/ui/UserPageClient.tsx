@@ -6,17 +6,18 @@ import { useState } from 'react';
 
 
 
-import { Card, ExternalLink, Section } from '@/components/common';
+import { logout } from '@/features/auth/model/logout';
+import { useAuth } from '@/features/auth/model/useIsAuthenticated';
+import { fetchUserProvider } from '@/features/user/api/fetchUserProvider';
+import { submitRevokeReason } from '@/features/user/api/submitRevokeReason';
+import { submitUserRevoke } from '@/features/user/api/submitUserRevoke';
 
-import { PATCHNOTE_URL, INQUIRY_URL } from '@/api/config';
-import { fetchUserProvider } from '@/api/user/fetchUserProvider';
-import { submitRevokeReason } from '@/api/user/submitRevokeReason';
-import { submitUserRevoke } from '@/api/user/submitUserRevoke';
-
-import { logout } from '@/model/auth/logout';
-import { useAuth } from '@/model/auth/useIsAuthenticated';
+import { PATCHNOTE_URL, INQUIRY_URL } from '@/shared/api';
+import { Card, ExternalLink, Section } from '@/shared/ui';
 
 import UserRevokeModal from './UserRevokeModal';
+
+
 
 
 

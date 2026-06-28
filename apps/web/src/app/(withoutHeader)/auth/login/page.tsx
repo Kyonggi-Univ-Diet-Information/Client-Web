@@ -4,10 +4,12 @@ import { ChevronLeftIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Suspense } from 'react';
 
-import LoginSection from '@/components/auth/LoginSection';
-import { AuthCard, AuthPageWrapper, ExternalLink } from '@/components/common';
+import LoginSection from '@/features/auth/ui/LoginSection';
 
-import { POLICY_URL } from '@/api/config';
+import { POLICY_URL } from '@/shared/api';
+import { AuthCard, AuthPageWrapper, ExternalLink } from '@/shared/ui';
+
+
 
 
 function LoginContent() {

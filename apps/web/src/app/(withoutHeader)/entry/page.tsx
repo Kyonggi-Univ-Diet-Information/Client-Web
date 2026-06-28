@@ -5,10 +5,12 @@ import Link from 'next/link';
 
 import { EntryLogoSection, EntryPolicySection } from '@/page/entry/ui';
 
-import LoginSection from '@/components/auth/LoginSection';
-import { AuthCard, AuthPageWrapper } from '@/components/common';
+import LoginSection from '@/features/auth/ui/LoginSection';
 
-import { COOKIE_KEYS } from '@/api/config';
+import { COOKIE_KEYS } from '@/shared/api';
+import { AuthCard, AuthPageWrapper } from '@/shared/ui';
+
+
 
 
 export default function EntryPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import { BottomNavBar, Header } from '@/app/_layout';
+import { BottomNavBar, Header } from '@/widgets/layout';
 
 export const metadata: Metadata = {
   title: '기룡아 밥먹자',

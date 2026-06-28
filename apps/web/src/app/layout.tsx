@@ -4,10 +4,11 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 
-import { ErrorProvider, SWRProvider } from '@/app/_providers';
 import { brBold, brRegular, tossFace, wantedSans } from '@/app/_styles/font';
 
-import { GA4_MEASUREMENT_ID } from '@/model/common/ga4';
+import { ErrorProvider, SWRProvider } from '@/widgets/providers';
+
+import { GA4_MEASUREMENT_ID } from '@/shared/lib/ga4';
 
 export const metadata: Metadata = {
   title: '기룡아 밥먹자',

@@ -3,9 +3,9 @@
 import { PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from '@/components/common';
+import { trackEvent } from '@/shared/lib/ga4';
+import { Button } from '@/shared/ui';
 
-import { trackEvent } from '@/model/common/ga4';
 
 interface ReviewWriteButtonProps {
   foodCourtId: string;

@@ -1,10 +1,12 @@
 import { Suspense } from 'react';
 
+
 import { SearchResult, SearchSkeleton } from '@/page/search';
 
-import { FoodCourt } from '@/api/config';
+import { SORTING_TYPE, SortingType } from '@/entities/search/model/search';
 
-import { SORTING_TYPE, SortingType } from '@/model/search/search';
+import { FoodCourt } from '@/shared/api';
+
 
 
 export default async function SearchPage({

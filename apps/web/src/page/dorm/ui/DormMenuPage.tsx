@@ -1,9 +1,12 @@
-import { Section, StaticTabNavigation } from '@/components/common';
-import DormFormattedDate from '@/components/dorm/DormFormattedDate';
-import DormMainTabs from '@/components/dorm/DormMainTabs';
-import DormMenuByDay from '@/components/dorm/DormMenuByDay';
 
-import { DORM_DAY_KEY, DORM_DAY_SHORT } from '@/model/dorm/dormDay';
+
+import DormFormattedDate from '@/widgets/dorm/DormFormattedDate';
+import DormMainTabs from '@/widgets/dorm/DormMainTabs';
+import DormMenuByDay from '@/widgets/dorm/DormMenuByDay';
+
+import { DORM_DAY_KEY, DORM_DAY_SHORT } from '@/entities/dorm/model/dormDay';
+
+import { Section, StaticTabNavigation } from '@/shared/ui';
 
 export interface DormMenuPageProps {
   params: Promise<{ day: number }>;

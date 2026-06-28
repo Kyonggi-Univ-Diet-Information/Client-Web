@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 
-import { WeekSelector, Button } from '@/components/common';
+import { DORM_DAY_KEY, DormDay } from '@/entities/dorm/model';
 
-import { DORM_DAY_KEY, DormDay } from '@/model/dorm';
+import { WeekSelector, Button } from '@/shared/ui';
+
 
 interface DaySelectModalProps {
   onDateSelect: (day: DormDay) => void;

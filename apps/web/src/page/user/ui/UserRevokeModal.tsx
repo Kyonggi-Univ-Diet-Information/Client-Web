@@ -4,11 +4,12 @@ import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.
 import { useEffect, useState } from 'react';
 
 
-import { Button, Modal } from '@/components/common';
+import { fetchRevokeReason } from '@/features/user/api/fetchRevokeReason';
 
-import { fetchRevokeReason } from '@/api/user/fetchRevokeReason';
+import { cn } from '@/shared/lib/string';
+import { Button, Modal } from '@/shared/ui';
 
-import { cn } from '@/model/common/string';
+
 
 
 interface UserRevokeModalProps {

@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { AuthCard, AuthPageWrapper, Button, Loader } from '@/components/common';
+import { useSocialCode } from '@/features/auth/model/useSocialCode';
 
-import { useSocialCode } from '@/model/auth/useSocialCode';
+import { AuthCard, AuthPageWrapper, Button, Loader } from '@/shared/ui';
+
 
 export default function AuthPage() {
   return (

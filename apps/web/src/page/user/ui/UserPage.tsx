@@ -1,13 +1,16 @@
 import { Suspense } from 'react';
 
 
-import { Loader } from '@/components/common';
 
-import { fetchUserFavReview } from '@/api/user/fetchUserFavReview';
-import { fetchUserInfo } from '@/api/user/fetchUserInfo';
-import { fetchUserReview } from '@/api/user/fetchUserReview';
+
+import { fetchUserFavReview } from '@/features/user/api/fetchUserFavReview';
+import { fetchUserInfo } from '@/features/user/api/fetchUserInfo';
+import { fetchUserReview } from '@/features/user/api/fetchUserReview';
+
+import { Loader } from '@/shared/ui';
 
 import UserPageClient from './UserPageClient';
+
 
 
 export default async function UserPage() {

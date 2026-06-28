@@ -1,14 +1,18 @@
 import React, { Suspense } from 'react';
 
 
-import { Loader, Title } from '@/components/common';
-import ReviewItem from '@/components/review/ReviewItem';
+import ReviewItem from '@/widgets/review/ReviewItem';
 
-import { FOOD_COURT } from '@/api/config';
-import { fetchReviewFavCount } from '@/api/review/fetchReviewFavCount';
-import { fetchUserFavReview } from '@/api/user/fetchUserFavReview';
+import { fetchReviewFavCount } from '@/features/review/api/fetchReviewFavCount';
+import { fetchUserFavReview } from '@/features/user/api/fetchUserFavReview';
 
-import { AuthService } from '@/model/common/auth';
+import { FOOD_COURT } from '@/shared/api';
+import { AuthService } from '@/shared/lib/auth';
+import { Loader, Title } from '@/shared/ui';
+
+
+
+
 
 
 

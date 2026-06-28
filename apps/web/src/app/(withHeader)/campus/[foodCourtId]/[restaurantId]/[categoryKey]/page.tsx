@@ -1,18 +1,20 @@
+
+
 import { CampusRestaurantPage } from '@/page/campus';
 
+import type { CategoryMenuResponse } from '@/entities/campus/api/api.type';
 
-import { FOOD_COURT_ID } from '@/api/config';
-import type { BaseResponse } from '@/api/config/api-base-types';
-import { ENDPOINT } from '@/api/config/api-endpoints';
-import { Http } from '@/api/config/api-handlers';
-
-import type { CategoryMenuResponse } from '@/constants/campus/menu';
+import { FOOD_COURT_ID } from '@/shared/api';
+import type { BaseResponse } from '@/shared/api/api-base-types';
+import { ENDPOINT } from '@/shared/api/api-endpoints';
+import { Http } from '@/shared/api/api-handlers';
 import {
   CAMPUS_FOOD_COURTS,
   FOOD_COURT_RESTAURANTS,
   RESTAURANT_ID_BY_NAME,
   hasSubRestaurants,
-} from '@/constants/campus/restaurant';
+} from '@/shared/constants/campus/restaurant';
+
 
 export const dynamicParams = true;
 

@@ -1,12 +1,15 @@
 import { type ReactNode } from 'react';
 
 
-import { type FoodCourt } from '@/api/config/api-endpoints';
-import { fetchSearch } from '@/api/search/fetchSearch';
+import { fetchSearch } from '@/features/search/api/fetchSearch';
 
-import { SortingType } from '@/model/search/search';
+import { SortingType } from '@/entities/search/model/search';
+
+import { type FoodCourt } from '@/shared/api/api-endpoints';
 
 import SearchMenuCard from './SearchMenuCard';
+
+
 
 
 export default async function SearchResult({

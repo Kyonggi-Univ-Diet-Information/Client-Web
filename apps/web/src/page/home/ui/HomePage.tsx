@@ -1,15 +1,16 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
-import { AnimatedCard, Section } from '@/components/common';
 
-import { FOOD_COURT_ID } from '@/api/config';
-import { fetchDormMenu } from '@/api/dorm/fetchDormMenu';
+import { fetchDormMenu } from '@/features/dorm/api/fetchDormMenu';
 
-import { RESTAURANT_ID_BY_NAME } from '@/constants/campus/restaurant';
+import { FOOD_COURT_ID } from '@/shared/api';
+import { RESTAURANT_ID_BY_NAME } from '@/shared/constants/campus/restaurant';
+import { AnimatedCard, Section } from '@/shared/ui';
 
 import CarouselWrapper from './CarouselWrapper';
 import DormSection from './DormSection';
+
 
 export default async function HomePage() {
   const dormMenu = await fetchDormMenu().catch(() => null);

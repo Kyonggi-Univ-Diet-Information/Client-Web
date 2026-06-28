@@ -3,22 +3,23 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { memo } from 'react';
 
 
-import { Select } from '@/components/common';
+import { SORTING_TYPE, SORTING_TYPE_NAME, SortingType } from '@/entities/search/model/search';
+
+import {
+  FOOD_COURT,
+  FOOD_COURT_NAME,
+  type FoodCourt,
+} from '@/shared/api/api-endpoints';
+import { Select } from '@/shared/ui';
 import {
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/common/SelectComponent';
+} from '@/shared/ui/SelectComponent';
 
-import {
-  FOOD_COURT,
-  FOOD_COURT_NAME,
-  type FoodCourt,
-} from '@/api/config/api-endpoints';
 
-import { SORTING_TYPE, SORTING_TYPE_NAME, SortingType } from '@/model/search/search';
 
 
 

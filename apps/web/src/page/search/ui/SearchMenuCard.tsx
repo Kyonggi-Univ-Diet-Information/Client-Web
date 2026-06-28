@@ -4,15 +4,17 @@ import Link from 'next/link';
 
 
 
-import CampusMenuImage from '@/components/campus/CampusMenuImage';
 
-import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/api/config';
-import type { SearchResult } from '@/api/search/fetchSearch';
+import CampusMenuImage from '@/widgets/campus/CampusMenuImage';
 
-import { FOOD_TYPE_NAME } from '@/model/search/search';
+import type { SearchResult } from '@/features/search/api/fetchSearch';
 
-import { CATEGORY_TO_TEXT } from '@/constants/campus/menu';
-import { CAMPUS_RESTAURANT } from '@/constants/campus/restaurant';
+import { FOOD_TYPE_NAME } from '@/entities/search/model/search';
+
+import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
+import { CATEGORY_TO_TEXT } from '@/shared/constants/campus/menu';
+import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
+
 
 
 

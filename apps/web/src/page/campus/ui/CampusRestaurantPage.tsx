@@ -1,15 +1,16 @@
-import { CampusMenuByRestaurant } from '@/components/campus';
-import { Section, StaticTabNavigation } from '@/components/common';
+import { CampusMenuByRestaurant } from '@/widgets/campus';
 
-import { getFoodCourtById } from '@/api/config';
+import { getCampusMainTabs } from '@/entities/campus/model/campus';
 
-import { getCampusMainTabs } from '@/model/campus/campus';
-
+import { getFoodCourtById } from '@/shared/api';
 import {
   CAMPUS_RESTAURANT,
   RESTAURANT_ID_BY_NAME,
   getRestaurantsByFoodCourt,
-} from '@/constants/campus/restaurant';
+} from '@/shared/constants/campus/restaurant';
+import { Section, StaticTabNavigation } from '@/shared/ui';
+
+
 
 
 

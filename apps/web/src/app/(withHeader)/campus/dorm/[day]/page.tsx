@@ -1,6 +1,8 @@
 import { DormMenuPage, DormMenuPageProps } from '@/page/dorm';
 
-import { generateDormDayParams } from '@/api/dorm/generateStaticParams';
+import { generateDormDayParams } from '@/features/dorm/api/generateStaticParams';
+
+
 
 export function generateStaticParams() {
   return generateDormDayParams();

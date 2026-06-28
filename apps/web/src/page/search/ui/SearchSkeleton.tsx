@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/common';
+import { Skeleton } from '@/shared/ui';
 
 export default function SearchSkeleton() {
   return (

@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { COOKIE_KEYS, PUBLIC_API_URL } from '@/api/config';
+import { COOKIE_KEYS, PUBLIC_API_URL } from '@/shared/api';
 
 async function handleRequest(
   request: NextRequest,

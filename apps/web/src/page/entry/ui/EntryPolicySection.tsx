@@ -1,6 +1,6 @@
-import { ExternalLink } from '@/components/common';
+import { POLICY_URL } from '@/shared/api';
+import { ExternalLink } from '@/shared/ui';
 
-import { POLICY_URL } from '@/api/config';
 
 
 export default function EntryPolicySection() {

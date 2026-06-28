@@ -1,13 +1,14 @@
 import React, { Suspense } from 'react';
 
 
-import { CampusMenuName } from '@/components/campus';
-import { Card, Loader, Title } from '@/components/common';
+import { CampusMenuName } from '@/widgets/campus';
 
-import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/api/config';
-import { fetchUserReview } from '@/api/user/fetchUserReview';
+import { fetchUserReview } from '@/features/user/api/fetchUserReview';
 
-import { getRelativeDate, parseReviewDate } from '@/model/common/date';
+import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
+import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
+import { Card, Loader, Title } from '@/shared/ui';
+
 
 
 

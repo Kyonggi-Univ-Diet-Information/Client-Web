@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { INQUIRY_URL } from '@/api/config';
+import { INQUIRY_URL } from '@/shared/api';
 
 export default function MaintenancePage() {
   return (
