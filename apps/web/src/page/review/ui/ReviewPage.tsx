@@ -1,26 +1,24 @@
+import { ChevronRight, Star } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 
-
-import {
-  CampusMenuName,
-  CampusMenuPrice,
-  CampusMenuSet,
-} from '@/widgets/campus';
 import CampusMenuImage from '@/widgets/campus/CampusMenuImage';
+import CampusMenuSet from '@/widgets/campus/CampusMenuSet';
 import ReviewFormSection from '@/widgets/review/ReviewFormSection';
-import ReviewPagedView from '@/widgets/review/ReviewPagedView';
-import ReviewRating from '@/widgets/review/ReviewRating';
+import ReviewPreviewCarousel from '@/widgets/review/ReviewPreviewCarousel';
 
-import { FOOD_COURT, getFoodCourtById } from '@/shared/api';
+import { fetchCampusMenuDetail } from '@/features/campus/api/fetchCampusMenuDetail';
+import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
+import { getReviewsAction } from '@/features/review/api/getReviewsAction';
+
+import { FOOD_COURT, FOOD_COURT_NAME, getFoodCourtById } from '@/shared/api';
+import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
 import { AuthService } from '@/shared/lib/auth';
 import { Loader, Modal, Button, AnimatedCard } from '@/shared/ui';
 
 import ReviewWriteButton from './ReviewWriteButton';
-
-
 
 export interface ReviewPageProps {
   params: Promise<{ foodCourtId: string; foodId: string }>;
@@ -51,53 +49,84 @@ export default async function ReviewPage({
 
   const isReviewMode = reviewMode === 'true';
 
+  const [menuDetail, reviewCount, initialReviews] = await Promise.all([
+    fetchCampusMenuDetail(foodCourt, foodId),
+    fetchReviewCount(foodCourt, foodId),
+    getReviewsAction(foodCourt, foodId, 0),
+  ]);
+
   return (
-    <div className='flex flex-col gap-8 pb-10'>
+    <div className='flex flex-col pb-10'>
       <AnimatedCard index={0}>
-        <div className='flex flex-col gap-4'>
-          <div className='space-y-1.5'>
-            <p className='text-[10px] font-bold tracking-widest text-gray-400 uppercase'>
-              Menu Review
-            </p>
-            <CampusMenuName
-              foodCourt={foodCourt}
-              menuId={foodId}
-              className='block text-xl leading-tight font-bold text-gray-900'
-            />
-          </div>
+        <div className='flex flex-col'>
+          <CampusMenuImage
+            foodCourt={foodCourt}
+            menuId={foodId}
+            className='h-[380px] w-full rounded-none'
+            sizes='(max-width: 770px) 100vw, 770px'
+          />
 
-          <div className='flex items-start gap-6'>
-            <div className='relative size-20 shrink-0 overflow-hidden rounded-2xl bg-gray-50/50'>
-              <CampusMenuImage
-                foodCourt={foodCourt}
-                menuId={foodId}
-                className='h-full w-full object-cover'
-              />
-            </div>
-
-            <div className='flex min-w-0 flex-1 flex-col justify-center'>
-              <div className='space-y-1'>
-                <p className='text-[10px] font-bold tracking-widest text-gray-400 uppercase'>
-                  Price
-                </p>
-                <div className='text-point text-xl leading-none font-black whitespace-nowrap'>
-                  <CampusMenuPrice foodCourt={foodCourt} menuId={foodId} />
+          <div className='flex flex-col gap-2 px-4 pt-5'>
+            <div className='flex items-center justify-between'>
+              <h1 className='text-lg font-semibold text-gray-900'>
+                {menuDetail.name}
+              </h1>
+              {menuDetail.averageRating != null && (
+                <div className='flex items-center -space-x-[3px]'>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      key={index}
+                      size={18}
+                      className={
+                        index < Math.round(menuDetail.averageRating!)
+                          ? 'fill-gray-900 text-gray-900'
+                          : 'fill-[#bbbbbb] text-[#bbbbbb]'
+                      }
+                    />
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center gap-0.5 text-sm text-gray-600'>
+                <span>{FOOD_COURT_NAME[foodCourt]}</span>
+                <ChevronRight size={14} />
+                <span>{CAMPUS_RESTAURANT[menuDetail.subRestaurant]}</span>
+              </div>
+              {menuDetail.averageRating != null && (
+                <span className='text-sm font-semibold text-gray-900'>
+                  {menuDetail.averageRating.toFixed(1)}점
+                </span>
+              )}
+            </div>
+            <p className='text-2xl font-semibold text-gray-900'>
+              {menuDetail.price.toLocaleString()}원
+            </p>
           </div>
 
-          {foodCourt === FOOD_COURT.KYONGSUL && (
-            <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
-          )}
+          <div className='mt-5 border-t-6 border-gray-100' />
 
-          <Suspense
-            fallback={
-              <div className='h-12 w-full animate-pulse rounded-xl bg-gray-50' />
-            }
+          <Link
+            href={`/review/${foodCourtId}/${foodId}/detail`}
+            className='mt-2 flex items-center justify-between px-4 py-2'
           >
-            <ReviewRating type={foodCourt} foodId={foodId} />
-          </Suspense>
+            <div className='flex items-center gap-2'>
+              <Star size={24} className='fill-point text-point' />
+              {menuDetail.averageRating != null && (
+                <span className='text-xl font-semibold text-gray-900'>
+                  {menuDetail.averageRating.toFixed(1)}
+                </span>
+              )}
+              <span className='text-xl text-gray-900'>
+                후기 <b className='font-medium'>{reviewCount}</b>
+              </span>
+            </div>
+            <ChevronRight size={22} className='text-gray-400' />
+          </Link>
+
+          {initialReviews.content.length > 0 && (
+            <ReviewPreviewCarousel reviews={initialReviews.content.slice(0, 5)} />
+          )}
         </div>
       </AnimatedCard>
 
@@ -111,16 +140,11 @@ export default async function ReviewPage({
           <LoginModal foodCourtId={foodCourtId} foodId={foodId} />
         )}
 
-        <AnimatedCard index={2}>
-          <div className='flex flex-col gap-8'>
-            <div className='flex flex-col gap-4'>
-              <div className='flex items-center justify-between px-1'>
-                <h3 className='font-brBold text-lg text-gray-900'>리뷰 목록</h3>
-              </div>
-              <ReviewPagedView type={foodCourt} foodId={foodId} />
-            </div>
+        {foodCourt === FOOD_COURT.KYONGSUL && (
+          <div className='px-4 border-t-6 border-gray-100 pt-4'>
+            <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
           </div>
-        </AnimatedCard>
+        )}
       </Suspense>
 
       {!isReviewMode && (
