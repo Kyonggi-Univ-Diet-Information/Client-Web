@@ -7,7 +7,6 @@ import DormNoDataMessage from '@/widgets/dorm/DormNoDataMessage';
 import type { DormMenu, DormMenuStatus } from '@/entities/dorm/api/api.type';
 import { DORM_TIME_RANGE, type DormTime } from '@/entities/dorm/model/dormTime';
 
-// ponytail: "배식 중/종료" only reflects real time when viewing today — other days just skip the badge, since a serving-time comparison is meaningless for a day that isn't today
 export function isServingNow(mealTime: DormTime): boolean {
   const { start, end } = DORM_TIME_RANGE[mealTime];
   const toMinutes = (time: string) => {

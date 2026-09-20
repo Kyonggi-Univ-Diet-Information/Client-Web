@@ -2,6 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 
+import DormSection from '@/widgets/dorm/DormSection';
 import { PageContainer } from '@/widgets/layout';
 
 import { fetchDormMenu } from '@/features/dorm/api/fetchDormMenu';
@@ -11,7 +12,6 @@ import { RESTAURANT_ID_BY_NAME } from '@/shared/constants/campus/restaurant';
 import { AnimatedCard, Section } from '@/shared/ui';
 
 import CampusFoodCourtSwitcher from './CampusFoodCourtSwitcher';
-import DormSection from './DormSection';
 
 
 export default async function HomePage() {

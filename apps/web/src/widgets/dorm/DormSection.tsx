@@ -2,9 +2,6 @@
 
 import { useState } from 'react';
 
-import DormMenuAll from '@/widgets/dorm/DormMenuAll';
-import DormMenuAnimatedWrapper from '@/widgets/dorm/DormMenuAnimatedWrapper';
-
 import type { FetchDormMenuResponse } from '@/entities/dorm/api/api.model';
 import { DORM_DAY_KEY, type DormDay } from '@/entities/dorm/model/dormDay';
 import type { DormTime } from '@/entities/dorm/model/dormTime';
@@ -12,6 +9,8 @@ import type { DormTime } from '@/entities/dorm/model/dormTime';
 import { getCurrentDate } from '@/shared/lib/date';
 import { Section, Tab } from '@/shared/ui';
 
+import DormMenuAll from './DormMenuAll';
+import DormMenuAnimatedWrapper from './DormMenuAnimatedWrapper';
 import WeeklyCalendar from './WeeklyCalendar';
 
 const MEAL_TIME_OPTIONS: { value: DormTime; label: string }[] = [
@@ -20,14 +19,19 @@ const MEAL_TIME_OPTIONS: { value: DormTime; label: string }[] = [
   { value: 'DINNER', label: '석식' },
 ];
 
-export default function DormSection({ dormMenu }: { dormMenu: FetchDormMenuResponse | null }) {
+export default function DormSection({
+  dormMenu,
+  initialDay,
+}: {
+  dormMenu: FetchDormMenuResponse | null;
+  initialDay?: DormDay;
+}) {
   const today = getCurrentDate().getDay();
-  const [currentDay, setCurrentDay] = useState<DormDay>(DORM_DAY_KEY[today]);
+  const [currentDay, setCurrentDay] = useState<DormDay>(initialDay ?? DORM_DAY_KEY[today]);
   const [mealTime, setMealTime] = useState<DormTime>('BREAKFAST');
 
   return (
-    <Section>
-      <Section.Header title='이번주 기숙사 메뉴' />
+    <Section className='px-4'>
       <WeeklyCalendar currentDay={currentDay} onSelectDay={setCurrentDay} />
       <Tab
         size='sm'
