@@ -3,10 +3,11 @@
 import { ChevronLeftIcon, MessageSquareWarning, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import { AuthButton } from '@/features/auth/ui/AuthButton';
+
 
 import { FOOD_COURT_ID, INQUIRY_URL } from '@/shared/api';
 import {
@@ -15,11 +16,14 @@ import {
 } from '@/shared/constants/campus/restaurant';
 import { ExternalLink } from '@/shared/ui';
 
+import HeaderSearchOverlay from './HeaderSearchOverlay';
+
 
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
   const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
@@ -109,15 +113,16 @@ export default function Header() {
         <DesktopHeader />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (
-            <Link
-              href='/search'
+            <button
+              type='button'
+              onClick={() => setIsSearchOpen(true)}
               className='cursor-pointer transition-transform hover:scale-110'
             >
               <Search size={20} className='text-accent-foreground' />
-            </Link>
+            </button>
           )}
 
-          <ExternalLink
+          {/* <ExternalLink
             href={INQUIRY_URL}
             className='cursor-pointer transition-transform hover:scale-110'
           >
@@ -126,9 +131,12 @@ export default function Header() {
               className='text-accent-foreground'
             />
           </ExternalLink>
-          <AuthButton />
+          <AuthButton /> */}
         </div>
       </div>
+      {isSearchOpen && (
+        <HeaderSearchOverlay onClose={() => setIsSearchOpen(false)} />
+      )}
     </header>
   );
 }
