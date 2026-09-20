@@ -1,6 +1,5 @@
-import { MessageSquareText } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Link from 'next/link';
-
 
 import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
 
@@ -10,7 +9,6 @@ import { type FoodCourt, FOOD_COURT_ID } from '@/shared/api';
 
 import CampusMenuImage from './CampusMenuImage';
 
-
 interface CampusMenuCardProps extends CampusMenu {
   foodCourt: FoodCourt;
 }
@@ -19,63 +17,48 @@ export default async function CampusMenuCard({
   id,
   name,
   price,
+  averageRating,
   foodCourt,
 }: CampusMenuCardProps) {
   const reviewCount = await fetchReviewCount(foodCourt, id);
   const foodCourtId = FOOD_COURT_ID[foodCourt];
 
-  const cardContent = (
-    <>
-      <div className='flex flex-col gap-1'>
-        <span className='font-semibold'>{name}</span>
-        <span className='text-sm'>{price.toLocaleString()}원</span>
-        <span className='mt-0.5 text-xs text-gray-900/80'>
-          리뷰 <b className='font-semibold'>{reviewCount}</b>개
-        </span>
-      </div>
-      <CampusMenuImage foodCourt={foodCourt} menuId={id} />
-    </>
-  );
-
   return (
-    <>
-      <Link
-        href={`/review/${foodCourtId}/${id}`}
-        className='w-screen -translate-x-4 border-b border-gray-100 md:hidden'
-      >
-        <div
-          className='group flex cursor-pointer justify-between p-4 text-gray-600 active:bg-gray-100/50'
-          key={id}
-        >
-          {cardContent}
-        </div>
-      </Link>
-
-      <div
-        className='hidden w-full justify-between rounded-2xl bg-gray-100/50 p-4 text-gray-600 md:flex'
-        key={id}
-      >
-        <div className='flex flex-col justify-between'>
-          <span className='mb-2 font-medium'>{name}</span>
-          <span className='text-sm text-gray-900/40'>
+    <Link
+      href={`/review/${foodCourtId}/${id}`}
+      className='flex gap-3 border-t border-gray-100 px-4 py-3.5'
+    >
+      <CampusMenuImage
+        foodCourt={foodCourt}
+        menuId={id}
+        className='size-[116px] rounded-lg'
+      />
+      <div className='flex flex-col gap-1.5 px-1'>
+        <div className='flex flex-col gap-1'>
+          <span className='text-base font-medium text-gray-900'>{name}</span>
+          <span className='text-lg font-semibold text-gray-900'>
             {price.toLocaleString()}원
           </span>
         </div>
-        <div className='flex items-start'>
-          <Link
-            href={`/review/${foodCourtId}/${id}`}
-            className='group flex cursor-pointer items-center gap-1 rounded-xl border bg-white px-2 py-1 duration-200 hover:bg-gray-200 active:bg-gray-300'
-          >
-            <MessageSquareText
-              size={14}
-              className='text-gray-900/40 group-hover:text-gray-900/80 group-active:text-gray-900/80'
-            />
-            <div className='text-sm text-gray-900/40 group-hover:text-gray-900/80 group-active:text-gray-900/80'>
-              리뷰 {reviewCount}
+        <div className='flex items-center gap-2.5'>
+          {averageRating && (
+            <div className='flex items-center gap-0.5'>
+              <Star size={20} className='fill-point text-point' />
+              <span className='text-sm font-semibold text-gray-600'>
+                {averageRating.toFixed(1)}
+              </span>
             </div>
-          </Link>
+          )}
+          {reviewCount > 0 ? (
+            <span className='text-sm text-gray-600'>
+            후기 <b className='font-semibold'>{reviewCount}</b>
+          </span>) : (
+            <span className='text-sm text-gray-600'>
+              아직 후기가 없어요
+            </span>
+          )}
         </div>
       </div>
-    </>
+    </Link>
   );
 }

@@ -17,6 +17,7 @@ describe('fetchCampusMenu', () => {
     {
       id: 1,
       name: '김치찌개',
+      averageRating: 4.5,
       nameEn: 'Kimchi Stew',
       price: 5000,
       subRestaurant: 'MANKWON',
@@ -24,6 +25,7 @@ describe('fetchCampusMenu', () => {
     {
       id: 2,
       name: '돈까스',
+      averageRating: 4.5,
       nameEn: 'Pork Cutlet',
       price: 6000,
       subRestaurant: 'MANKWON',
@@ -31,6 +33,7 @@ describe('fetchCampusMenu', () => {
     {
       id: 3,
       name: '파스타',
+      averageRating: 4.5,
       nameEn: 'Pasta',
       price: 7000,
       subRestaurant: 'SYONG',
@@ -57,6 +60,7 @@ describe('fetchCampusMenu', () => {
         {
           id: 1,
           name: '김치찌개',
+          averageRating: 4.5,
           nameEn: 'Kimchi Stew',
           price: 5000,
           subRestaurant: 'MANKWON',
@@ -64,6 +68,7 @@ describe('fetchCampusMenu', () => {
         {
           id: 2,
           name: '돈까스',
+          averageRating: 4.5,
           nameEn: 'Pork Cutlet',
           price: 6000,
           subRestaurant: 'MANKWON',
@@ -73,6 +78,7 @@ describe('fetchCampusMenu', () => {
         {
           id: 3,
           name: '파스타',
+          averageRating: 4.5,
           nameEn: 'Pasta',
           price: 7000,
           subRestaurant: 'SYONG',

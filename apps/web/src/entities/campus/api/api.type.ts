@@ -17,6 +17,7 @@ export type SetType = (typeof SET)[keyof typeof SET];
 export type CampusMenu = {
   id: number;
   name: string;
+  averageRating: number | null;
   nameEn: string;
   price: number;
   subRestaurant: SubRestaurant;

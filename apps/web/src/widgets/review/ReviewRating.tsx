@@ -40,7 +40,7 @@ export default async function ReviewRating({
         <div className='flex flex-col gap-1.5'>
           <div className='flex items-baseline gap-1'>
             <span className='text-3xl leading-none font-black tracking-tighter text-gray-900'>
-              {averageRating.toFixed(1)}
+              {(averageRating ?? 0).toFixed(1)}
             </span>
             <span className='text-xs font-bold text-gray-400'>/ 5.0</span>
           </div>

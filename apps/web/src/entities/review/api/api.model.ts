@@ -100,7 +100,7 @@ export interface FetchReviewRatingAverageRequest {
   foodId: number;
 }
 
-export type FetchReviewRatingAverageResponse = number;
+export type FetchReviewRatingAverageResponse = number | null;
 
 export interface SubmitReviewReportRequest {
   reviewId: number;
