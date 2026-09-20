@@ -8,4 +8,5 @@ export { default as CampusMenuImage } from './CampusMenuImage';
 export { default as CampusMenuName } from './CampusMenuName';
 export { default as CampusMenuPrice } from './CampusMenuPrice';
 export { default as CampusMenuSet } from './CampusMenuSet';
+export { default as CampusSortSheet } from './CampusSortSheet';
 export { default as CampusTopMenu } from './CampusTopMenu';

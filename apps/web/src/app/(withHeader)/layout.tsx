@@ -10,9 +10,10 @@ export const metadata: Metadata = {
 
 type Props = {
   children: ReactNode;
+  modal: ReactNode;
 };
 
-export default function HeaderLayout({ children }: Props) {
+export default function HeaderLayout({ children, modal }: Props) {
   return (
     <>
       <Header />
@@ -20,6 +21,7 @@ export default function HeaderLayout({ children }: Props) {
         {children}
       </main>
       <BottomNavBar />
+      {modal}
     </>
   );
 }
