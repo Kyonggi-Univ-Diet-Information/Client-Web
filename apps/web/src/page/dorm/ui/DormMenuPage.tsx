@@ -1,7 +1,5 @@
-
-
+import { CampusMainTabs } from '@/widgets/campus';
 import DormFormattedDate from '@/widgets/dorm/DormFormattedDate';
-import DormMainTabs from '@/widgets/dorm/DormMainTabs';
 import DormMenuByDay from '@/widgets/dorm/DormMenuByDay';
 
 import { DORM_DAY_KEY, DORM_DAY_SHORT } from '@/entities/dorm/model/dormDay';
@@ -23,10 +21,9 @@ export default async function DormMenuPage({ params }: DormMenuPageProps) {
 
   return (
     <>
-      <Section.Header
-        title={<DormMainTabs />}
-        subtitle='이번 주 경기드림타워 메뉴를 확인하세요!'
-      />
+      <Section.Header>
+        <CampusMainTabs currentTabKey='dorm' />
+      </Section.Header>
       <Section>
         <Section.Content className='flex flex-col gap-4'>
           <StaticTabNavigation tabs={dayTabs} currentTabKey={String(day)} />

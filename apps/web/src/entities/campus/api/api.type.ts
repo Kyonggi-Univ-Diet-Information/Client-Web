@@ -55,3 +55,5 @@ export type SimpleCategoryMenuResponse = {
 export type CategoryMenuResponse =
   | KyongsulCategoryMenuResponse
   | SimpleCategoryMenuResponse;
+
+export type CampusMenuSort = 'rating' | 'name' | 'review_count';

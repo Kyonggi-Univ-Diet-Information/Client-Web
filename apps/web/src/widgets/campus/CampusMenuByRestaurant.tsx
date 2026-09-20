@@ -1,10 +1,6 @@
-import Link from 'next/link';
-
-
-
 import { fetchCampusMenuByCategory } from '@/features/campus/api/fetchCampusMenuByCategory';
 
-import type { CampusMenuWithCategory } from '@/entities/campus/api/api.type';
+import type { CampusMenuSort, CampusMenuWithCategory } from '@/entities/campus/api/api.type';
 
 import { getFoodCourtById } from '@/shared/api';
 import { CATEGORY_TO_TEXT } from '@/shared/constants/campus/menu';
@@ -12,21 +8,24 @@ import {
   CAMPUS_RESTAURANT_ID,
   hasSubRestaurants,
 } from '@/shared/constants/campus/restaurant';
-import { cn } from '@/shared/lib';
+import { ChipNavigation } from '@/shared/ui';
 
 import CampusMenuCard from './CampusMenuCard';
+import CampusMenuListHeader from './CampusMenuListHeader';
 
 
 interface CampusMenuByRestaurantProps {
   foodCourtId: string;
   restaurantId: string;
   categoryKey?: string;
+  sort?: CampusMenuSort;
 }
 
 export default async function CampusMenuByRestaurant({
   foodCourtId,
   restaurantId,
   categoryKey,
+  sort,
 }: CampusMenuByRestaurantProps) {
   const foodCourt = getFoodCourtById(foodCourtId);
   if (!foodCourt) {
@@ -40,11 +39,13 @@ export default async function CampusMenuByRestaurant({
   const { categories, menusByCategory } = await fetchCampusMenuByCategory(
     foodCourt,
     currentRestaurant,
+    sort,
   );
 
   const categoryTexts = CATEGORY_TO_TEXT;
 
   let displayMenus: CampusMenuWithCategory[] = [];
+
   let totalCount = 0;
 
   if (categoryKey && menusByCategory[categoryKey]) {
@@ -55,38 +56,31 @@ export default async function CampusMenuByRestaurant({
     totalCount = displayMenus.length;
   }
 
+  const currentPath = categoryKey
+    ? `/campus/${foodCourtId}/${restaurantId}/${categoryKey}`
+    : `/campus/${foodCourtId}/${restaurantId}`;
+  const sortHref = `/campus/sort?from=${encodeURIComponent(currentPath)}${sort ? `&sort=${sort}` : ''}`;
+
+  const categoryTabs = [
+    { key: 'all', label: '전체', href: `/campus/${foodCourtId}/${restaurantId}` },
+    ...categories.map(key => ({
+      key,
+      label: categoryTexts[key] || key,
+      href: `/campus/${foodCourtId}/${restaurantId}/${key}`,
+    })),
+  ];
+
   return (
     <>
-      <div className='flex items-center justify-between gap-4'>
-        <div className='scrollbar-hide flex items-center divide-x divide-gray-200 overflow-x-scroll text-sm'>
-          <Link
-            prefetch
-            href={`/campus/${foodCourtId}/${restaurantId}`}
-            className={cn(
-              !categoryKey ? 'text-point font-bold' : '',
-              'cursor-pointer pr-2 text-nowrap',
-            )}
-          >
-            전체
-          </Link>
-          {categories.map(key => (
-            <Link
-              prefetch
-              key={key}
-              href={`/campus/${foodCourtId}/${restaurantId}/${key}`}
-              className={cn(
-                categoryKey === key ? 'text-point font-bold' : '',
-                'cursor-pointer px-2 text-nowrap',
-              )}
-            >
-              {categoryTexts[key] || key}
-            </Link>
-          ))}
-        </div>
-        <span className='rounded-full bg-gray-100 px-3 py-1.5 text-sm whitespace-nowrap text-gray-600'>
-          총 {totalCount}개
-        </span>
-      </div>
+      <ChipNavigation
+        tabs={categoryTabs}
+        currentTabKey={categoryKey ?? 'all'}
+        variant='black'
+        size='small'
+        className='border-b-0 pb-0'
+      />
+
+      <CampusMenuListHeader totalCount={totalCount} sortHref={sortHref} sort={sort} />
 
       <div className='flex flex-col md:grid md:grid-cols-2 md:gap-4'>
         {displayMenus.length > 0 &&

@@ -12,6 +12,10 @@ const TAB_SIZE_STYLES = {
     button: 'h-10 rounded-[14px] py-2.5 text-base font-semibold',
     track: 'h-1',
   },
+  md: {
+    button: 'h-12 rounded-2xl py-3 text-lg font-semibold',
+    track: 'h-1',
+  },
 } as const;
 
 export default function Tab({

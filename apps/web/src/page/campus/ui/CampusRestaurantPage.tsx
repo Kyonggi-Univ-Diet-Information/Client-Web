@@ -1,6 +1,6 @@
-import { CampusMenuByRestaurant } from '@/widgets/campus';
+import { CampusMainTabs, CampusMenuByRestaurant } from '@/widgets/campus';
 
-import { getCampusMainTabs } from '@/entities/campus/model/campus';
+import type { CampusMenuSort } from '@/entities/campus/api/api.type';
 
 import { getFoodCourtById } from '@/shared/api';
 import {
@@ -8,7 +8,7 @@ import {
   RESTAURANT_ID_BY_NAME,
   getRestaurantsByFoodCourt,
 } from '@/shared/constants/campus/restaurant';
-import { Section, StaticTabNavigation } from '@/shared/ui';
+import { ChipNavigation, Section } from '@/shared/ui';
 
 
 
@@ -20,19 +20,20 @@ export interface CampusRestaurantPageProps {
     restaurantId: string;
     categoryKey?: string;
   }>;
+  searchParams?: Promise<{ sort?: CampusMenuSort }>;
 }
 
 export default async function CampusRestaurantPage({
   params,
+  searchParams,
 }: CampusRestaurantPageProps) {
   const { foodCourtId, restaurantId, categoryKey } = await params;
+  const { sort } = (await searchParams) ?? {};
 
   const foodCourt = getFoodCourtById(foodCourtId);
   if (!foodCourt) {
     throw new Error('Invalid food court id');
   }
-
-  const mainTabs = getCampusMainTabs('ko', '기숙사');
 
   const restaurantsInFoodCourt = getRestaurantsByFoodCourt(foodCourt);
   const restaurantNames = CAMPUS_RESTAURANT;
@@ -45,26 +46,22 @@ export default async function CampusRestaurantPage({
 
   return (
     <>
-      <Section.Header
-        title={
-          <StaticTabNavigation
-            tabs={mainTabs}
-            currentTabKey={foodCourtId}
-            variant='header'
-          />
-        }
-        subtitle='리뷰 버튼을 클릭해서 리뷰를 작성해보세요!'
-      />
+      <Section.Header>
+        <CampusMainTabs currentTabKey={foodCourtId} />
+      </Section.Header>
       {restaurantTabs.length > 0 && (
-        <StaticTabNavigation
+        <ChipNavigation
           tabs={restaurantTabs}
           currentTabKey={restaurantId}
+          variant='point'
+          size='md'
         />
       )}
       <CampusMenuByRestaurant
         foodCourtId={foodCourtId}
         restaurantId={restaurantId}
         categoryKey={categoryKey}
+        sort={sort}
       />
     </>
   );

@@ -13,6 +13,7 @@ export { default as Title } from './Title';
 export { default as Skeleton } from './Skeleton';
 export { default as SegmentedControl } from './SegmentedControl';
 export { default as Tab } from './Tab';
+export { default as ChipNavigation } from './ChipNavigation';
 export {
   Select,
   SelectContent,

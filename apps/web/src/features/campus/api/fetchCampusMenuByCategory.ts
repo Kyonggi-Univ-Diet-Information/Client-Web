@@ -4,6 +4,7 @@ import { cache } from 'react';
 
 import type {
   CategoryMenuResponse,
+  CampusMenuSort,
   CampusMenuWithCategory,
 } from '@/entities/campus/api/api.type';
 
@@ -24,9 +25,11 @@ export const fetchCampusMenuByCategory = cache(
   async (
     foodCourt: CampusFoodCourt,
     restaurant?: SubRestaurant,
+    sort?: CampusMenuSort,
   ): Promise<CategorizedMenuData> => {
     const response = await Http.getDirect<BaseResponse<CategoryMenuResponse>>({
       request: ENDPOINT.MENU.MENU_BY_CATEGORY(foodCourt),
+      params: sort ? { sort } : undefined,
       next: { tags: [menuKeys.campus.tag(foodCourt)], revalidate: 60 * 60 },
     });
 
