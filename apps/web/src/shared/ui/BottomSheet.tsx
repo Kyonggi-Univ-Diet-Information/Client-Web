@@ -3,7 +3,7 @@
 import { motion, type PanInfo } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { ReactNode } from 'react';
+import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 
 export default function BottomSheet({
   children,
@@ -14,9 +14,17 @@ export default function BottomSheet({
 }) {
   const router = useRouter();
 
+  const close = () => router.back();
+
+  const handleOverlayClick = (e: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    close();
+  };
+
   const handleDragEnd = (_: PointerEvent | MouseEvent | TouchEvent, info: PanInfo) => {
     if (info.offset.y > 80 || info.velocity.y > 500) {
-      router.push(href);
+      close();
     }
   };
 
@@ -24,6 +32,7 @@ export default function BottomSheet({
     <div className='fixed inset-0 z-60 flex items-end justify-center'>
       <Link
         href={href}
+        onClick={handleOverlayClick}
         className='absolute inset-0 bg-black/30 backdrop-blur-xs'
         aria-label='닫기'
       />
