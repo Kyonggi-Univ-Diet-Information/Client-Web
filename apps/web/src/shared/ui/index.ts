@@ -5,6 +5,7 @@ export { default as AnimatedCard } from './AnimatedCard';
 export { default as Card } from './Card';
 export { default as Modal } from './Modal';
 export { default as BottomSheet } from './BottomSheet';
+export { default as AsyncBoundary } from './AsyncBoundary';
 export { default as TabNavigation } from './TabNavigation';
 export { default as StaticTabNavigation } from './StaticTabNavigation';
 export { default as Pagination } from './PaginationComponents';

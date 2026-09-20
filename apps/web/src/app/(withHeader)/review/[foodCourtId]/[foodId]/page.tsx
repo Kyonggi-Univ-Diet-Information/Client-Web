@@ -1,7 +1,16 @@
-import { ReviewPage, ReviewPageProps } from '@/page/review';
+import { ReviewPage, ReviewPageErrorFallback, ReviewPageProps } from '@/page/review';
+
+import { AsyncBoundary, Loader } from '@/shared/ui';
 
 const Page = async (props: ReviewPageProps) => {
-  return <ReviewPage {...props} />;
+  return (
+    <AsyncBoundary
+      pendingFallback={<Loader />}
+      rejectedFallback={ReviewPageErrorFallback}
+    >
+      <ReviewPage {...props} />
+    </AsyncBoundary>
+  );
 };
 
 export default Page;
