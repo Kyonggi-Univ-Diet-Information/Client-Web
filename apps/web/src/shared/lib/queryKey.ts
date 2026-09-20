@@ -55,8 +55,10 @@ export const reviewKeys = {
     (type: FoodCourt, foodId: number) => ['reviews', type, foodId] as const,
   ),
   paged: createQueryKeyFactory(
-    (type: FoodCourt, foodId: number, pageIndex: number = 0) =>
-      ['reviews', type, foodId, pageIndex] as const,
+    (type: FoodCourt, foodId: number, pageIndex: number = 0, sort?: string) =>
+      sort
+        ? (['reviews', type, foodId, pageIndex, sort] as const)
+        : (['reviews', type, foodId, pageIndex] as const),
   ),
   count: createQueryKeyFactory(
     (type: FoodCourt, foodId: number) =>

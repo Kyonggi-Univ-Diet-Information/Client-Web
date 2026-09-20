@@ -1,5 +1,5 @@
 
-import type { Review } from '@/entities/review/api/api.type';
+import type { Review, ReviewSort } from '@/entities/review/api/api.type';
 
 import { ENDPOINT, type FoodCourt } from '@/shared/api';
 import type { BasePagedResponse } from '@/shared/api/api-base-types';
@@ -12,17 +12,19 @@ export const fetchReviewPaged = async (
   type: FoodCourt,
   foodId: number,
   page: number = 0,
+  sort?: ReviewSort,
 ): Promise<BasePagedResponse<Review[]>> => {
   const isAuthenticated = await AuthService.isAuthenticated();
 
   const data = await Http.get<BasePagedResponse<Review[]>>({
-    request: `${ENDPOINT.REVIEW_R.PAGED(type, foodId)}?pageNo=${page}`,
+    request: ENDPOINT.REVIEW_R.PAGED(type, foodId),
+    params: { pageNo: page, sort },
     cache: 'no-store',
     authorize: isAuthenticated,
     next: {
       tags: [
         reviewKeys.byFood.tag(type, foodId),
-        reviewKeys.paged.tag(type, foodId, page),
+        reviewKeys.paged.tag(type, foodId, page, sort),
       ],
     },
   });

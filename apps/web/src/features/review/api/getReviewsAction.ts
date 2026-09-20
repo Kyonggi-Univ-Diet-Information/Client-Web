@@ -10,6 +10,7 @@ import type {
   FetchReviewLikedRes,
   KyongsulFoodReviewRes,
   Review,
+  ReviewSort,
   SallyBoxFoodReviewRes,
 } from '@/entities/review/api/api.type';
 
@@ -50,11 +51,12 @@ export async function getReviewsAction(
   type: FoodCourt,
   foodId: number,
   pageNo: number,
+  sort?: ReviewSort,
 ) {
   const [isAuthenticated, userInfo, reviews] = await Promise.all([
     AuthService.isAuthenticated(),
     AuthService.getUserInfo(),
-    fetchReviewPaged(type, foodId, pageNo),
+    fetchReviewPaged(type, foodId, pageNo, sort),
   ]);
 
   const likedReviewItems = isAuthenticated ? await fetchReviewFaved(type) : [];

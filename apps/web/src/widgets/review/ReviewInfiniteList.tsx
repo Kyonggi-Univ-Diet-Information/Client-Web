@@ -10,6 +10,8 @@ import {
   reviewsFetcher,
 } from '@/features/review/api/reviewSWR';
 
+import type { ReviewSort } from '@/entities/review/api/api.type';
+
 import { type FoodCourt } from '@/shared/api';
 import { reviewKeys } from '@/shared/lib/queryKey';
 import { Loader } from '@/shared/ui';
@@ -21,19 +23,21 @@ interface ReviewInfiniteListProps {
   type: FoodCourt;
   foodId: number;
   initialData: PagedReviewResponse;
+  sort?: ReviewSort;
 }
 
 export default function ReviewInfiniteList({
   type,
   foodId,
   initialData,
+  sort,
 }: ReviewInfiniteListProps) {
   const getKey = (
     pageIndex: number,
     previousPageData: PagedReviewResponse | null,
   ) => {
     if (previousPageData && previousPageData.last) return null;
-    return reviewKeys.paged(type, foodId, pageIndex);
+    return reviewKeys.paged(type, foodId, pageIndex, sort);
   };
 
   const { data, size, setSize, isValidating, mutate } =
