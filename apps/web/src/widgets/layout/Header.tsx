@@ -103,7 +103,7 @@ export default function Header() {
   };
 
   return (
-    <header className='fixed top-0 z-50 flex h-14 w-full bg-white py-8'>
+    <header className='fixed top-0 z-50 flex h-16 w-full items-center bg-transparent'>
       <div className='mx-auto flex w-full max-w-[770px] items-center justify-between px-4'>
         <MobileHeader />
         <DesktopHeader />
