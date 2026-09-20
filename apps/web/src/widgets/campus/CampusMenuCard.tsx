@@ -32,6 +32,7 @@ export default async function CampusMenuCard({
         foodCourt={foodCourt}
         menuId={id}
         className='size-[116px] rounded-lg'
+        sizes='116px'
       />
       <div className='flex flex-col gap-1.5 px-1'>
         <div className='flex flex-col gap-1'>

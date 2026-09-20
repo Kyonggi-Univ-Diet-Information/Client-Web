@@ -13,12 +13,14 @@ interface CampusMenuImageProps {
   menuId: number;
   foodCourt: FoodCourt;
   className?: string;
+  sizes?: string;
 }
 
 export default function CampusMenuImage({
   foodCourt,
   menuId,
   className,
+  sizes = '100px',
 }: CampusMenuImageProps) {
   const imageKey: Record<FoodCourt, string> = {
     [FOOD_COURT.KYONGSUL]: '',
@@ -56,7 +58,7 @@ export default function CampusMenuImage({
   return (
     <div
       className={cn(
-        'relative size-[100px] overflow-hidden rounded-xl focus:outline-none',
+        'relative h-[100px] w-[100px] overflow-hidden rounded-xl focus:outline-none',
         className,
       )}
     >
@@ -68,6 +70,7 @@ export default function CampusMenuImage({
         src={imageSrc}
         alt={menuId.toString()}
         fill
+        sizes={sizes}
         onLoad={handleLoad}
         onError={handleError}
         className={cn(
