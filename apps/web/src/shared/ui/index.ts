@@ -9,10 +9,10 @@ export { default as StaticTabNavigation } from './StaticTabNavigation';
 export { default as Pagination } from './PaginationComponents';
 export { default as Loader } from './Loader';
 export { default as Section } from './Section';
-export { default as WeekSelector } from './WeekSelector';
 export { default as Title } from './Title';
 export { default as Skeleton } from './Skeleton';
 export { default as SegmentedControl } from './SegmentedControl';
+export { default as Tab } from './Tab';
 export {
   Select,
   SelectContent,
