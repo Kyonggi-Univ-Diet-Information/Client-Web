@@ -8,13 +8,15 @@ import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 export default function BottomSheet({
   children,
   href,
+  onClose,
 }: {
   children: ReactNode;
-  href: string;
+  href?: string;
+  onClose?: () => void;
 }) {
   const router = useRouter();
 
-  const close = () => router.back();
+  const close = onClose ?? (() => router.back());
 
   const handleOverlayClick = (e: ReactMouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
@@ -30,12 +32,21 @@ export default function BottomSheet({
 
   return (
     <div className='fixed inset-0 z-60 flex items-end justify-center'>
-      <Link
-        href={href}
-        onClick={handleOverlayClick}
-        className='absolute inset-0 bg-black/30 backdrop-blur-xs'
-        aria-label='닫기'
-      />
+      {href ? (
+        <Link
+          href={href}
+          onClick={handleOverlayClick}
+          className='absolute inset-0 bg-black/30 backdrop-blur-xs'
+          aria-label='닫기'
+        />
+      ) : (
+        <button
+          type='button'
+          onClick={close}
+          className='absolute inset-0 bg-black/30 backdrop-blur-xs'
+          aria-label='닫기'
+        />
+      )}
       <motion.div
         drag='y'
         dragConstraints={{ top: 0, bottom: 0 }}
