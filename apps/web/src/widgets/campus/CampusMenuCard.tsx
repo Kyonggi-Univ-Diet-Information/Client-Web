@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { ChevronRight, Star } from 'lucide-react';
 import Link from 'next/link';
 
 import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
@@ -11,6 +11,8 @@ import CampusMenuImage from './CampusMenuImage';
 
 interface CampusMenuCardProps extends CampusMenu {
   foodCourt: FoodCourt;
+  location?: string[];
+  reviewCount?: number;
 }
 
 export default async function CampusMenuCard({
@@ -19,8 +21,11 @@ export default async function CampusMenuCard({
   price,
   averageRating,
   foodCourt,
+  location,
+  reviewCount: givenReviewCount,
 }: CampusMenuCardProps) {
-  const reviewCount = await fetchReviewCount(foodCourt, id);
+  const reviewCount =
+    givenReviewCount ?? (await fetchReviewCount(foodCourt, id));
   const foodCourtId = FOOD_COURT_ID[foodCourt];
 
   return (
@@ -36,7 +41,19 @@ export default async function CampusMenuCard({
       />
       <div className='flex flex-col gap-1.5 px-1'>
         <div className='flex flex-col gap-1'>
-          <span className='text-base font-medium text-gray-900'>{name}</span>
+          <div className='flex flex-col'>
+            <span className='text-base font-medium text-gray-900'>{name}</span>
+            {location && (
+              <span className='flex items-center gap-0.5 text-[13px] text-gray-500'>
+                {location.map((label, index) => (
+                  <span key={label} className='flex items-center gap-0.5'>
+                    {index > 0 && <ChevronRight size={12} />}
+                    {label}
+                  </span>
+                ))}
+              </span>
+            )}
+          </div>
           <span className='text-lg font-semibold text-gray-900'>
             {price.toLocaleString()}원
           </span>

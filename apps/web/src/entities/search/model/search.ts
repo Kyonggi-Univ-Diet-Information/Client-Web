@@ -42,9 +42,9 @@ export const FOOD_TYPE_NAME: Record<FoodType, string> = {
 };
 
 export const SORTING_TYPE_NAME: Record<SortingType, string> = {
-  [SORTING_TYPE.BASIC]: '기본',
-  [SORTING_TYPE.REVIEW_COUNT_DESC]: '리뷰 많은 순',
-  [SORTING_TYPE.RATING_DESC]: '평점 높은 순',
-  [SORTING_TYPE.PRICE_ASC]: '가격 낮은 순',
-  [SORTING_TYPE.PRICE_DESC]: '가격 높은 순',
+  [SORTING_TYPE.BASIC]: '기본순',
+  [SORTING_TYPE.REVIEW_COUNT_DESC]: '리뷰 많은순',
+  [SORTING_TYPE.RATING_DESC]: '평점 높은순',
+  [SORTING_TYPE.PRICE_ASC]: '가격 낮은순',
+  [SORTING_TYPE.PRICE_DESC]: '가격 높은순',
 };

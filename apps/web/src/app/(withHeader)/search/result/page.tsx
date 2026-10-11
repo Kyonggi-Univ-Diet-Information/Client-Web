@@ -1,13 +1,11 @@
 import { Suspense } from 'react';
 
-
 import { SearchResult, SearchSkeleton } from '@/page/search';
 
-import { SORTING_TYPE, SortingType } from '@/entities/search/model/search';
+import { SORTING_TYPE, type SortingType } from '@/entities/search/model/search';
 
-import { FoodCourt } from '@/shared/api';
-
-
+import { FOOD_COURT, FOOD_COURT_NAME, type FoodCourt } from '@/shared/api';
+import { ChipNavigation } from '@/shared/ui';
 
 export default async function SearchPage({
   searchParams,
@@ -24,18 +22,40 @@ export default async function SearchPage({
     sort = SORTING_TYPE.BASIC,
   } = await searchParams;
 
+  const tabHref = (type: string) =>
+    `/search/result?${new URLSearchParams({ q, restaurantType: type, sort }).toString()}`;
+  const restaurantTabs = [
+    { key: 'ALL', label: '전체', href: tabHref('ALL') },
+    ...Object.values(FOOD_COURT)
+      .filter(type => type !== FOOD_COURT.DORMITORY)
+      .map(type => ({
+        key: type,
+        label: FOOD_COURT_NAME[type],
+        href: tabHref(type),
+      })),
+  ];
+
   return (
-    <Suspense
-      key={q}
-      fallback={
-        <>
-          <SearchSkeleton />
-          <SearchSkeleton />
-          <SearchSkeleton />
-        </>
-      }
-    >
-      <SearchResult q={q} restaurantType={restaurantType} sort={sort} />
-    </Suspense>
+    <>
+      <ChipNavigation
+        tabs={restaurantTabs}
+        currentTabKey={restaurantType}
+        className='pt-3'
+      />
+      <div className='h-2.5 shrink-0 bg-[#F3F4F5]' />
+      <Suspense
+        key={`${q}-${restaurantType}-${sort}`}
+        fallback={
+          <>
+            <div className='h-[46px]' />
+            <SearchSkeleton />
+            <SearchSkeleton />
+            <SearchSkeleton />
+          </>
+        }
+      >
+        <SearchResult q={q} restaurantType={restaurantType} sort={sort} />
+      </Suspense>
+    </>
   );
 }
