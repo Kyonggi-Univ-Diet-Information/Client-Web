@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-
 import { AuthButton } from '@/features/auth/ui/AuthButton';
-
 
 import { FOOD_COURT_ID, INQUIRY_URL } from '@/shared/api';
 import {
@@ -17,8 +15,6 @@ import {
 import { ExternalLink } from '@/shared/ui';
 
 import HeaderSearchOverlay from './HeaderSearchOverlay';
-
-
 
 export default function Header() {
   const pathname = usePathname();
@@ -59,8 +55,10 @@ export default function Header() {
           <ChevronLeftIcon />
         ) : (
           <>
-            <span className='font-brBold text-xl font-bold'>기밥</span>
-            <span className='font-brRegular hidden md:block'>
+            <span className='font-gyeonggiTitleBold text-xl font-bold'>
+              기밥
+            </span>
+            <span className='font-gyeonggiTitleBold hidden md:block'>
               기룡아 밥먹자
             </span>
           </>
@@ -76,8 +74,12 @@ export default function Header() {
           href='/'
           className='hidden cursor-pointer items-baseline gap-2 md:flex'
         >
-          <span className='font-brBold text-2xl font-bold'>기밥</span>
-          <span className='font-brRegular hidden md:block'>기룡아 밥먹자</span>
+          <span className='font-gyeonggiTitleBold text-2xl font-bold'>
+            기밥
+          </span>
+          <span className='font-gyeonggiTitleBold hidden md:block'>
+            기룡아 밥먹자
+          </span>
         </Link>
         <div className='hidden items-baseline gap-4 md:flex'>
           {navItems.map(item => {

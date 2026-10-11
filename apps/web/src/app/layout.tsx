@@ -4,7 +4,13 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 
-import { brBold, brRegular, tossFace, wantedSans } from '@/app/_styles/font';
+import {
+  brBold,
+  brRegular,
+  gyeonggiTitleBold,
+  tossFace,
+  wantedSans,
+} from '@/app/_styles/font';
 
 import { ErrorProvider, SWRProvider } from '@/widgets/providers';
 
@@ -23,7 +29,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html
       lang='ko'
-      className={`${wantedSans.variable} ${brBold.variable} ${brRegular.variable} ${tossFace.variable}`}
+      className={`${wantedSans.variable} ${brBold.variable} ${brRegular.variable} ${gyeonggiTitleBold.variable} ${tossFace.variable}`}
       suppressHydrationWarning
     >
       <head>

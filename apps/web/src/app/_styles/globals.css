@@ -150,6 +150,10 @@ body {
   font-family: var(--font-brRegular);
 }
 
+.font-gyeonggiTitleBold {
+  font-family: var(--font-gyeonggiTitleBold);
+}
+
 .font-tossFace {
   font-family: var(--font-tossFace);
 }
