@@ -5,7 +5,7 @@ import { SearchInput } from '@/page/search';
 
 export default async function SearchPage() {
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 px-4'>
       <Suspense fallback={<SearchInputSkeleton />}>
         <SearchInput />
       </Suspense>

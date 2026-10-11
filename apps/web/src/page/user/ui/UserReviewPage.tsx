@@ -18,7 +18,7 @@ export default async function UserReviewPage() {
 
   return (
     <>
-      <div className='flex flex-col gap-1'>
+      <div className='flex flex-col gap-1 px-4'>
         <Title>작성한 리뷰</Title>
         <p className='text-sm text-gray-500'>
           내가 작성한 리뷰를 확인할 수 있습니다.
@@ -31,7 +31,7 @@ export default async function UserReviewPage() {
             작성한 리뷰가 없어요!
           </div>
         )}
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 px-4'>
           {data?.content.map(review => (
             <Card
               key={`${review.reviewId}-${review.foodId}`}

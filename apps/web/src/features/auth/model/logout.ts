@@ -10,6 +10,7 @@ export async function logout(): Promise<{ success: boolean; error?: string }> {
       };
     }
 
+    window.Android?.logout();
     return { success: true };
   } catch (error) {
     console.error('Logout failed:', error);

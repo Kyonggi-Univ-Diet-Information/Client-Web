@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import { PUBLIC_API_URL } from '@/shared/api/api-endpoints';
+import { isNativeApp, refreshNativeToken } from '@/shared/lib/nativeBridge';
 
 export interface RequestBase {
   request: string;
@@ -123,11 +124,16 @@ export class Http {
     options: HttpOptions,
     authorize?: boolean,
   ): Promise<T> {
-    const res = await fetch(url, {
-      ...init,
-      credentials: 'include',
-      redirect: 'follow',
-    });
+    const doFetch = () =>
+      fetch(url, { ...init, credentials: 'include', redirect: 'follow' });
+
+    let res = await doFetch();
+
+    if (res.status === 401 && authorize && isNativeApp()) {
+      // 실패 시 네이티브가 로그인 화면으로 전환하므로 웹은 아무것도 하지 않아요
+      if (!(await refreshNativeToken())) return new Promise<T>(() => {});
+      res = await doFetch();
+    }
 
     const data = await res.json().catch(() => ({}));
 
