@@ -43,10 +43,6 @@ export default async function CampusMenuByFoodCourt({
 
   const foodCourtId = FOOD_COURT_ID[foodCourt as keyof typeof FOOD_COURT_ID];
 
-  const currentPath = categoryKey
-    ? `/campus/${foodCourtId}/${categoryKey}`
-    : `/campus/${foodCourtId}`;
-  const sortHref = `/campus/sort?from=${encodeURIComponent(currentPath)}${sort ? `&sort=${sort}` : ''}`;
 
   const categoryTabs = [
     { key: 'all', label: '전체', href: `/campus/${foodCourtId}` },
@@ -67,7 +63,7 @@ export default async function CampusMenuByFoodCourt({
         className='border-b-0 pb-0'
       />
 
-      <CampusMenuListHeader totalCount={totalCount} sortHref={sortHref} sort={sort} />
+      <CampusMenuListHeader totalCount={totalCount} />
 
       <div className='flex flex-col md:grid md:grid-cols-2 md:gap-4'>
         {displayMenus.length > 0 &&
