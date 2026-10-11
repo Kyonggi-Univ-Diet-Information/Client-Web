@@ -18,6 +18,7 @@ import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
 import { AuthService } from '@/shared/lib/auth';
 import { Loader, Modal, Button, AnimatedCard } from '@/shared/ui';
 
+import RecordRecentMenu from './RecordRecentMenu';
 import ReviewWriteButton from './ReviewWriteButton';
 
 export interface ReviewPageProps {
@@ -57,6 +58,12 @@ export default async function ReviewPage({
 
   return (
     <div className='flex flex-col pb-10'>
+      <RecordRecentMenu
+        foodCourt={foodCourt}
+        foodId={foodId}
+        name={menuDetail.name}
+        subRestaurant={menuDetail.subRestaurant}
+      />
       <AnimatedCard index={0}>
         <div className='flex flex-col'>
           <CampusMenuImage
