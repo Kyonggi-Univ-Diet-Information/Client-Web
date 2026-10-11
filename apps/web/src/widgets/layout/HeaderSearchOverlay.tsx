@@ -3,6 +3,7 @@
 import { Search, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import {
   addRecentSearch,
@@ -32,15 +33,16 @@ export default function HeaderSearchOverlay({ onClose }: { onClose: () => void }
     setRecentSearches(removeRecentSearch(term));
   };
 
-  return (
-    <div className='fixed inset-0 z-50'>
+  // 헤더가 fixed·z-50 스태킹 컨텍스트라 내부에 그리면 BottomNavBar(z-50) 아래로 깔려요
+  return createPortal(
+    <div className='fixed inset-0 z-[60]'>
       <button
         type='button'
         onClick={onClose}
         className='absolute inset-0 bg-black/20'
         aria-label='닫기'
       />
-      <div className='absolute top-16 left-1/2 w-full max-w-[770px] -translate-x-1/2 rounded-b-2xl bg-white pb-4 shadow-lg'>
+      <div className='absolute top-0 left-1/2 w-full max-w-[770px] -translate-x-1/2 rounded-b-2xl bg-white pb-4 shadow-lg'>
         <form
           onSubmit={e => {
             e.preventDefault();
@@ -92,6 +94,7 @@ export default function HeaderSearchOverlay({ onClose }: { onClose: () => void }
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
