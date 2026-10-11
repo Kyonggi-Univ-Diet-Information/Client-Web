@@ -3,10 +3,11 @@
 import { ChevronLeftIcon, MessageSquareWarning, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import { AuthButton } from '@/features/auth/ui/AuthButton';
+
 
 import { FOOD_COURT_ID, INQUIRY_URL } from '@/shared/api';
 import {
@@ -15,11 +16,14 @@ import {
 } from '@/shared/constants/campus/restaurant';
 import { ExternalLink } from '@/shared/ui';
 
+import HeaderSearchOverlay from './HeaderSearchOverlay';
+
 
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
   const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
@@ -103,21 +107,22 @@ export default function Header() {
   };
 
   return (
-    <header className='fixed top-0 z-50 flex h-14 w-full bg-white py-8'>
+    <header className='fixed top-0 z-50 flex h-16 w-full items-center bg-transparent'>
       <div className='mx-auto flex w-full max-w-[770px] items-center justify-between px-4'>
         <MobileHeader />
         <DesktopHeader />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (
-            <Link
-              href='/search'
+            <button
+              type='button'
+              onClick={() => setIsSearchOpen(true)}
               className='cursor-pointer transition-transform hover:scale-110'
             >
               <Search size={20} className='text-accent-foreground' />
-            </Link>
+            </button>
           )}
 
-          <ExternalLink
+          {/* <ExternalLink
             href={INQUIRY_URL}
             className='cursor-pointer transition-transform hover:scale-110'
           >
@@ -126,9 +131,12 @@ export default function Header() {
               className='text-accent-foreground'
             />
           </ExternalLink>
-          <AuthButton />
+          <AuthButton /> */}
         </div>
       </div>
+      {isSearchOpen && (
+        <HeaderSearchOverlay onClose={() => setIsSearchOpen(false)} />
+      )}
     </header>
   );
 }

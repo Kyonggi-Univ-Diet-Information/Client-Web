@@ -13,33 +13,31 @@ export default async function CampusMenuSet({
   type: CampusFoodCourt;
   baseFoodId: number;
 }) {
-  const setMenus = await fetchCampusMenuHasSet(type, baseFoodId);
+  const setMenus = await fetchCampusMenuHasSet(type, baseFoodId).catch(() => []);
 
   if (setMenus.length === 0) return null;
 
   const description = (setMenu: CampusSetMenu) =>
     setMenu.name.includes('세트')
-      ? '(단품 + 감자튀김 + 탄산음료)'
-      : '(단품 + 탄산음료)';
+      ? '단품 + 감자튀김 + 탄산음료'
+      : '단품 + 탄산음료';
 
   return (
-    <div className='flex flex-col gap-2 rounded-2xl bg-gray-50 p-5'>
-      <h3 className='text-xs font-semibold text-gray-400'>연관 세트 메뉴</h3>
-      <div className='flex flex-col gap-4'>
+    <div className='flex flex-col'>
+      <h3 className='text-lg font-semibold mb-4'>연관 세트 메뉴</h3>
+      <div className='flex flex-col gap-2.5'>
         {setMenus.map(setMenu => (
           <div
-            className='flex items-start justify-between gap-4'
+            className='flex items-start flex-col gap-1.5 p-4 border border-gray-100 rounded-[8px]'
             key={setMenu.id}
           >
-            <div className='flex min-w-0 flex-col gap-1'>
-              <p className='truncate text-sm font-bold text-gray-900'>
-                {setMenu.name}
-              </p>
-              <p className='text-xs leading-tight text-gray-500'>
-                {description(setMenu)}
-              </p>
-            </div>
-            <p className='shrink-0 text-sm font-black whitespace-nowrap text-gray-900'>
+           <p className='truncate text-gray-900'>
+              {setMenu.name}
+            </p>
+            <p className='text-sm leading-tight text-gray-500'>
+              {description(setMenu)}
+            </p>
+            <p className='flex w-full justify-end shrink-0 text-xl font-black text-gray-900'>
               {setMenu.price.toLocaleString()}원
             </p>
           </div>

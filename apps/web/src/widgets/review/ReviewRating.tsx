@@ -1,16 +1,17 @@
+import { Star } from 'lucide-react';
 
 import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
 import { fetchReviewRating } from '@/features/review/api/fetchReviewRating';
 import { fetchReviewRatingAverage } from '@/features/review/api/fetchReviewRatingAverage';
 
 import { type FoodCourt } from '@/shared/api';
-import { cn } from '@/shared/lib';
-
 
 interface ReviewRatingSectionProps {
   type: FoodCourt;
   foodId: number;
 }
+
+const STARS = ['5', '4', '3', '2', '1'] as const;
 
 export default async function ReviewRating({
   type,
@@ -22,60 +23,57 @@ export default async function ReviewRating({
     fetchReviewRatingAverage(type, foodId),
   ]);
 
-  const ratingPercentage = {
-    '5': (rating['5'] / reviewCount) * 100,
-    '4': (rating['4'] / reviewCount) * 100,
-    '3': (rating['3'] / reviewCount) * 100,
-    '2': (rating['2'] / reviewCount) * 100,
-    '1': (rating['1'] / reviewCount) * 100,
-  };
-
   if (reviewCount === 0) {
     return null;
   }
 
-  return (
-    <div className='flex flex-col gap-6'>
-      <div className='flex items-center justify-between gap-8'>
-        <div className='flex flex-col gap-1.5'>
-          <div className='flex items-baseline gap-1'>
-            <span className='text-3xl leading-none font-black tracking-tighter text-gray-900'>
-              {averageRating.toFixed(1)}
-            </span>
-            <span className='text-xs font-bold text-gray-400'>/ 5.0</span>
-          </div>
-          <span className='w-full text-center text-xs font-semibold text-gray-400 uppercase'>
-            전체 리뷰 {reviewCount}개
-          </span>
-        </div>
+  const roundedAverage = Math.round(averageRating ?? 0);
 
-        <div className='grid flex-1 grid-cols-5 gap-2'>
-          {Object.entries(ratingPercentage)
-            .reverse()
-            .map(([rating, percentage]) => (
-              <div key={rating} className='flex flex-col items-center gap-2'>
-                <div className='relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border border-gray-100 transition-all duration-700'>
-                  <div
-                    className='bg-point absolute inset-0 transition-all duration-1000 ease-out'
-                    style={{
-                      opacity: Math.max(0.05, percentage / 100),
-                    }}
-                  />
-                  <span
-                    className={cn(
-                      'relative text-sm font-black transition-colors duration-500',
-                      percentage > 60 ? 'text-white' : 'text-gray-900',
-                    )}
-                  >
-                    {rating}
-                  </span>
-                </div>
-                <span className='text-xs font-semibold text-gray-300'>
-                  {Math.round(percentage)}%
-                </span>
-              </div>
+  return (
+    <div className='flex items-end gap-8 bg-white pl-8 pb-4 pr-10'>
+      <div className='flex w-[72px] h-full flex-col justify-center'>
+        <div className='flex flex-col items-center justify-center gap-1.5'>
+           <p className='text-[28px] leading-[38px] font-semibold text-gray-900'>
+            {(averageRating ?? 0).toFixed(1)}
+          </p>
+          <div className='flex items-center'>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Star
+                key={index}
+                size={16}
+                className={
+                  index < roundedAverage
+                    ? 'fill-point text-point'
+                    : 'fill-[#ebebeb] text-[#ebebeb]'
+                }
+              />
             ))}
+          </div>
         </div>
+      </div>
+
+      <div className='flex flex-1 flex-col gap-1'>
+        {STARS.map(star => {
+          const count = rating[star];
+          const percentage = (count / reviewCount) * 100;
+
+          return (
+            <div key={star} className='flex items-center gap-2'>
+              <span className='w-6 shrink-0 text-xs font-medium text-gray-900'>
+                {star}점
+              </span>
+              <div className='h-1 flex-1 overflow-hidden rounded-full bg-[#ebebeb]'>
+                <div
+                  className='bg-point h-full rounded-full'
+                  style={{ width: `${percentage}%` }}
+                />
+              </div>
+              <span className='w-4 shrink-0 text-xs font-medium text-gray-400'>
+                {count}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

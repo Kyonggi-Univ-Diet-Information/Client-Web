@@ -10,20 +10,18 @@ export const metadata: Metadata = {
 
 type Props = {
   children: ReactNode;
+  modal: ReactNode;
 };
 
-export default function HeaderLayout({ children }: Props) {
+export default function HeaderLayout({ children, modal }: Props) {
   return (
     <>
       <Header />
-      <div className='size-full pt-[65px]'>
-        <main className='relative mx-auto flex min-h-[calc(100vh-65px)] max-w-[770px]'>
-          <div className='scrollbar-hide pb-26 absolute inset-0 flex flex-col gap-8 overflow-x-visible overflow-y-scroll p-4 pt-6 focus:outline-none'>
-            {children}
-          </div>
-        </main>
-      </div>
+      <main className='relative mx-auto flex min-h-screen max-w-[770px]'>
+        {children}
+      </main>
       <BottomNavBar />
+      {modal}
     </>
   );
 }

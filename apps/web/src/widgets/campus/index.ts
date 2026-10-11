@@ -1,4 +1,5 @@
 export { default as CampusAnimatedCard } from './CampusAnimatedCard';
+export { default as CampusMainTabs } from './CampusMainTabs';
 export { default as CampusMenuAll } from './CampusMenuAll';
 export { default as CampusMenuByFoodCourt } from './CampusMenuByFoodCourt';
 export { default as CampusMenuByRestaurant } from './CampusMenuByRestaurant';
@@ -7,4 +8,5 @@ export { default as CampusMenuImage } from './CampusMenuImage';
 export { default as CampusMenuName } from './CampusMenuName';
 export { default as CampusMenuPrice } from './CampusMenuPrice';
 export { default as CampusMenuSet } from './CampusMenuSet';
+export { default as CampusSortSheet } from './CampusSortSheet';
 export { default as CampusTopMenu } from './CampusTopMenu';

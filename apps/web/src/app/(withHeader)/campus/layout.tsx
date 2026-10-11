@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { PageContainer } from '@/widgets/layout';
+
 export default function CampusLayout({ children }: { children: ReactNode }) {
-  return <div className='space-y-4'>{children}</div>;
+  return <PageContainer className='gap-4'>{children}</PageContainer>;
 }

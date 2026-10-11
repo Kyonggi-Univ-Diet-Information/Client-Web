@@ -30,12 +30,9 @@ export default function ReviewWriteButton({
         })
       }
     >
-      <Button
-        variant='primary'
-        className='flex h-12 items-center gap-2 rounded-full px-6! shadow-lg shadow-orange-200 transition-all active:scale-95'
-      >
-        <PencilIcon size={18} />
-        <span className='text-base font-semibold'>리뷰 작성하기</span>
+      <Button className='flex h-11 items-center gap-2 rounded-full bg-gray-900 px-4! text-white shadow-lg transition-all hover:bg-gray-900 active:scale-95'>
+        <PencilIcon size={16} />
+        <span className='text-[13px] font-semibold'>리뷰 작성</span>
       </Button>
     </Link>
   );

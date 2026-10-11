@@ -15,7 +15,11 @@ export default async function CampusMenuName({
   menuId: number;
   className?: string;
 }) {
-  const menuName = await fetchCampusMenuName(foodCourt, menuId);
+  const menuName = await fetchCampusMenuName(foodCourt, menuId).catch(() => ({
+    id: menuId,
+    name: '삭제된 메뉴',
+    nameEn: 'Deleted menu',
+  }));
 
   return (
     <Suspense>

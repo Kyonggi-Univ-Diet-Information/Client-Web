@@ -1,11 +1,7 @@
 'use client';
 
-import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
-
-
 
 import { FOOD_COURT_ID } from '@/shared/api';
 import {
@@ -19,61 +15,8 @@ import Restaurant2 from '../../../public/icons/icon-restaurant2.svg';
 import Review from '../../../public/icons/icon-review.svg';
 import User from '../../../public/icons/icon-user.svg';
 
-
-
 export default function BottomNavBar() {
   const pathname = usePathname();
-  const [hidden, setHidden] = useState(false);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    let rafId: number | null = null;
-
-    const handleScroll = (e: Event) => {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-
-      rafId = requestAnimationFrame(() => {
-        const target = e.target as HTMLElement;
-        const currentScrollY = target.scrollTop || window.scrollY;
-
-        if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-          setHidden(true);
-        } else if (currentScrollY < lastScrollY.current) {
-          setHidden(false);
-        }
-
-        lastScrollY.current = currentScrollY;
-        rafId = null;
-      });
-    };
-
-    const scrollContainers = document.querySelectorAll(
-      'main [class*="overflow-y-scroll"], main .scrollbar-hide, .scrollbar-hide',
-    );
-
-    if (scrollContainers.length > 0) {
-      scrollContainers.forEach(container => {
-        container.addEventListener('scroll', handleScroll, { passive: true });
-      });
-    } else {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-    }
-
-    return () => {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-      if (scrollContainers.length > 0) {
-        scrollContainers.forEach(container => {
-          container.removeEventListener('scroll', handleScroll);
-        });
-      } else {
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [pathname]);
 
   const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
   const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
@@ -83,25 +26,25 @@ export default function BottomNavBar() {
     {
       href: '/',
       label: '홈',
-      icon: <Home width={32} height={32} />,
+      icon: <Home className='size-6' />,
       alt: 'home',
     },
     {
       href: defaultCampusHref,
       label: '교내식당',
-      icon: <Restaurant2 width={32} height={32} />,
+      icon: <Restaurant2 className='size-6' />,
       alt: 'restaurant2',
     },
     {
       href: '/review',
       label: '리뷰',
-      icon: <Review width={32} height={32} />,
+      icon: <Review className='size-6' />,
       alt: 'review',
     },
     {
       href: '/user',
       label: '마이',
-      icon: <User width={32} height={32} />,
+      icon: <User className='size-6' />,
       alt: 'user',
     },
   ];
@@ -118,16 +61,7 @@ export default function BottomNavBar() {
   }
 
   return (
-    <motion.div
-      className='shadow-t-md fixed bottom-0 z-50 grid w-full grid-cols-4 items-center rounded-t-2xl border-t border-gray-100 bg-white px-10 pt-2 pb-6 md:hidden'
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: '100%' },
-      }}
-      animate={hidden ? 'hidden' : 'visible'}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      style={{ willChange: 'transform' }}
-    >
+    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] backdrop-blur-md md:hidden'>
       {navItems.map(item => {
         const isActive =
           item.href === '/'
@@ -139,19 +73,22 @@ export default function BottomNavBar() {
             key={item.href}
             href={item.href}
             prefetch
-            className='flex flex-col items-center'
+            className='flex h-[83px] w-20 flex-col items-center justify-center gap-1 pb-6'
           >
-            <div className={cn(isActive ? 'text-point' : 'text-gray-400')}>
+            <div className={cn(isActive ? 'text-gray-900' : 'text-gray-400')}>
               {item.icon}
             </div>
             <span
-              className={`text-xs ${isActive ? 'text-point' : 'text-gray-400'}`}
+              className={cn(
+                'text-xs font-medium',
+                isActive ? 'text-gray-900' : 'text-gray-400',
+              )}
             >
               {item.label}
             </span>
           </Link>
         );
       })}
-    </motion.div>
+    </div>
   );
 }

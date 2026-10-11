@@ -1,0 +1,64 @@
+import { notFound } from 'next/navigation';
+
+import ReviewPagedView from '@/widgets/review/ReviewPagedView';
+import ReviewRating from '@/widgets/review/ReviewRating';
+
+import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
+import { getReviewsAction } from '@/features/review/api/getReviewsAction';
+
+import type { ReviewSort } from '@/entities/review/api/api.type';
+
+import { getFoodCourtById } from '@/shared/api';
+
+export interface ReviewDetailPageProps {
+  params: Promise<{ foodCourtId: string; foodId: string }>;
+  searchParams: Promise<{ sort?: ReviewSort }>;
+}
+
+export default async function ReviewDetailPage({
+  params,
+  searchParams,
+}: ReviewDetailPageProps) {
+  const [{ foodCourtId, foodId: foodIdParam }, { sort }] = await Promise.all([
+    params,
+    searchParams,
+  ]);
+
+  const foodCourt = getFoodCourtById(foodCourtId);
+  if (!foodCourt) {
+    notFound();
+  }
+
+  const foodId = Number(foodIdParam);
+  if (isNaN(foodId) || !Number.isInteger(foodId) || foodId <= 0) {
+    notFound();
+  }
+
+  const [reviewCount, initialReviews] = await Promise.all([
+    fetchReviewCount(foodCourt, foodId),
+    getReviewsAction(foodCourt, foodId, 0, sort),
+  ]);
+
+  return (
+    <div className='flex flex-col pb-10'>
+      <ReviewRating type={foodCourt} foodId={foodId} />
+
+      <div className='border-t-6 border-gray-100 px-4 py-4'>
+        <h1 className='text-lg font-semibold text-gray-900'>
+          전체 리뷰 {reviewCount}
+        </h1>
+      </div>
+
+      {/* TODO: 서버가 sort 쿼리를 지원하면 정렬 링크 복구 (33c8f35 참고) */}
+
+      
+      <ReviewPagedView
+        type={foodCourt}
+        foodId={foodId}
+        initialData={initialReviews}
+        sort={sort}
+      />
+     
+    </div>
+  );
+}

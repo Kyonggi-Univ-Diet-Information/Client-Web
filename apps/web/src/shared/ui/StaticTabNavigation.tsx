@@ -10,35 +10,13 @@ interface StaticTabNavigationProps {
   }>;
   className?: string;
   currentTabKey: string;
-  variant?: 'default' | 'header';
 }
 
 export default function StaticTabNavigation({
   tabs,
   className,
   currentTabKey,
-  variant = 'default',
 }: StaticTabNavigationProps) {
-  if (variant === 'header') {
-    return (
-      <div className={cn('flex items-center gap-2', className)}>
-        {tabs.map(tab => (
-          <Link
-            prefetch
-            key={tab.key}
-            href={tab.href}
-            className={cn(
-              'font-semibold',
-              currentTabKey === tab.key ? 'text-black' : 'text-gray-600/50',
-            )}
-          >
-            {tab.label}
-          </Link>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div
       className={cn(

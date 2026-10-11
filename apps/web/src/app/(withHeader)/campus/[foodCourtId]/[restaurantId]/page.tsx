@@ -2,7 +2,7 @@
 
 import { CampusRestaurantPage, CampusFoodCourtPage } from '@/page/campus';
 
-import type { CategoryMenuResponse } from '@/entities/campus/api/api.type';
+import type { CampusMenuSort, CategoryMenuResponse } from '@/entities/campus/api/api.type';
 
 import { FOOD_COURT_ID, getFoodCourtById } from '@/shared/api';
 import type { BaseResponse } from '@/shared/api/api-base-types';
@@ -72,8 +72,10 @@ const Page = async (props: {
     foodCourtId: string;
     restaurantId: string;
   }>;
+  searchParams: Promise<{ sort?: CampusMenuSort }>;
 }) => {
   const { foodCourtId, restaurantId } = await props.params;
+  const { sort } = await props.searchParams;
   const foodCourt = getFoodCourtById(foodCourtId);
 
   if (!foodCourt) {
@@ -84,6 +86,7 @@ const Page = async (props: {
     return (
       <CampusRestaurantPage
         params={Promise.resolve({ foodCourtId, restaurantId })}
+        searchParams={Promise.resolve({ sort })}
       />
     );
   }
@@ -94,6 +97,7 @@ const Page = async (props: {
         foodCourtId,
         categoryKey: restaurantId,
       })}
+      searchParams={Promise.resolve({ sort })}
     />
   );
 };

@@ -86,10 +86,10 @@ export default function ReviewLikeButton({
       size='sm'
       onClick={handleLikeToggle}
       className={cn(
-        'group h-8 gap-1.5 rounded-full px-3 transition-all active:scale-95',
+        'gap-1.5 rounded-md border px-2.5 transition-all active:scale-95',
         optimisticState.isLiked
-          ? 'bg-point/10 text-point hover:bg-point/20'
-          : 'bg-gray-50 text-gray-400 hover:bg-gray-100',
+          ? 'border-point bg-point/5 text-point'
+          : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50',
       )}
     >
       <motion.div
@@ -99,15 +99,17 @@ export default function ReviewLikeButton({
         transition={{ duration: 0.4, ease: [0.175, 0.885, 0.32, 1.275] }}
       >
         <HeartIcon
+          size={14}
           className={cn(
-            'size-3.5 transition-colors',
+            'transition-colors',
             optimisticState.isLiked
               ? 'fill-current'
               : 'fill-none stroke-[2.5px]',
           )}
         />
       </motion.div>
-      <span className='text-xs font-bold tabular-nums'>
+      <span className='text-[13px] font-medium'>도움돼요</span>
+      <span className='text-[13px] font-medium tabular-nums'>
         {optimisticState.likedCount}
       </span>
     </Button>

@@ -1,5 +1,4 @@
 import type { SubRestaurant } from '@/shared/constants/campus/restaurant';
-import type { DormDay } from '@/shared/types/dorm';
 
 
 export const PUBLIC_API_URL =
@@ -79,7 +78,6 @@ export const ENDPOINT = {
   },
   DORM: {
     DORM_MENU: '/diet-content/dormitory',
-    DORM_MENU_BY_DAY: (day: DormDay) => `/diet-content/dormitory/dow/${day}`,
   },
   MENU: {
     TOP_MENU: '/food/top5-menu',

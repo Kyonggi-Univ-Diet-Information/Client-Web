@@ -144,3 +144,10 @@ export function getRelativeDate(date: Date): string {
 
   return dayjs(date).format('YYYY년 MM월 D일');
 }
+
+/**
+ * 리뷰 카드 등에 쓰이는 짧은 날짜 포맷 (예: 26.09.23)
+ */
+export function formatShortDate(date: Date): string {
+  return dayjs(date).format('YY.MM.DD');
+}

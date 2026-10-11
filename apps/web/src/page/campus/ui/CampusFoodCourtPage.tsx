@@ -1,9 +1,10 @@
 import {
+  CampusMainTabs,
   CampusMenuByFoodCourt,
   CampusMenuByRestaurant,
 } from '@/widgets/campus';
 
-import { getCampusMainTabs } from '@/entities/campus/model/campus';
+import type { CampusMenuSort } from '@/entities/campus/api/api.type';
 
 import { getFoodCourtById } from '@/shared/api';
 import {
@@ -12,7 +13,7 @@ import {
   hasSubRestaurants,
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
-import { Section, StaticTabNavigation } from '@/shared/ui';
+import { ChipNavigation, Section } from '@/shared/ui';
 
 
 
@@ -23,19 +24,20 @@ export interface CampusFoodCourtPageProps {
     foodCourtId: string;
     categoryKey?: string;
   }>;
+  searchParams?: Promise<{ sort?: CampusMenuSort }>;
 }
 
 export default async function CampusFoodCourtPage({
   params,
+  searchParams,
 }: CampusFoodCourtPageProps) {
   const { foodCourtId, categoryKey } = await params;
+  const { sort } = (await searchParams) ?? {};
 
   const foodCourt = getFoodCourtById(foodCourtId);
   if (!foodCourt) {
     throw new Error('Invalid food court id');
   }
-
-  const mainTabs = getCampusMainTabs('ko', '기숙사');
 
   if (hasSubRestaurants(foodCourt)) {
     const restaurants = getRestaurantsByFoodCourt(foodCourt);
@@ -51,23 +53,19 @@ export default async function CampusFoodCourtPage({
 
     return (
       <>
-        <Section.Header
-          title={
-            <StaticTabNavigation
-              tabs={mainTabs}
-              currentTabKey={foodCourtId}
-              variant='header'
-            />
-          }
-          subtitle='리뷰 버튼을 클릭해서 리뷰를 작성해보세요!'
-        />
-        <StaticTabNavigation
-          tabs={restaurantTabs}
-          currentTabKey={firstRestaurantId}
-        />
+        <Section.Header>
+          <CampusMainTabs currentTabKey={foodCourtId} />
+        </Section.Header>
+          <ChipNavigation
+            tabs={restaurantTabs}
+            currentTabKey={firstRestaurantId}
+            variant='point'
+            size='md'
+          />
         <CampusMenuByRestaurant
           foodCourtId={foodCourtId}
           restaurantId={firstRestaurantId}
+          sort={sort}
         />
       </>
     );
@@ -75,17 +73,14 @@ export default async function CampusFoodCourtPage({
 
   return (
     <>
-      <Section.Header
-        title={
-          <StaticTabNavigation
-            tabs={mainTabs}
-            currentTabKey={foodCourtId}
-            variant='header'
-          />
-        }
-        subtitle='리뷰 버튼을 클릭해서 리뷰를 작성해보세요!'
+      <Section.Header>
+        <CampusMainTabs currentTabKey={foodCourtId} />
+      </Section.Header>
+      <CampusMenuByFoodCourt
+        foodCourt={foodCourt}
+        categoryKey={categoryKey}
+        sort={sort}
       />
-      <CampusMenuByFoodCourt foodCourt={foodCourt} categoryKey={categoryKey} />
     </>
   );
 }

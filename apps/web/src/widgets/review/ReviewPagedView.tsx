@@ -1,23 +1,25 @@
+import type { PagedReviewResponse } from '@/features/review/api/reviewSWR';
 
-import { getReviewsAction } from '@/features/review/api/getReviewsAction';
+import type { ReviewSort } from '@/entities/review/api/api.type';
+
 
 import { type FoodCourt } from '@/shared/api';
 
 import ReviewInfiniteList from './ReviewInfiniteList';
 
-
-
 interface ReviewPagedViewProps {
   type: FoodCourt;
   foodId: number;
+  initialData: PagedReviewResponse;
+  sort?: ReviewSort;
 }
 
-export default async function ReviewPagedView({
+export default function ReviewPagedView({
   type,
   foodId,
+  initialData,
+  sort,
 }: ReviewPagedViewProps) {
-  const initialData = await getReviewsAction(type, foodId, 0);
-
   if (initialData.content.length === 0) {
     return (
       <div className='mt-10 text-center font-medium text-gray-500'>
@@ -27,6 +29,12 @@ export default async function ReviewPagedView({
   }
 
   return (
-    <ReviewInfiniteList type={type} foodId={foodId} initialData={initialData} />
+    <ReviewInfiniteList
+      key={sort}
+      type={type}
+      foodId={foodId}
+      initialData={initialData}
+      sort={sort}
+    />
   );
 }

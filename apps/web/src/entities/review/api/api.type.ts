@@ -22,6 +22,8 @@ export type RecentReview = Pick<
 
 export type ReviewPost = Pick<Review, 'rating' | 'title' | 'content'>;
 
+export type ReviewSort = 'recent' | 'rating-desc' | 'rating-asc';
+
 export type Rating = {
   '1': number;
   '2': number;
