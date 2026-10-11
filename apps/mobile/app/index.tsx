@@ -116,6 +116,7 @@ export default function Index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView
+        edges={Platform.OS === 'android' ? [] : undefined}
         style={[
           styles.container,
           {
