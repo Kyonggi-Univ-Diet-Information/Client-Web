@@ -52,7 +52,7 @@ export const useSocialCode = () => {
           result = await submitKakaoLogin(code);
           break;
         case 'google':
-          if (isAndroid() && !window.IS_REACT_NATIVE_WEBVIEW) {
+          if (isAndroid() && !window.IS_REACT_NATIVE_WEBVIEW && !window.Android) {
             window.location.href = getAppDeepLink();
             return;
           }
