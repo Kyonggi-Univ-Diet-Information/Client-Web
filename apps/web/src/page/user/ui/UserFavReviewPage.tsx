@@ -45,7 +45,7 @@ export default async function UserFavReviewPage() {
 
   return (
     <>
-      <div className='flex flex-col gap-1'>
+      <div className='flex flex-col gap-1 px-4'>
         <Title>좋아요한 리뷰</Title>
         <p className='text-sm text-gray-500'>
           좋아요한 리뷰를 확인할 수 있습니다.

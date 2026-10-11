@@ -69,7 +69,7 @@ export default function UserPageClient({
 
   return (
     <>
-      <Section>
+      <Section className='px-4'>
         <div>
           <h1 className='text-lg'>
             <b className='text-xl font-semibold'>{userInfo.name}</b> 님,
@@ -98,7 +98,7 @@ export default function UserPageClient({
           </Card>
         </div>
       </Section>
-      <Section>
+      <Section className='px-4'>
         <ExternalLink href={PATCHNOTE_URL}>패치노트</ExternalLink>
         <ExternalLink href={INQUIRY_URL}>문의하기</ExternalLink>
         <button onClick={handleLogout} className='text-start'>
