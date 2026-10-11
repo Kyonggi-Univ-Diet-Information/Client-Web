@@ -12,19 +12,20 @@ export const fetchReviewPaged = async (
   type: FoodCourt,
   foodId: number,
   page: number = 0,
-  sort?: ReviewSort,
+  _sort?: ReviewSort,
 ): Promise<BasePagedResponse<Review[]>> => {
   const isAuthenticated = await AuthService.isAuthenticated();
 
   const data = await Http.get<BasePagedResponse<Review[]>>({
     request: ENDPOINT.REVIEW_R.PAGED(type, foodId),
-    params: { pageNo: page, sort },
+    // TODO: 서버가 sort 쿼리를 지원하면 params: { pageNo: page, sort } 복구
+    params: { pageNo: page },
     cache: 'no-store',
     authorize: isAuthenticated,
     next: {
       tags: [
         reviewKeys.byFood.tag(type, foodId),
-        reviewKeys.paged.tag(type, foodId, page, sort),
+        reviewKeys.paged.tag(type, foodId, page),
       ],
     },
   });
