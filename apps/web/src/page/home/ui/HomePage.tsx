@@ -1,5 +1,3 @@
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
 
 
 import DormSection from '@/widgets/dorm/DormSection';
@@ -12,6 +10,7 @@ import { RESTAURANT_ID_BY_NAME } from '@/shared/constants/campus/restaurant';
 import { AnimatedCard, Section } from '@/shared/ui';
 
 import CampusFoodCourtSwitcher from './CampusFoodCourtSwitcher';
+import ReviewCallout from './ReviewCallout';
 
 
 export default async function HomePage() {
@@ -56,13 +55,10 @@ export default async function HomePage() {
 }
 
 function ReviewLinkButton() {
-  const defaultReviewHref = `/review`;
+  const campusHref = `/campus/${FOOD_COURT_ID.KYONGSUL}/${RESTAURANT_ID_BY_NAME.MANKWON}`;
 
   return (
-    <Link
-      href={defaultReviewHref}
-      className='flex items-center justify-between rounded-2xl border border-gray-100 bg-white px-4 py-4 transition-colors active:bg-gray-50'
-    >
+    <ReviewCallout campusHref={campusHref}>
       <AnimatedCard index={0} animationType='spring'>
         <div className='flex items-center gap-3'>
           <div className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-gray-50'>
@@ -74,8 +70,7 @@ function ReviewLinkButton() {
           </div>
         </div>
       </AnimatedCard>
-      <ChevronRight size={18} className='shrink-0 text-gray-400' />
-    </Link>
+    </ReviewCallout>
   );
 }
 
