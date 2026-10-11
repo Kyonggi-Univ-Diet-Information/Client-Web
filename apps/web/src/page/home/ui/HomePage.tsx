@@ -48,7 +48,7 @@ export default async function HomePage() {
       <Section className='p-4'>
         <ReviewLinkButton />
       </Section>
-      <div className='flex flex-col gap-8 bg-white px-4 pt-[18px]'>
+      <div className='flex flex-1 flex-col gap-8 bg-white px-4 pt-[18px]'>
         <DormSection dormMenu={dormMenu} />
       </div>
     </PageContainer>
