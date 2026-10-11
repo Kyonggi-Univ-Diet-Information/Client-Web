@@ -18,8 +18,8 @@ export default function DormMenuSection({ dayMenu, mealTime, isToday }: DormMenu
   const timeMenu = dayMenu?.[mealTime];
 
   return (
-    <Section.Content className='mb-10 h-fit'>
-      <AnimatedCard index={0} className='w-full'>
+    <Section.Content className='mb-10 flex-1'>
+      <AnimatedCard index={0} className='flex w-full'>
         {timeMenu ? (
           <DormMealCard
             mealTime={mealTime}

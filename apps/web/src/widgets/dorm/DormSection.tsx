@@ -31,7 +31,7 @@ export default function DormSection({
   const [mealTime, setMealTime] = useState<DormTime>('BREAKFAST');
 
   return (
-    <Section className='px-4'>
+    <Section className='flex-1 px-4'>
       <WeeklyCalendar currentDay={currentDay} onSelectDay={setCurrentDay} />
       <Tab
         size='sm'
@@ -39,7 +39,7 @@ export default function DormSection({
         value={mealTime}
         onChange={value => setMealTime(value as DormTime)}
       />
-      <Section.Content>
+      <Section.Content className='flex-1'>
         <DormMenuAnimatedWrapper currentDay={currentDay}>
           <DormMenuAll
             dayMenu={dormMenu?.[currentDay] ?? null}
