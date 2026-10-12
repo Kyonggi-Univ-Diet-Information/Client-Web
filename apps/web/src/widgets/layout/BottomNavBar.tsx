@@ -60,8 +60,9 @@ export default function BottomNavBar() {
     return null;
   }
 
+  // iOS 앱은 네이티브 SafeAreaView가 하단 inset을 일부 상쇄해서(paddingBottom -24) 웹뷰 env()가 0이라 최소 24px을 직접 확보해요
   return (
-    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden'>
+    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md supports-[-webkit-touch-callout:none]:pb-[max(env(safe-area-inset-bottom),24px)] md:hidden'>
       {navItems.map(item => {
         const isActive =
           item.href === '/'
