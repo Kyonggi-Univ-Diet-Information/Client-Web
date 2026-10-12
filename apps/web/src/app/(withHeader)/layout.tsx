@@ -18,7 +18,7 @@ export default function HeaderLayout({ children, modal }: Props) {
     <>
       <Header />
       {/* body에 safe-area padding이 있어 100vh를 쓰면 문서 자체가 넘쳐 바깥 스크롤이 생겨요 */}
-      <main className='relative mx-auto flex min-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))] max-w-[770px]'>
+      <main className='relative mx-auto flex min-h-[calc(100dvh-env(safe-area-inset-bottom))] max-w-[770px]'>
         {children}
       </main>
       <BottomNavBar />
