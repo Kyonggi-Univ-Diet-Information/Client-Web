@@ -61,7 +61,7 @@ export default function BottomNavBar() {
   }
 
   return (
-    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] backdrop-blur-md md:hidden'>
+    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden'>
       {navItems.map(item => {
         const isActive =
           item.href === '/'
@@ -73,7 +73,7 @@ export default function BottomNavBar() {
             key={item.href}
             href={item.href}
             prefetch
-            className='flex h-[83px] w-20 flex-col items-center justify-center gap-1 pb-6'
+            className='flex h-14 w-20 flex-col items-center justify-center gap-1'
           >
             <div className={cn(isActive ? 'text-gray-900' : 'text-gray-400')}>
               {item.icon}
