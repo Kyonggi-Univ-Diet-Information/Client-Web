@@ -7,7 +7,7 @@ import DormNoDataMessage from '@/widgets/dorm/DormNoDataMessage';
 import type { DormMenu, DormMenuStatus } from '@/entities/dorm/api/api.type';
 import { DORM_TIME_RANGE, type DormTime } from '@/entities/dorm/model/dormTime';
 
-export function isServingNow(mealTime: DormTime): boolean {
+export function getServingStatus(mealTime: DormTime): '배식 예정' | '배식 중' | '배식 종료' {
   const { start, end } = DORM_TIME_RANGE[mealTime];
   const toMinutes = (time: string) => {
     const [hour, minute] = time.split(':').map(Number);
@@ -16,7 +16,8 @@ export function isServingNow(mealTime: DormTime): boolean {
   const now = new Date();
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
-  return nowMinutes >= toMinutes(start) && nowMinutes < toMinutes(end);
+  if (nowMinutes < toMinutes(start)) return '배식 예정';
+  return nowMinutes < toMinutes(end) ? '배식 중' : '배식 종료';
 }
 
 export default function DormMealCard({
@@ -42,7 +43,7 @@ export default function DormMealCard({
         </span>
         {isToday && (
           <span className='rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700'>
-            {isServingNow(mealTime) ? '배식 중' : '배식 종료'}
+            {getServingStatus(mealTime)}
           </span>
         )}
       </div>
