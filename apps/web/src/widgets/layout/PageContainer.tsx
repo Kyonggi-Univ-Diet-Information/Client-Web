@@ -12,7 +12,7 @@ export default function PageContainer({
   return (
     <div
       className={cn(
-        'scrollbar-hide absolute inset-0 flex flex-col gap-8 overflow-x-visible overflow-y-scroll pt-16 pb-20 bg-white focus:outline-none',
+        'scrollbar-hide absolute inset-0 flex flex-col gap-8 overflow-x-visible overflow-y-scroll pt-16 pb-[calc(5rem+env(safe-area-inset-bottom))] bg-white focus:outline-none',
         className,
       )}
     >

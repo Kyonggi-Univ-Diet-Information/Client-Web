@@ -123,8 +123,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* 상단 inset은 iOS 앱의 네이티브 SafeAreaView가 이미 처리해서 웹에서 또 주면 이중 여백이 생겨요 */
-    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
