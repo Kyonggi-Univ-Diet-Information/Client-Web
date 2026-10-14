@@ -142,7 +142,7 @@ export function getRelativeDate(date: Date): string {
     return `${diffDays}일 전`;
   }
 
-  return dayjs(date).format('YYYY년 MM월 D일');
+  return dayjs(date).format('YYYY년 M월 D일');
 }
 
 /**

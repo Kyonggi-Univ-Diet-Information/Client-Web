@@ -164,6 +164,11 @@ describe('Date Utility Functions', () => {
       const result = getRelativeDate(date);
       expect(result).toMatch(/2023년/);
     });
+
+    it('한 자리 월은 앞에 0을 붙이지 않는다', () => {
+      const date = new Date('2023-09-08T03:00:00Z');
+      expect(getRelativeDate(date)).toBe('2023년 9월 8일');
+    });
   });
 
   describe('WEEKDAYS', () => {
