@@ -107,13 +107,13 @@ describe('Button Component', () => {
   it('asChild 속성으로 자식 컴포넌트를 래핑한다', () => {
     render(
       <Button asChild>
-        <a href='/test'>링크 버튼</a>
+        <a href='https://example.com'>링크 버튼</a>
       </Button>,
     );
 
     const link = screen.getByRole('link', { name: '링크 버튼' });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/test');
+    expect(link).toHaveAttribute('href', 'https://example.com');
   });
 
   it('data-slot 속성이 올바르게 설정된다', () => {
