@@ -12,6 +12,7 @@ import {
   FOOD_COURT_RESTAURANTS,
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
+import { cn } from '@/shared/lib';
 import { ExternalLink } from '@/shared/ui';
 
 import HeaderSearchOverlay from './HeaderSearchOverlay';
@@ -109,7 +110,12 @@ export default function Header() {
   };
 
   return (
-    <header className='fixed top-0 z-50 flex h-16 w-full items-center bg-white'>
+    <header
+      className={cn(
+        'fixed top-0 z-50 flex h-16 w-full items-center bg-white',
+        pathname === '/' && 'bg-[#F3F4F5]/70 backdrop-blur-md',
+      )}
+    >
       <div className='mx-auto flex w-full max-w-[770px] items-center justify-between px-4'>
         <MobileHeader />
         <DesktopHeader />
