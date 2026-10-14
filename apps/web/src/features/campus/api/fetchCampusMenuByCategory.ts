@@ -25,11 +25,11 @@ export const fetchCampusMenuByCategory = cache(
   async (
     foodCourt: CampusFoodCourt,
     restaurant?: SubRestaurant,
-    _sort?: CampusMenuSort,
+    sort?: CampusMenuSort,
   ): Promise<CategorizedMenuData> => {
     const response = await Http.getDirect<BaseResponse<CategoryMenuResponse>>({
       request: ENDPOINT.MENU.MENU_BY_CATEGORY(foodCourt),
-      // TODO: 서버가 sort 쿼리를 지원하면 params: sort ? { sort } : undefined 복구
+      params: sort ? { sort } : undefined,
       next: { tags: [menuKeys.campus.tag(foodCourt)], revalidate: 60 * 60 },
     });
 

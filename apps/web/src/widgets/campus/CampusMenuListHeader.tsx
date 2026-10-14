@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib';
 
-// TODO: 서버가 sort 쿼리를 지원하면 캠퍼스 메뉴에도 sortHref 전달 (28e1c6e 참고)
 export default function CampusMenuListHeader({
   totalCount,
   sortHref,
