@@ -32,6 +32,7 @@ export default function ReviewSortSheet({
             <Link
               key={option.value}
               href={optionHref}
+              replace
               className={cn(
                 'flex items-center justify-between px-5 py-4 text-lg',
                 isSelected ? 'font-medium text-point' : 'text-gray-900',
