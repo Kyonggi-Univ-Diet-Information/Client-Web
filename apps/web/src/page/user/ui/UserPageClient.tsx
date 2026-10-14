@@ -1,10 +1,8 @@
 'use client';
 
-import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-
+import { type ReactNode, useState } from 'react';
 
 import { logout } from '@/features/auth/model/logout';
 import { useAuth } from '@/features/auth/model/useIsAuthenticated';
@@ -13,13 +11,13 @@ import { submitRevokeReason } from '@/features/user/api/submitRevokeReason';
 import { submitUserRevoke } from '@/features/user/api/submitUserRevoke';
 
 import { PATCHNOTE_URL, INQUIRY_URL } from '@/shared/api';
-import { Card, ExternalLink, Section } from '@/shared/ui';
+import { ExternalLink } from '@/shared/ui';
 
 import UserRevokeModal from './UserRevokeModal';
-
-
-
-
+import ArrowRight from '../../../../public/icons/icon-arrow-right.svg';
+import LogOut from '../../../../public/icons/icon-logout.svg';
+import Mail from '../../../../public/icons/icon-mail.svg';
+import UserDelete from '../../../../public/icons/icon-user-delete.svg';
 
 interface UserPageClientProps {
   userInfo: {
@@ -67,50 +65,69 @@ export default function UserPageClient({
     }
   };
 
-  return (
+  const stats = [
+    { label: '작성한 리뷰', count: writtenReviewCount, href: '/user/my' },
+    { label: '공감한 리뷰', count: likedReviewCount, href: '/user/fav' },
+  ];
+
+  const rowClassName =
+    'flex w-full items-center justify-between px-3.5 py-2.5 text-start';
+  const rowContent = (icon: ReactNode, label: string) => (
     <>
-      <Section className='px-4'>
-        <div>
-          <h1 className='text-lg'>
-            <b className='text-xl font-semibold'>{userInfo.name}</b> 님,
-            안녕하세요!
-          </h1>
-          <p className='text-sm text-gray-500'>{userInfo.email}</p>
-        </div>
-        <div className='grid grid-cols-2 gap-4'>
-          <Card className='min-w-1/2' href='/user/fav'>
-            <p className='flex items-center justify-between'>
-              좋아요한 리뷰
-              <ChevronRight size={16} />
-            </p>
-            <Card.Content>
-              <span className='font-semibold'>{likedReviewCount}</span>
-            </Card.Content>
-          </Card>
-          <Card className='min-w-1/2' href='/user/my'>
-            <p className='flex items-center justify-between'>
-              작성한 리뷰
-              <ChevronRight size={16} />
-            </p>
-            <Card.Content>
-              <span className='font-semibold'>{writtenReviewCount}</span>
-            </Card.Content>
-          </Card>
-        </div>
-      </Section>
-      <Section className='px-4'>
-        <ExternalLink href={PATCHNOTE_URL}>패치노트</ExternalLink>
-        <ExternalLink href={INQUIRY_URL}>문의하기</ExternalLink>
-        <button onClick={handleLogout} className='text-start'>
-          로그아웃
+      <span className='flex items-center gap-2.5 text-base text-[#191919]'>
+        {icon}
+        {label}
+      </span>
+      <ArrowRight className='size-5' />
+    </>
+  );
+
+  return (
+    <div className='flex flex-col pt-2.5'>
+      <div className='flex flex-col items-end gap-3 bg-white pt-2.5 pr-5 pb-5'>
+        <p className='text-xl font-semibold text-[#191919]'>
+          {userInfo.name}님
+        </p>
+        <p className='text-base font-semibold text-[#767676]'>
+          {userInfo.email}
+        </p>
+      </div>
+      <div className='flex gap-2.5 border-t border-[#efefef] bg-white px-5 pt-[18px] pb-6'>
+        {stats.map(stat => (
+          <Link
+            key={stat.href}
+            href={stat.href}
+            className='flex w-[110px] flex-col gap-0.5'
+          >
+            <span className='text-sm font-semibold text-[#191919]'>
+              {stat.label}
+            </span>
+            <span className='px-0.5 text-5xl leading-normal text-[#191919]'>
+              {stat.count}
+            </span>
+          </Link>
+        ))}
+      </div>
+      <div className='mx-4 mt-3.5 flex flex-col rounded-[14px] bg-white py-2'>
+        <p className='px-3.5 py-1.5 text-sm font-semibold text-[#1a1a1a]'>
+          고객지원
+        </p>
+        <ExternalLink href={PATCHNOTE_URL} className={rowClassName}>
+          {rowContent(<Mail />, '패치노트')}
+        </ExternalLink>
+        <ExternalLink href={INQUIRY_URL} className={rowClassName}>
+          {rowContent(<Mail />, '의견 남기기')}
+        </ExternalLink>
+        <button onClick={handleLogout} className={rowClassName}>
+          {rowContent(<LogOut />, '로그아웃')}
         </button>
         <button
           onClick={() => setIsRevokeModalOpen(true)}
-          className='text-start text-red-500'
+          className={rowClassName}
         >
-          회원탈퇴
+          {rowContent(<UserDelete />, '탈퇴하기')}
         </button>
-      </Section>
+      </div>
 
       <UserRevokeModal
         isOpen={isRevokeModalOpen}
@@ -122,6 +139,6 @@ export default function UserPageClient({
         selectedReasonType={selectedReasonType}
         setSelectedReasonType={setSelectedReasonType}
       />
-    </>
+    </div>
   );
 }

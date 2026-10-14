@@ -1,9 +1,15 @@
 import { UserFavReviewPage } from '@/page/user';
 
+import { PageContainer } from '@/widgets/layout';
+
 export const dynamic = 'force-dynamic';
 
 const Page = () => {
-  return <UserFavReviewPage />;
+  return (
+    <PageContainer>
+      <UserFavReviewPage />
+    </PageContainer>
+  );
 };
 
 export default Page;
