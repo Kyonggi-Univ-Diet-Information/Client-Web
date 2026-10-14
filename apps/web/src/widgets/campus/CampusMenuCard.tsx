@@ -12,7 +12,7 @@ import CampusMenuImage from './CampusMenuImage';
 interface CampusMenuCardProps extends CampusMenu {
   foodCourt: FoodCourt;
   location?: string[];
-  reviewCount?: number;
+  reviewCount?: number | null;
 }
 
 export default async function CampusMenuCard({

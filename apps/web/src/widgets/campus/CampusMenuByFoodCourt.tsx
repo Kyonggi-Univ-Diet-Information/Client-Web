@@ -1,6 +1,7 @@
 import { fetchCampusMenuByCategory } from '@/features/campus/api/fetchCampusMenuByCategory';
 
 import type { CampusMenuSort, CampusMenuWithCategory } from '@/entities/campus/api/api.type';
+import { sortCampusMenus } from '@/entities/campus/model/campus';
 
 import { type FoodCourt, type CampusFoodCourt, FOOD_COURT_ID } from '@/shared/api';
 import { CATEGORY_TO_TEXT } from '@/shared/constants/campus/menu';
@@ -39,6 +40,7 @@ export default async function CampusMenuByFoodCourt({
     totalCount = displayMenus.length;
   } else {
     displayMenus = Object.values(menusByCategory).flat();
+    if (sort) displayMenus = sortCampusMenus(displayMenus, sort);
     totalCount = displayMenus.length;
   }
 

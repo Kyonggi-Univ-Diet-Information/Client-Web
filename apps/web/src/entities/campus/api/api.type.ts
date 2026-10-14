@@ -39,6 +39,7 @@ export type CampusTopMenu = CampusMenu & {
 };
 
 export type CampusMenuWithCategory = CampusMenu & {
+  reviewCount: number | null;
   category: string;
   categoryKorean: string;
 };
