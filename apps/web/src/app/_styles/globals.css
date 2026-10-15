@@ -131,6 +131,10 @@ body {
   font-family: var(--font-wantedSans);
 }
 
+html {
+  overscroll-behavior-y: none;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
