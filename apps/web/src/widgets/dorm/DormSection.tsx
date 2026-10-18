@@ -29,6 +29,9 @@ export default function DormSection({
   const today = getCurrentDate().getDay();
   const [currentDay, setCurrentDay] = useState<DormDay>(initialDay ?? DORM_DAY_KEY[today]);
   const [mealTime, setMealTime] = useState<DormTime>('BREAKFAST');
+  const isWeekMenuUploaded = Object.values(dormMenu ?? {}).some(dayMenu =>
+    Object.values(dayMenu).some(timeMenu => timeMenu.status === 'OPEN'),
+  );
 
   return (
     <Section className='flex-1 px-4'>
@@ -45,6 +48,8 @@ export default function DormSection({
             dayMenu={dormMenu?.[currentDay] ?? null}
             mealTime={mealTime}
             isToday={currentDay === DORM_DAY_KEY[today]}
+            isWeekend={currentDay === 'SATURDAY' || currentDay === 'SUNDAY'}
+            isWeekMenuUploaded={isWeekMenuUploaded}
           />
         </DormMenuAnimatedWrapper>
       </Section.Content>
