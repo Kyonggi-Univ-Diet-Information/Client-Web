@@ -7,7 +7,15 @@ import DormNoDataMessage from '@/widgets/dorm/DormNoDataMessage';
 import type { DormMenu, DormMenuStatus } from '@/entities/dorm/api/api.type';
 import { DORM_TIME_RANGE, type DormTime } from '@/entities/dorm/model/dormTime';
 
-export function getServingStatus(mealTime: DormTime): '배식 예정' | '배식 중' | '배식 종료' {
+type ServingStatus = '배식 예정' | '배식 중' | '배식 종료';
+
+const SERVING_STATUS_CLASS: Record<ServingStatus, string> = {
+  '배식 예정': 'bg-[rgba(13,116,218,0.06)] text-[#0d74da]',
+  '배식 중': 'bg-[rgba(33,170,75,0.06)] text-[#21aa4b]',
+  '배식 종료': 'bg-[#f1f2f3] text-[#767676]',
+};
+
+export function getServingStatus(mealTime: DormTime): ServingStatus {
   const { start, end } = DORM_TIME_RANGE[mealTime];
   const toMinutes = (time: string) => {
     const [hour, minute] = time.split(':').map(Number);
@@ -41,11 +49,7 @@ export default function DormMealCard({
         <span className='text-base font-medium text-gray-900'>
           {DORM_TIME_RANGE[mealTime].label}
         </span>
-        {isToday && (
-          <span className='rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700'>
-            {getServingStatus(mealTime)}
-          </span>
-        )}
+        {isToday && <ServingStatusBadge status={getServingStatus(mealTime)} />}
       </div>
       <div className='flex flex-col px-5 pb-2'>
         {contents.map((menuItem, index) => (
@@ -71,5 +75,15 @@ export default function DormMealCard({
         </div>
       </div>
     </div>
+  );
+}
+
+function ServingStatusBadge({ status }: { status: ServingStatus }) {
+  return (
+    <span
+      className={`rounded-lg px-3 py-1.5 text-xs leading-[18px] font-medium tracking-[-0.2px] ${SERVING_STATUS_CLASS[status]}`}
+    >
+      {status}
+    </span>
   );
 }
