@@ -1,3 +1,4 @@
+<br/>
 
 <img width="80" alt="logo" src="https://github.com/user-attachments/assets/4aa633cf-884a-489c-af4b-fc3e0356b0f7" />
 
@@ -11,8 +12,6 @@
 [ iOS App Store](https://apps.apple.com/kr/app/%EA%B8%B0%EB%A3%A1%EC%95%84-%EB%B0%A5%EB%A8%B9%EC%9E%90/id6758451053)
 [🤖 Android Play Store](https://play.google.com/store/apps/details?id=apple.auth.diet.kyonggi.com)
 
-
-<br/>
 <br/>
 
 # Let's Eat Kiryong! · 기룡아 밥먹자!
