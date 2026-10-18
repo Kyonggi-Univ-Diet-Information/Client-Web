@@ -8,7 +8,6 @@ export type DormTime = keyof typeof DORM_TIME;
 
 export const DORM_TIME_NAME = Object.keys(DORM_TIME) as DormTime[];
 
-// ponytail: lunch/dinner windows are a best guess (only breakfast was in the design mock) — confirm against the real dorm schedule
 export const DORM_TIME_RANGE: Record<DormTime, { label: string; start: string; end: string }> = {
   BREAKFAST: { label: '07:30 - 09:00', start: '07:30', end: '09:00' },
   LUNCH: { label: '11:30 - 13:30', start: '11:30', end: '13:30' },
