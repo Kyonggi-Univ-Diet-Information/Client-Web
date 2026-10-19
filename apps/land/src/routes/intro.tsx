@@ -61,7 +61,7 @@ export default function Intro() {
                 </span>
                 2026 경기대학교 학식의 혁신
               </div>
-              <h1 class='mb-8 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl'>
+              <h1 class='mb-8 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl'>
                 오늘의 학식, <br />
                 더 이상 고민 말고 <br />
                 <span class='text-point font-gyeonggiTitleBold'>기밥</span>하세요
