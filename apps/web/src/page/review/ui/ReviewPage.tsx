@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-
 import CampusMenuImage from '@/widgets/campus/CampusMenuImage';
 import CampusMenuSet from '@/widgets/campus/CampusMenuSet';
 import ReviewFormSection from '@/widgets/review/ReviewFormSection';
@@ -70,10 +69,10 @@ export default async function ReviewPage({
             foodCourt={foodCourt}
             menuId={foodId}
             className='h-[380px] w-full rounded-none'
-            sizes='(max-width: 770px) 100vw, 770px'
+            sizes='100vw'
           />
 
-          <div className='flex flex-col gap-2 px-4 pt-5'>
+          <div className='md:px-gutter flex flex-col gap-2 px-4 pt-5'>
             <div className='flex items-center justify-between'>
               <h1 className='text-lg font-semibold text-gray-900'>
                 {menuDetail.name}
@@ -115,7 +114,7 @@ export default async function ReviewPage({
 
           <Link
             href={`/review/${foodCourtId}/${foodId}/detail`}
-            className='mt-2 flex items-center justify-between px-4 py-2'
+            className='md:px-gutter mt-2 flex items-center justify-between px-4 py-2'
           >
             <div className='flex items-center gap-2'>
               <Star size={24} className='fill-point text-point' />
@@ -132,7 +131,9 @@ export default async function ReviewPage({
           </Link>
 
           {initialReviews.content.length > 0 && (
-            <ReviewPreviewCarousel reviews={initialReviews.content.slice(0, 5)} />
+            <ReviewPreviewCarousel
+              reviews={initialReviews.content.slice(0, 5)}
+            />
           )}
         </div>
       </AnimatedCard>
@@ -148,7 +149,7 @@ export default async function ReviewPage({
         )}
 
         {foodCourt === FOOD_COURT.KYONGSUL && (
-          <div className='px-4 border-t-6 border-gray-100 pt-4'>
+          <div className='md:px-gutter border-t-6 border-gray-100 px-4 pt-4'>
             <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
           </div>
         )}

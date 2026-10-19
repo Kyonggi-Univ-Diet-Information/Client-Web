@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-
 import { CampusMenuName } from '@/widgets/campus';
 
 import { fetchUserReview } from '@/features/user/api/fetchUserReview';
@@ -9,16 +8,12 @@ import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
 import { Card, Loader, Title } from '@/shared/ui';
 
-
-
-
-
 export default async function UserReviewPage() {
   const data = await fetchUserReview(0);
 
   return (
     <>
-      <div className='flex flex-col gap-1 px-4'>
+      <div className='md:px-gutter flex flex-col gap-1 px-4'>
         <Title>작성한 리뷰</Title>
         <p className='text-sm text-gray-500'>
           내가 작성한 리뷰를 확인할 수 있습니다.
@@ -31,7 +26,7 @@ export default async function UserReviewPage() {
             작성한 리뷰가 없어요!
           </div>
         )}
-        <div className='flex flex-col gap-2 px-4'>
+        <div className='md:px-gutter flex flex-col gap-2 px-4'>
           {data?.content.map(review => (
             <Card
               key={`${review.reviewId}-${review.foodId}`}

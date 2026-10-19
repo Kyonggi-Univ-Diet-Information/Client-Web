@@ -54,13 +54,13 @@ export default async function ReviewDetailPage({
     <div className='flex flex-col pb-10'>
       <ReviewRating type={foodCourt} foodId={foodId} />
 
-      <div className='border-t-6 border-gray-100 px-4 py-4'>
+      <div className='md:px-gutter border-t-6 border-gray-100 px-4 py-4'>
         <h1 className='text-lg font-semibold text-gray-900'>
           전체 리뷰 {reviewCount}
         </h1>
       </div>
 
-      <div className='flex justify-end px-4 py-2'>
+      <div className='md:px-gutter flex justify-end px-4 py-2'>
         <Link
           href={sortHref}
           className='flex items-center gap-1 py-1 text-[13px] font-medium text-gray-500'
@@ -70,14 +70,12 @@ export default async function ReviewDetailPage({
         </Link>
       </div>
 
-      
       <ReviewPagedView
         type={foodCourt}
         foodId={foodId}
         initialData={initialReviews}
         sort={sort}
       />
-     
     </div>
   );
 }

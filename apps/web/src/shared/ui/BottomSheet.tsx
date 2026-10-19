@@ -24,7 +24,10 @@ export default function BottomSheet({
     close();
   };
 
-  const handleDragEnd = (_: PointerEvent | MouseEvent | TouchEvent, info: PanInfo) => {
+  const handleDragEnd = (
+    _: PointerEvent | MouseEvent | TouchEvent,
+    info: PanInfo,
+  ) => {
     if (info.offset.y > 80 || info.velocity.y > 500) {
       close();
     }
@@ -55,7 +58,7 @@ export default function BottomSheet({
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-        className='relative z-10 flex w-full max-w-[770px] flex-col rounded-t-2xl bg-white pb-6 shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-20 after:bg-white'
+        className='relative z-10 flex w-full flex-col rounded-t-2xl bg-white pb-6 shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-20 after:bg-white'
       >
         <div className='flex items-start justify-center pt-3 pb-1'>
           <span className='h-1 w-9 rounded-full bg-gray-200' />

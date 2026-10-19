@@ -10,7 +10,7 @@ export default function ReviewPreviewCarousel({
   reviews: ReviewWithMetadata[];
 }) {
   return (
-    <div className='scrollbar-hide flex gap-2.5 overflow-x-scroll px-4 pt-2.5 pb-9'>
+    <div className='scrollbar-hide md:px-gutter flex gap-2.5 overflow-x-scroll px-4 pt-2.5 pb-9'>
       {reviews.map(review => {
         const maskedMemberName = review.memberName
           ? review.memberName.length > 1

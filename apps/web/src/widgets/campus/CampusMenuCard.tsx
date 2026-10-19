@@ -31,7 +31,7 @@ export default async function CampusMenuCard({
   return (
     <Link
       href={`/review/${foodCourtId}/${id}`}
-      className='flex gap-3 border-t border-gray-100 px-4 py-3.5'
+      className='md:px-gutter flex gap-3 border-t border-gray-100 px-4 py-3.5'
     >
       <CampusMenuImage
         foodCourt={foodCourt}
@@ -69,11 +69,10 @@ export default async function CampusMenuCard({
           )}
           {reviewCount > 0 ? (
             <span className='text-sm text-gray-600'>
-            후기 <b className='font-semibold'>{reviewCount}</b>
-          </span>) : (
-            <span className='text-sm text-gray-600'>
-              아직 후기가 없어요
+              후기 <b className='font-semibold'>{reviewCount}</b>
             </span>
+          ) : (
+            <span className='text-sm text-gray-600'>아직 후기가 없어요</span>
           )}
         </div>
       </div>

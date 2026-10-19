@@ -12,7 +12,6 @@ import { Avatar, AvatarFallback } from '@/shared/ui';
 import ReviewActionMenu from './ReviewActionMenu';
 import ReviewFavButton from './ReviewFavButton';
 
-
 interface ReviewItemProps extends Review {
   type: FoodCourt;
   foodId: number;
@@ -44,7 +43,7 @@ export default function ReviewItem({
   const formattedDate = formatShortDate(parseReviewDate(createdAt));
 
   return (
-    <div className='flex w-full flex-col gap-3 border-t border-gray-100 py-5 px-4'>
+    <div className='md:px-gutter flex w-full flex-col gap-3 border-t border-gray-100 px-4 py-5'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <Avatar className='size-9 bg-[#f5f5f5]'>

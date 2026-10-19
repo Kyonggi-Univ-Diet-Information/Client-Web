@@ -17,9 +17,7 @@ export default function HeaderLayout({ children, modal }: Props) {
   return (
     <>
       <Header />
-      <main className='relative mx-auto flex min-h-dvh max-w-[770px]'>
-        {children}
-      </main>
+      <main className='relative flex min-h-dvh'>{children}</main>
       <BottomNavBar />
       {modal}
     </>

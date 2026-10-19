@@ -27,14 +27,16 @@ export default function DormSection({
   initialDay?: DormDay;
 }) {
   const today = getCurrentDate().getDay();
-  const [currentDay, setCurrentDay] = useState<DormDay>(initialDay ?? DORM_DAY_KEY[today]);
+  const [currentDay, setCurrentDay] = useState<DormDay>(
+    initialDay ?? DORM_DAY_KEY[today],
+  );
   const [mealTime, setMealTime] = useState<DormTime>('BREAKFAST');
   const isWeekMenuUploaded = Object.values(dormMenu ?? {}).some(dayMenu =>
     Object.values(dayMenu).some(timeMenu => timeMenu.status === 'OPEN'),
   );
 
   return (
-    <Section className='flex-1 px-4'>
+    <Section className='md:px-gutter flex-1 px-4'>
       <WeeklyCalendar currentDay={currentDay} onSelectDay={setCurrentDay} />
       <Tab
         size='sm'

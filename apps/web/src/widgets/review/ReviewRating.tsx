@@ -30,10 +30,10 @@ export default async function ReviewRating({
   const roundedAverage = Math.round(averageRating ?? 0);
 
   return (
-    <div className='flex items-end gap-8 bg-white pl-8 pb-4 pr-10'>
-      <div className='flex w-[72px] h-full flex-col justify-center'>
+    <div className='md:px-gutter flex items-end gap-8 bg-white pr-10 pb-4 pl-8'>
+      <div className='flex h-full w-[72px] flex-col justify-center'>
         <div className='flex flex-col items-center justify-center gap-1.5'>
-           <p className='text-[28px] leading-[38px] font-semibold text-gray-900'>
+          <p className='text-[28px] leading-[38px] font-semibold text-gray-900'>
             {(averageRating ?? 0).toFixed(1)}
           </p>
           <div className='flex items-center'>

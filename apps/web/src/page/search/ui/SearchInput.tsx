@@ -27,7 +27,10 @@ export default function SearchInput() {
   };
 
   return (
-    <form className='bg-white px-4 pt-2.5 pb-1.5' onSubmit={handleSubmit}>
+    <form
+      className='md:px-gutter bg-white px-4 pt-2.5 pb-1.5'
+      onSubmit={handleSubmit}
+    >
       <div className='flex items-center gap-2.5 rounded-lg border border-gray-900 bg-white px-4 py-3.5 shadow-[0px_2px_4px_rgba(0,0,0,0.1)]'>
         <SearchIcon size={18} className='shrink-0 text-gray-900' />
         <input

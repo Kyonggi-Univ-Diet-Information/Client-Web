@@ -52,7 +52,7 @@ export default function Header() {
         pathname === '/' && 'bg-[#F3F4F5]/70 backdrop-blur-md',
       )}
     >
-      <div className='mx-auto flex w-full max-w-[770px] items-center justify-between px-4'>
+      <div className='md:px-gutter flex w-full items-center justify-between px-4'>
         <MobileHeader />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (

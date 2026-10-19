@@ -11,7 +11,11 @@ import {
   removeRecentSearch,
 } from './recentSearches';
 
-export default function HeaderSearchOverlay({ onClose }: { onClose: () => void }) {
+export default function HeaderSearchOverlay({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
@@ -42,13 +46,13 @@ export default function HeaderSearchOverlay({ onClose }: { onClose: () => void }
         className='absolute inset-0 bg-black/20'
         aria-label='닫기'
       />
-      <div className='absolute top-0 left-1/2 w-full max-w-[770px] -translate-x-1/2 rounded-b-2xl bg-white pb-4 shadow-lg'>
+      <div className='absolute inset-x-0 top-0 rounded-b-2xl bg-white pb-4 shadow-lg'>
         <form
           onSubmit={e => {
             e.preventDefault();
             search(query);
           }}
-          className='px-5 pt-4'
+          className='md:px-gutter px-5 pt-4'
         >
           <div className='flex items-center gap-2.5 rounded-lg border-2 border-gray-100 px-4 py-3.5'>
             <Search size={18} className='shrink-0 text-gray-400' />
@@ -64,10 +68,10 @@ export default function HeaderSearchOverlay({ onClose }: { onClose: () => void }
 
         {recentSearches.length > 0 && (
           <div className='flex flex-col'>
-            <p className='px-6 py-2.5 text-[13px] font-semibold text-gray-500'>
+            <p className='md:px-gutter px-6 py-2.5 text-[13px] font-semibold text-gray-500'>
               최근 검색어
             </p>
-            <div className='flex flex-wrap gap-2 px-5'>
+            <div className='md:px-gutter flex flex-wrap gap-2 px-5'>
               {recentSearches.map(term => (
                 <div
                   key={term}

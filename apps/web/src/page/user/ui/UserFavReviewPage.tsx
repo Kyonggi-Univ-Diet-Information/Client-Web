@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-
 import ReviewItem from '@/widgets/review/ReviewItem';
 
 import { fetchReviewFavCount } from '@/features/review/api/fetchReviewFavCount';
@@ -9,13 +8,6 @@ import { fetchUserFavReview } from '@/features/user/api/fetchUserFavReview';
 import { FOOD_COURT } from '@/shared/api';
 import { AuthService } from '@/shared/lib/auth';
 import { Loader, Title } from '@/shared/ui';
-
-
-
-
-
-
-
 
 export default async function UserFavReviewPage() {
   const [data, isAuthenticated] = await Promise.all([
@@ -45,7 +37,7 @@ export default async function UserFavReviewPage() {
 
   return (
     <>
-      <div className='flex flex-col gap-1 px-4'>
+      <div className='md:px-gutter flex flex-col gap-1 px-4'>
         <Title>좋아요한 리뷰</Title>
         <p className='text-sm text-gray-500'>
           좋아요한 리뷰를 확인할 수 있습니다.

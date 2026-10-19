@@ -15,7 +15,12 @@ export default function CampusMenuListHeader({
   className?: string;
 }) {
   return (
-    <div className={cn('flex items-center justify-between px-4', className)}>
+    <div
+      className={cn(
+        'md:px-gutter flex items-center justify-between px-4',
+        className,
+      )}
+    >
       <p className='text-[13px] text-gray-500'>
         총 <span className='font-semibold text-gray-900'>{totalCount}개</span>
       </p>
