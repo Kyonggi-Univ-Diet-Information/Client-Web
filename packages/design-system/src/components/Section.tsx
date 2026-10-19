@@ -30,7 +30,7 @@ function SectionHeader({
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-1'>
           {title && <div className='text-xl font-bold'>{title}</div>}
-          {subtitle && <div className='text-sm text-grey-600'>{subtitle}</div>}
+          {subtitle && <div className='text-grey-600 text-sm'>{subtitle}</div>}
         </div>
         {action}
       </div>

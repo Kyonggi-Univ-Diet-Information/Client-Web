@@ -10,7 +10,8 @@ interface ChipNavigationTab {
 
 const CHIP_NAVIGATION_VARIANT_STYLES = {
   point: {
-    selected: 'bg-primary-500 text-white shadow-[0px_4px_6px_rgba(245,88,0,0.2)]',
+    selected:
+      'bg-primary-500 text-white shadow-[0px_4px_6px_rgba(245,88,0,0.2)]',
     unselected: 'bg-grey-100 text-grey-600',
   },
   black: {
@@ -43,7 +44,7 @@ export default function ChipNavigation({
   return (
     <div
       className={cn(
-        'scrollbar-hide flex w-full flex-shrink-0 items-center gap-1.5 overflow-x-scroll border-b border-grey-100 bg-white pb-3',
+        'scrollbar-hide border-grey-100 flex w-full flex-shrink-0 items-center gap-1.5 overflow-x-scroll border-b bg-white pb-3',
         className,
       )}
     >

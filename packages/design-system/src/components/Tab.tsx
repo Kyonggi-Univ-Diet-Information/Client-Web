@@ -57,11 +57,11 @@ export default function Tab({
         ))}
       </div>
       <div
-        className={cn('relative w-full rounded-full bg-grey-100', styles.track)}
+        className={cn('bg-grey-100 relative w-full rounded-full', styles.track)}
       >
         <div
           className={cn(
-            'absolute inset-y-0 rounded-full bg-grey-900 transition-all duration-200',
+            'bg-grey-900 absolute inset-y-0 rounded-full transition-all duration-200',
             styles.track,
           )}
           style={{

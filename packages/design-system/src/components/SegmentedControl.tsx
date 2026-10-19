@@ -21,7 +21,7 @@ export default function SegmentedControl({
   return (
     <div
       className={cn(
-        'flex items-center gap-0.5 rounded-lg bg-grey-100 p-1.5',
+        'bg-grey-100 flex items-center gap-0.5 rounded-lg p-1.5',
         className,
       )}
     >
@@ -33,7 +33,7 @@ export default function SegmentedControl({
           className={cn(
             'flex-1 rounded-lg px-4 py-2.5 text-base font-medium whitespace-nowrap transition-colors',
             value === option.value
-              ? 'bg-white text-grey-900 shadow-sm'
+              ? 'text-grey-900 bg-white shadow-sm'
               : 'text-grey-600',
           )}
         >

@@ -61,7 +61,7 @@ export default function BottomSheet({
         className='relative z-10 flex w-full flex-col rounded-t-2xl bg-white pb-6 shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-20 after:bg-white'
       >
         <div className='flex items-start justify-center pt-3 pb-1'>
-          <span className='h-1 w-9 rounded-full bg-grey-200' />
+          <span className='bg-grey-200 h-1 w-9 rounded-full' />
         </div>
         {children}
       </motion.div>
