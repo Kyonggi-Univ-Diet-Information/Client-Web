@@ -1,3 +1,5 @@
+import { For, createSignal, onCleanup, onMount } from 'solid-js';
+
 export default function Intro() {
   const POLICY_URL = {
     TERMS_OF_SERVICE:
@@ -124,78 +126,7 @@ export default function Intro() {
             </div>
 
             <div class='relative flex flex-1 items-center justify-center lg:justify-end'>
-              {/* Phone Mockup */}
-              <div class='relative h-[580px] w-[280px] rounded-[3.5rem] bg-gray-950 p-3.5 shadow-[0_0_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-white/10 md:h-[640px] md:w-[310px]'>
-                <div class='h-full w-full overflow-hidden rounded-[2.8rem] bg-white'>
-                  {/* Mockup App Content */}
-                  <div class='flex h-full flex-col'>
-                    <div class='bg-point/5 flex h-48 flex-col items-center justify-center gap-4'>
-                      <img
-                        src='/icons/icon512_rounded.png'
-                        alt='기밥 앱 로고'
-                        class='h-20 w-20 rounded-2xl shadow-xl shadow-orange-200'
-                      />
-                    </div>
-                    <div class='flex flex-1 flex-col gap-6 p-7'>
-                      <div class='space-y-3'>
-                        <div class='h-4.5 w-2/3 rounded-full bg-gray-100'></div>
-                        <div class='h-4.5 w-full rounded-full bg-gray-50'></div>
-                      </div>
-                      <div class='space-y-4 rounded-3xl border border-gray-100 bg-gray-50/50 p-5'>
-                        <div class='flex items-center justify-between'>
-                          <div class='h-4 w-20 rounded-full bg-gray-200'></div>
-                          <div class='bg-point/20 h-4 w-4 rounded-full'></div>
-                        </div>
-                        <div class='space-y-2'>
-                          <div class='h-3 w-full rounded-full bg-gray-100'></div>
-                          <div class='h-3 w-4/5 rounded-full bg-gray-100'></div>
-                        </div>
-                      </div>
-                      <div class='grid grid-cols-2 gap-3'>
-                        <div class='h-24 rounded-2xl border border-gray-100 bg-gray-50'></div>
-                        <div class='h-24 rounded-2xl border border-gray-100 bg-gray-50'></div>
-                      </div>
-                    </div>
-                    <div class='mt-auto flex h-16 items-center justify-between border-t border-gray-100 bg-white/50 px-8'>
-                      {[1, 2, 3, 4].map(() => (
-                        <div class='h-2 w-6 rounded-full bg-gray-100'></div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                {/* Dynamic Island style element */}
-                <div class='absolute left-1/2 top-0 h-7 w-28 -translate-x-1/2 rounded-b-[1.25rem] bg-gray-950'></div>
-              </div>
-
-              {/* Float Cards */}
-              <div class='absolute -right-4 top-1/4 animate-bounce duration-[3000ms]'>
-                <div class='rounded-2xl border border-white/20 bg-white/80 p-4 shadow-xl backdrop-blur-md'>
-                  <div class='flex items-center gap-3'>
-                    <div class='flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100 text-lg'>
-                      🍱
-                    </div>
-                    <div class='space-y-1'>
-                      <p class='text-xs font-bold text-gray-400'>
-                        오늘의 인기 메뉴
-                      </p>
-                      <p class='text-sm font-extrabold'>매콤 제육볶음</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class='absolute -left-10 bottom-1/4 animate-bounce duration-[2500ms]'>
-                <div class='rounded-2xl border border-white/20 bg-white/80 p-4 shadow-xl backdrop-blur-md'>
-                  <div class='flex items-center gap-3'>
-                    <div class='flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg'>
-                      ⭐
-                    </div>
-                    <div class='space-y-1'>
-                      <p class='text-xs font-bold text-gray-400'>최근 리뷰</p>
-                      <p class='text-sm font-extrabold'>맛있어서 기절..</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ScreenshotCarousel />
             </div>
           </div>
         </div>
@@ -215,7 +146,6 @@ export default function Intro() {
               담았습니다.
             </p>
           </div>
-
           <div class='grid gap-8 md:grid-cols-2'>
             {[
               {
@@ -381,6 +311,61 @@ export default function Intro() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+const SCREENSHOTS = [1, 2, 3, 4, 5].map(n => `/screenshots/ios-${n}.jpg`);
+
+function ScreenshotCarousel() {
+  let track!: HTMLDivElement;
+  const [index, setIndex] = createSignal(0);
+
+  const goTo = (i: number) =>
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+
+  onMount(() => {
+    const timer = setInterval(
+      () => goTo((index() + 1) % SCREENSHOTS.length),
+      3500,
+    );
+    onCleanup(() => clearInterval(timer));
+  });
+
+  return (
+    <div class='flex flex-col items-center gap-5'>
+      <div
+        ref={track}
+        onScroll={() =>
+          setIndex(Math.round(track.scrollLeft / track.clientWidth))
+        }
+        class='scrollbar-hide flex aspect-[1320/2868] w-[280px] snap-x snap-mandatory overflow-x-auto rounded-[2rem] shadow-[0_0_50px_-12px_rgba(0,0,0,0.3)] md:w-[310px]'
+      >
+        <For each={SCREENSHOTS}>
+          {(src, i) => (
+            <img
+              src={src}
+              alt={`기밥 앱 화면 ${i() + 1}`}
+              loading={i() === 0 ? 'eager' : 'lazy'}
+              class='h-full w-full shrink-0 snap-center object-cover'
+            />
+          )}
+        </For>
+      </div>
+      <div class='flex gap-2'>
+        <For each={SCREENSHOTS}>
+          {(_, i) => (
+            <button
+              type='button'
+              aria-label={`${i() + 1}번째 화면 보기`}
+              onClick={() => goTo(i())}
+              class={`h-2 rounded-full transition-all ${
+                index() === i() ? 'bg-point w-6' : 'w-2 bg-gray-300'
+              }`}
+            />
+          )}
+        </For>
+      </div>
     </div>
   );
 }
