@@ -33,7 +33,7 @@ export default function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <head>
-        <link rel='icon' href='/favicon/favicon.ico' sizes='any' />
+        <link rel='icon' href='/favicon/favicon.png' type='image/png' />
         <link rel='manifest' href='/config/manifest.json' />
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
         <link rel='preconnect' href='https://www.googletagmanager.com' />
