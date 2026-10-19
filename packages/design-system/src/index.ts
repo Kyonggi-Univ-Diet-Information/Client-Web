@@ -6,6 +6,7 @@ export * from './components/Button';
 export { default as AnimatedCard } from './components/AnimatedCard';
 export { default as BottomSheet } from './components/BottomSheet';
 export { default as Card } from './components/Card';
+export { default as Dialog } from './components/Dialog';
 export { default as ChipNavigation } from './components/ChipNavigation';
 export { default as Modal } from './components/Modal';
 export { default as Section } from './components/Section';
