@@ -1,17 +1,9 @@
 @import 'tailwindcss';
 
 @font-face {
-  font-family: 'brBold';
-  src: url('/fonts/brBold.otf') format('opentype');
+  font-family: 'gyeonggiTitleBold';
+  src: url('/fonts/gyeonggiTitleBold.woff2') format('woff2');
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'brRegular';
-  src: url('/fonts/brRegular.otf') format('opentype');
-  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -56,8 +48,7 @@
   --radius-lg: 0.625rem;
   --radius-xl: calc(0.625rem + 4px);
   --radius-2xl: calc(0.625rem + 8px);
-  --font-brBold: 'brBold', sans-serif;
-  --font-brRegular: 'brRegular', sans-serif;
+  --font-gyeonggiTitleBold: 'gyeonggiTitleBold', sans-serif;
   --font-wantedSans: 'Wanted Sans', sans-serif;
 }
 
@@ -71,12 +62,8 @@
   }
 }
 
-.font-brBold {
-  font-family: var(--font-brBold);
-}
-
-.font-brRegular {
-  font-family: var(--font-brRegular);
+.font-gyeonggiTitleBold {
+  font-family: var(--font-gyeonggiTitleBold);
 }
 
 .scrollbar-hide::-webkit-scrollbar {

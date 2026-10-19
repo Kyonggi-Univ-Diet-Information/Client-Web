@@ -150,14 +150,6 @@ html {
   display: none;
 }
 
-.font-brBold {
-  font-family: var(--font-brBold);
-}
-
-.font-brRegular {
-  font-family: var(--font-brRegular);
-}
-
 .font-gyeonggiTitleBold {
   font-family: var(--font-gyeonggiTitleBold);
 }

@@ -103,7 +103,7 @@ export default function ReviewFormSection({
 
       <div className='flex flex-col gap-4'>
         <div className='space-y-1 px-1'>
-          <h3 className='font-brBold text-lg leading-none text-gray-900'>
+          <h3 className='text-lg leading-none font-bold text-gray-900'>
             이 메뉴는 어땠나요?
           </h3>
           <p className='text-xs font-medium text-gray-400'>

@@ -16,12 +16,12 @@ export default function EntryLogoSection() {
         >
           <div className='bg-point/10 absolute inset-0 -m-6 rounded-[48px] blur-2xl' />
           <div className='bg-point size-26 flex shrink-0 items-center justify-center rounded-[32px] shadow-2xl shadow-orange-200'>
-            <span className='font-brBold text-4xl text-white'>기밥</span>
+            <span className='font-gyeonggiTitleBold text-4xl text-white'>기밥</span>
           </div>
         </motion.div>
 
         <div className='text-center'>
-          <h1 className='font-brBold mb-4 text-3xl tracking-tight text-gray-900'>
+          <h1 className='font-gyeonggiTitleBold mb-4 text-3xl tracking-tight text-gray-900'>
             기룡아 밥먹자!
           </h1>
           <p className='text-balance leading-relaxed text-gray-500'>

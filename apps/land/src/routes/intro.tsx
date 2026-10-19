@@ -28,7 +28,7 @@ export default function Intro() {
               alt='기밥 로고'
               class='h-9 w-9 rounded-xl shadow-lg shadow-orange-100'
             />
-            <span class='font-brBold text-xl tracking-tight'>
+            <span class='font-gyeonggiTitleBold text-xl tracking-tight'>
               기룡아 밥먹자
             </span>
           </div>
@@ -64,7 +64,7 @@ export default function Intro() {
               <h1 class='mb-8 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl'>
                 오늘의 학식, <br />
                 더 이상 고민 말고 <br />
-                <span class='text-point font-brBold'>기밥</span>하세요
+                <span class='text-point font-gyeonggiTitleBold'>기밥</span>하세요
               </h1>
               <p class='mb-12 text-lg font-medium leading-relaxed text-gray-500 md:text-xl'>
                 다양한 학식 메뉴 확인부터 생생한 학생들의 리뷰까지.{' '}
@@ -207,7 +207,7 @@ export default function Intro() {
           <div class='mb-24 text-center'>
             <h2 class='mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl'>
               학교 생활의 즐거움, <br />
-              <span class='text-point font-brBold'>기밥</span> 하나로 충분하니까
+              <span class='text-point font-gyeonggiTitleBold'>기밥</span> 하나로 충분하니까
             </h2>
             <p class='mx-auto max-w-2xl text-lg font-medium text-gray-500'>
               우리는 경기대 학우들의 식사 시간을 더 가치 있게 만들기 위해{' '}
@@ -256,7 +256,7 @@ export default function Intro() {
           <div class='mx-auto max-w-4xl'>
             <h2 class='mb-12 text-4xl font-extrabold leading-tight md:text-6xl'>
               더 나은 학교 생활, <br />
-              지금 <span class='text-point font-brBold'>기밥</span>과 함께하세요
+              지금 <span class='text-point font-gyeonggiTitleBold'>기밥</span>과 함께하세요
             </h2>
             <div class='flex flex-col sm:flex-row justify-center gap-6'>
               <button class='bg-point rounded-2xl px-12 py-5.5 text-xl font-bold text-white shadow-2xl shadow-orange-200 transition-all hover:scale-105 active:scale-95'>
@@ -285,7 +285,7 @@ export default function Intro() {
                   alt='기밥 로고'
                   class='h-7 w-7 rounded-lg opacity-90'
                 />
-                <span class='font-brBold text-xl tracking-tight'>
+                <span class='font-gyeonggiTitleBold text-xl tracking-tight'>
                   기룡아 밥먹자
                 </span>
               </div>

@@ -51,7 +51,7 @@ function InvalidAccessView() {
   return (
     <div className='flex flex-col items-center gap-y-6'>
       <div>
-        <h1 className='font-brBold mb-2 text-2xl tracking-tight text-gray-900'>
+        <h1 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>
           잘못된 접근
         </h1>
         <p className='text-sm leading-relaxed text-balance text-gray-500'>
@@ -77,7 +77,7 @@ function LoginErrorView() {
   return (
     <div className='flex flex-col items-center gap-y-6'>
       <div>
-        <h1 className='font-brBold mb-2 text-2xl tracking-tight text-gray-900'>
+        <h1 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>
           로그인 실패
         </h1>
         <p className='text-sm leading-relaxed text-balance text-gray-500'>
@@ -115,7 +115,7 @@ function Logo() {
       whileTap={{ scale: 0.95 }}
       className='bg-point mb-6 flex size-16 items-center justify-center rounded-2xl shadow-lg shadow-orange-200'
     >
-      <span className='font-brBold text-xl text-white'>기밥</span>
+      <span className='font-gyeonggiTitleBold text-xl text-white'>기밥</span>
     </motion.div>
   );
 }

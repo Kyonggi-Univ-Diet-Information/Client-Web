@@ -5,8 +5,6 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import {
-  brBold,
-  brRegular,
   gyeonggiTitleBold,
   pretendard,
   tossFace,
@@ -29,7 +27,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html
       lang='ko'
-      className={`${pretendard.variable} ${brBold.variable} ${brRegular.variable} ${gyeonggiTitleBold.variable} ${tossFace.variable}`}
+      className={`${pretendard.variable} ${gyeonggiTitleBold.variable} ${tossFace.variable}`}
       suppressHydrationWarning
     >
       <head>
