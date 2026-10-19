@@ -14,6 +14,7 @@ import { PATCHNOTE_URL, INQUIRY_URL } from '@/shared/api';
 import { ExternalLink } from '@/shared/ui';
 
 import UserRevokeModal from './UserRevokeModal';
+import AlertHexagon from '../../../../public/icons/icon-alert-hexagon.svg';
 import ArrowRight from '../../../../public/icons/icon-arrow-right.svg';
 import LogOut from '../../../../public/icons/icon-logout.svg';
 import Mail from '../../../../public/icons/icon-mail.svg';
@@ -113,7 +114,7 @@ export default function UserPageClient({
           고객지원
         </p>
         <ExternalLink href={PATCHNOTE_URL} className={rowClassName}>
-          {rowContent(<Mail />, '패치노트')}
+          {rowContent(<AlertHexagon />, '패치노트')}
         </ExternalLink>
         <ExternalLink href={INQUIRY_URL} className={rowClassName}>
           {rowContent(<Mail />, '의견 남기기')}
