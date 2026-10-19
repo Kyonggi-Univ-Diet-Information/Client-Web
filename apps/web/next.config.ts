@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingRoot: process.env.OUTPUT_FILE_TRACING_ROOT || '../..',
   serverExternalPackages: [],
+  transpilePackages: ['@kiryong/design-system'],
 
   compress: true,
   poweredByHeader: false,
