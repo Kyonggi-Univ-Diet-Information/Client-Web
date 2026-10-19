@@ -43,10 +43,10 @@ export default function ReviewItem({
   const formattedDate = formatShortDate(parseReviewDate(createdAt));
 
   return (
-    <div className='md:px-gutter flex w-full flex-col gap-3 border-t border-gray-100 px-4 py-5'>
+    <div className='md:px-gutter flex w-full flex-col gap-3 border-t border-grey-100 px-4 py-5'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <Avatar className='size-9 bg-[#f5f5f5]'>
+          <Avatar className='size-9 bg-grey-100'>
             <AvatarFallback className='bg-transparent'>
               <Image
                 src='/images/avatar-default.png'
@@ -57,7 +57,7 @@ export default function ReviewItem({
               />
             </AvatarFallback>
           </Avatar>
-          <p className='text-sm font-medium text-gray-900'>
+          <p className='text-sm font-medium text-grey-900'>
             {maskedMemberName}
           </p>
         </div>
@@ -81,15 +81,15 @@ export default function ReviewItem({
                 size={16}
                 className={
                   index < rating
-                    ? 'fill-point text-point'
-                    : 'fill-[#ebebeb] text-[#ebebeb]'
+                    ? 'fill-primary-500 text-primary-500'
+                    : 'fill-grey-200 text-grey-200'
                 }
               />
             ))}
           </div>
-          <span className='text-xs text-gray-400'>{formattedDate}</span>
+          <span className='text-xs text-grey-400'>{formattedDate}</span>
         </div>
-        <p className='text-sm leading-relaxed break-words whitespace-pre-wrap text-gray-700'>
+        <p className='text-sm leading-relaxed break-words whitespace-pre-wrap text-grey-700'>
           {content}
         </p>
       </div>

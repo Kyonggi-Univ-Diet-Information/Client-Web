@@ -19,7 +19,7 @@ export default function MaintenancePage() {
         <p className='text-muted-foreground text-sm'>
           문의사항이 있으시면 아래로 연락해주세요
         </p>
-        <p className='text-point mt-2 font-medium underline'>
+        <p className='text-primary-500 mt-2 font-medium underline'>
           <Link href={INQUIRY_URL} target='_blank'>
             {INQUIRY_URL}
           </Link>

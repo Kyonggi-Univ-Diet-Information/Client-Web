@@ -2,7 +2,7 @@ import { Skeleton } from '@kiryong/design-system';
 
 export default function SearchSkeleton() {
   return (
-    <div className='md:px-gutter flex gap-3 border-t border-gray-100 px-4 py-3.5'>
+    <div className='md:px-gutter flex gap-3 border-t border-grey-100 px-4 py-3.5'>
       <Skeleton className='size-[116px] rounded-lg' />
       <div className='flex flex-col gap-1.5 px-1'>
         <Skeleton className='h-5 w-28' />

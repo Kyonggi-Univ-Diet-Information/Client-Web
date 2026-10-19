@@ -14,7 +14,7 @@ export default function AuthPage() {
   return (
     <Suspense
       fallback={
-        <main className='relative inset-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#F9FAFB]'>
+        <main className='relative inset-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-grey-50'>
           <Loader />
         </main>
       }
@@ -51,10 +51,10 @@ function InvalidAccessView() {
   return (
     <div className='flex flex-col items-center gap-y-6'>
       <div>
-        <h1 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>
+        <h1 className='mb-2 text-2xl font-bold tracking-tight text-grey-900'>
           잘못된 접근
         </h1>
-        <p className='text-sm leading-relaxed text-balance text-gray-500'>
+        <p className='text-sm leading-relaxed text-balance text-grey-500'>
           요청하신 페이지를 찾을 수 없거나
           <br />
           잘못된 접근입니다.
@@ -77,10 +77,10 @@ function LoginErrorView() {
   return (
     <div className='flex flex-col items-center gap-y-6'>
       <div>
-        <h1 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>
+        <h1 className='mb-2 text-2xl font-bold tracking-tight text-grey-900'>
           로그인 실패
         </h1>
-        <p className='text-sm leading-relaxed text-balance text-gray-500'>
+        <p className='text-sm leading-relaxed text-balance text-grey-500'>
           로그인 처리 중 문제가 발생했습니다.
           <br />
           잠시 후 다시 시도해 주세요.
@@ -103,7 +103,7 @@ function LoadingView() {
   return (
     <div className='flex flex-col items-center gap-y-4 py-8'>
       <Loader />
-      <p className='font-medium text-gray-500'>로그인 처리 중입니다...</p>
+      <p className='font-medium text-grey-500'>로그인 처리 중입니다...</p>
     </div>
   );
 }
@@ -113,7 +113,7 @@ function Logo() {
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className='bg-point mb-6 flex size-16 items-center justify-center rounded-2xl shadow-lg shadow-orange-200'
+      className='bg-primary-500 mb-6 flex size-16 items-center justify-center rounded-2xl shadow-lg shadow-orange-200'
     >
       <span className='font-gyeonggiTitleBold text-xl text-white'>기밥</span>
     </motion.div>

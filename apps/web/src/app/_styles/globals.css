@@ -7,7 +7,6 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --point: #ff690b;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -79,7 +78,6 @@
 }
 
 @theme inline {
-  --color-point: var(--point);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

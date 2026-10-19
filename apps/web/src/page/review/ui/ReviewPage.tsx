@@ -75,7 +75,7 @@ export default async function ReviewPage({
 
           <div className='md:px-gutter flex flex-col gap-2 px-4 pt-5'>
             <div className='flex items-center justify-between'>
-              <h1 className='text-lg font-semibold text-gray-900'>
+              <h1 className='text-lg font-semibold text-grey-900'>
                 {menuDetail.name}
               </h1>
               {menuDetail.averageRating != null && (
@@ -86,8 +86,8 @@ export default async function ReviewPage({
                       size={18}
                       className={
                         index < Math.round(menuDetail.averageRating!)
-                          ? 'fill-gray-900 text-gray-900'
-                          : 'fill-[#bbbbbb] text-[#bbbbbb]'
+                          ? 'fill-grey-900 text-grey-900'
+                          : 'fill-grey-300 text-grey-300'
                       }
                     />
                   ))}
@@ -95,40 +95,40 @@ export default async function ReviewPage({
               )}
             </div>
             <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-0.5 text-sm text-gray-600'>
+              <div className='flex items-center gap-0.5 text-sm text-grey-600'>
                 <span>{FOOD_COURT_NAME[foodCourt]}</span>
                 <ChevronRight size={14} />
                 <span>{CAMPUS_RESTAURANT[menuDetail.subRestaurant]}</span>
               </div>
               {menuDetail.averageRating != null && (
-                <span className='text-sm font-semibold text-gray-900'>
+                <span className='text-sm font-semibold text-grey-900'>
                   {menuDetail.averageRating.toFixed(1)}점
                 </span>
               )}
             </div>
-            <p className='text-2xl font-semibold text-gray-900'>
+            <p className='text-2xl font-semibold text-grey-900'>
               {menuDetail.price.toLocaleString()}원
             </p>
           </div>
 
-          <div className='mt-5 border-t-6 border-gray-100' />
+          <div className='mt-5 border-t-6 border-grey-100' />
 
           <Link
             href={`/review/${foodCourtId}/${foodId}/detail`}
             className='md:px-gutter mt-2 flex items-center justify-between px-4 py-2'
           >
             <div className='flex items-center gap-2'>
-              <Star size={24} className='fill-point text-point' />
+              <Star size={24} className='fill-primary-500 text-primary-500' />
               {menuDetail.averageRating != null && (
-                <span className='text-xl font-semibold text-gray-900'>
+                <span className='text-xl font-semibold text-grey-900'>
                   {menuDetail.averageRating.toFixed(1)}
                 </span>
               )}
-              <span className='text-xl text-gray-900'>
+              <span className='text-xl text-grey-900'>
                 후기 <b className='font-medium'>{reviewCount}</b>
               </span>
             </div>
-            <ChevronRight size={22} className='text-gray-400' />
+            <ChevronRight size={22} className='text-grey-400' />
           </Link>
 
           {initialReviews.content.length > 0 && (
@@ -150,7 +150,7 @@ export default async function ReviewPage({
         )}
 
         {foodCourt === FOOD_COURT.KYONGSUL && (
-          <div className='md:px-gutter border-t-6 border-gray-100 px-4 pt-4'>
+          <div className='md:px-gutter border-t-6 border-grey-100 px-4 pt-4'>
             <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
           </div>
         )}

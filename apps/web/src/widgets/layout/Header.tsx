@@ -49,7 +49,7 @@ export default function Header() {
     <header
       className={cn(
         'fixed top-0 z-50 flex h-16 w-full items-center bg-white',
-        pathname === '/' && 'bg-[#F3F4F5]/70 backdrop-blur-md',
+        pathname === '/' && 'bg-grey-100/70 backdrop-blur-md',
       )}
     >
       <div className='md:px-gutter flex w-full items-center justify-between px-4'>

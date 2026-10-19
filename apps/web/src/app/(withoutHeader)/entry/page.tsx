@@ -29,7 +29,7 @@ export default function EntryPage() {
         className='p-0! shadow-none! ring-0!'
         roundedBottom={false}
       >
-        <p className='mb-6 text-center text-sm font-medium text-gray-400'>
+        <p className='mb-6 text-center text-sm font-medium text-grey-400'>
           SNS 계정으로 3초만에 시작하기!
         </p>
 
@@ -37,7 +37,7 @@ export default function EntryPage() {
 
         <motion.button
           whileHover={{ y: -1 }}
-          className='mt-8 w-full cursor-pointer text-center text-sm font-medium text-gray-500 transition-colors hover:text-gray-900'
+          className='mt-8 w-full cursor-pointer text-center text-sm font-medium text-grey-500 transition-colors hover:text-grey-900'
         >
           <Link
             href='/'

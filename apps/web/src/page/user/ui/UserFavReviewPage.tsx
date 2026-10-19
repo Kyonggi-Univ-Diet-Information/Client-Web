@@ -40,14 +40,14 @@ export default async function UserFavReviewPage() {
     <>
       <div className='md:px-gutter flex flex-col gap-1 px-4'>
         <Title>좋아요한 리뷰</Title>
-        <p className='text-sm text-gray-500'>
+        <p className='text-sm text-grey-500'>
           좋아요한 리뷰를 확인할 수 있습니다.
         </p>
       </div>
 
       <Suspense fallback={<Loader />}>
         {reviewsWithMetadata.length === 0 && (
-          <div className='mt-10 text-center text-gray-500'>
+          <div className='mt-10 text-center text-grey-500'>
             좋아요한 리뷰가 없어요!
           </div>
         )}

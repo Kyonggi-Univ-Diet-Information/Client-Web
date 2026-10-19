@@ -28,16 +28,16 @@ export default async function CampusMenuSet({
       <div className='flex flex-col gap-2.5'>
         {setMenus.map(setMenu => (
           <div
-            className='flex items-start flex-col gap-1.5 p-4 border border-gray-100 rounded-[8px]'
+            className='flex items-start flex-col gap-1.5 p-4 border border-grey-100 rounded-[8px]'
             key={setMenu.id}
           >
-           <p className='truncate text-gray-900'>
+           <p className='truncate text-grey-900'>
               {setMenu.name}
             </p>
-            <p className='text-sm leading-tight text-gray-500'>
+            <p className='text-sm leading-tight text-grey-500'>
               {description(setMenu)}
             </p>
-            <p className='flex w-full justify-end shrink-0 text-xl font-black text-gray-900'>
+            <p className='flex w-full justify-end shrink-0 text-xl font-black text-grey-900'>
               {setMenu.price.toLocaleString()}원
             </p>
           </div>

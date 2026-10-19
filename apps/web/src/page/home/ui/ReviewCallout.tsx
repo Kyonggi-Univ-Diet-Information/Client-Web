@@ -32,10 +32,10 @@ export default function ReviewCallout({
       <button
         type='button'
         onClick={handleClick}
-        className='flex w-full items-center justify-between rounded-2xl border border-gray-100 bg-white px-4 py-4 text-left transition-colors active:bg-gray-50'
+        className='flex w-full items-center justify-between rounded-2xl border border-grey-100 bg-white px-4 py-4 text-left transition-colors active:bg-grey-50'
       >
         {children}
-        <ChevronRight size={18} className='shrink-0 text-gray-400' />
+        <ChevronRight size={18} className='shrink-0 text-grey-400' />
       </button>
       {menus && (
         <RecentMenuSheet

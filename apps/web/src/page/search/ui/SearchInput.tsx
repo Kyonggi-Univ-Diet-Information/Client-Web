@@ -31,12 +31,12 @@ export default function SearchInput() {
       className='md:px-gutter bg-white px-4 pt-2.5 pb-1.5'
       onSubmit={handleSubmit}
     >
-      <div className='flex items-center gap-2.5 rounded-lg border border-gray-900 bg-white px-4 py-3.5 shadow-[0px_2px_4px_rgba(0,0,0,0.1)]'>
-        <SearchIcon size={18} className='shrink-0 text-gray-900' />
+      <div className='flex items-center gap-2.5 rounded-lg border border-grey-900 bg-white px-4 py-3.5 shadow-[0px_2px_4px_rgba(0,0,0,0.1)]'>
+        <SearchIcon size={18} className='shrink-0 text-grey-900' />
         <input
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className='w-full text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none'
+          className='w-full text-sm font-medium text-grey-900 placeholder:text-grey-400 focus:outline-none'
           type='search'
           enterKeyHint='search'
           placeholder='검색어를 입력해주세요.'
@@ -48,7 +48,7 @@ export default function SearchInput() {
             aria-label='검색어 지우기'
             className='shrink-0'
           >
-            <CircleX size={22} className='fill-gray-500 text-white' />
+            <CircleX size={22} className='fill-grey-500 text-white' />
           </button>
         )}
       </div>

@@ -21,7 +21,7 @@ export default function CampusSortSheet({
 }) {
   return (
     <BottomSheet href={from}>
-      <p className='px-5 py-4 text-xl font-semibold text-gray-900'>정렬</p>
+      <p className='px-5 py-4 text-xl font-semibold text-grey-900'>정렬</p>
       <div className='flex flex-col'>
         {(Object.keys(CAMPUS_SORT_LABEL) as CampusMenuSort[]).map(option => {
           const isSelected = option === sort;
@@ -34,11 +34,11 @@ export default function CampusSortSheet({
               replace
               className={cn(
                 'flex items-center justify-between px-5 py-4 text-lg',
-                isSelected ? 'text-point font-medium' : 'text-gray-900',
+                isSelected ? 'text-primary-500 font-medium' : 'text-grey-900',
               )}
             >
               {CAMPUS_SORT_LABEL[option]}
-              {isSelected && <Check size={22} className='text-point' />}
+              {isSelected && <Check size={22} className='text-primary-500' />}
             </Link>
           );
         })}

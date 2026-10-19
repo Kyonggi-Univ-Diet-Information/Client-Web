@@ -23,35 +23,35 @@ export default function CampusFoodCourtCard({
   return (
     <Link
       href={href}
-      className='flex flex-col rounded-2xl border border-gray-100 bg-white pt-4 pr-3 pb-5 pl-4'
+      className='flex flex-col rounded-2xl border border-grey-100 bg-white pt-4 pr-3 pb-5 pl-4'
     >
       <div className='flex items-center justify-between'>
-        <h3 className='text-lg font-semibold text-gray-900'>{location}</h3>
-        <div className='flex items-center gap-0.5 text-point'>
+        <h3 className='text-lg font-semibold text-grey-900'>{location}</h3>
+        <div className='flex items-center gap-0.5 text-primary-500'>
           <span className='text-sm font-medium'>{viewMenuText}</span>
           <ChevronRight size={16} />
         </div>
       </div>
       <div className='mt-1 flex items-center gap-1'>
-        <span className='size-1.5 rounded-full bg-point' />
-        <span className='text-[13px] font-medium text-gray-600'>
+        <span className='size-1.5 rounded-full bg-primary-500' />
+        <span className='text-[13px] font-medium text-grey-600'>
           {isOpen ? '운영중' : '운영종료'}
         </span>
       </div>
       <div className='mt-5 flex flex-col gap-3'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-1.5'>
-            <CalendarIcon className='size-4 text-gray-900' />
-            <span className='text-sm font-medium text-gray-900'>평일 운영</span>
+            <CalendarIcon className='size-4 text-grey-900' />
+            <span className='text-sm font-medium text-grey-900'>평일 운영</span>
           </div>
-          <span className='text-[13px] text-gray-900'>{operatingHours}</span>
+          <span className='text-[13px] text-grey-900'>{operatingHours}</span>
         </div>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-1.5'>
-            <ClockIcon className='size-4 text-gray-900' />
-            <span className='text-sm font-medium text-gray-900'>주문 마감</span>
+            <ClockIcon className='size-4 text-grey-900' />
+            <span className='text-sm font-medium text-grey-900'>주문 마감</span>
           </div>
-          <span className='text-[13px] text-gray-900'>{orderDeadline}</span>
+          <span className='text-[13px] text-grey-900'>{orderDeadline}</span>
         </div>
       </div>
     </Link>

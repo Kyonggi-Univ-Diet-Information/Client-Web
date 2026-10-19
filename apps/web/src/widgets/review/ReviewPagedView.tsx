@@ -22,7 +22,7 @@ export default function ReviewPagedView({
 }: ReviewPagedViewProps) {
   if (initialData.content.length === 0) {
     return (
-      <div className='mt-10 text-center font-medium text-gray-500'>
+      <div className='mt-10 text-center font-medium text-grey-500'>
         아직 작성된 리뷰가 없어요.
       </div>
     );

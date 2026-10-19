@@ -38,7 +38,7 @@ export default function ReviewWriteButton({
         }
       }}
     >
-      <Button className='flex h-11 items-center gap-2 rounded-full bg-gray-900 px-4! text-white shadow-lg transition-all hover:bg-gray-900 active:scale-95'>
+      <Button className='flex h-11 items-center gap-2 rounded-full bg-grey-900 px-4! text-white shadow-lg transition-all hover:bg-grey-900 active:scale-95'>
         <PencilIcon size={16} />
         <span className='text-[13px] font-semibold'>리뷰 작성</span>
       </Button>

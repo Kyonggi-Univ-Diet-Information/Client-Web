@@ -57,11 +57,11 @@ export function getFallbackMenu(status: FallbackStatus): DormMenu[] {
 export function renderMenuItems(menu: DormMenu[], locale?: string) {
   if (menu.length === 0)
     return (
-      <p className='text-gray-600'>{locale === 'en' ? 'Closed' : '미운영'}</p>
+      <p className='text-grey-600'>{locale === 'en' ? 'Closed' : '미운영'}</p>
     );
 
   return menu.map(menuItem => (
-    <p className='text-gray-600' key={menuItem.id}>
+    <p className='text-grey-600' key={menuItem.id}>
       {locale === 'en'
         ? menuItem.dietFoodDTO.nameEn
         : menuItem.dietFoodDTO.name}
@@ -74,13 +74,13 @@ export function renderMenuItems(menu: DormMenu[], locale?: string) {
  */
 export function renderMenuItemsWithReview(menu: DormMenu[], locale?: string) {
   return menu.map(menuItem => (
-    <p className='flex justify-between text-gray-600' key={menuItem.id}>
+    <p className='flex justify-between text-grey-600' key={menuItem.id}>
       {locale === 'en'
         ? menuItem.dietFoodDTO.nameEn
         : menuItem.dietFoodDTO.name}
       <Link
         href={`/review/${menuItem.id}?menuType=dorm`}
-        className='text-gray-600'
+        className='text-grey-600'
       >
         리뷰
       </Link>

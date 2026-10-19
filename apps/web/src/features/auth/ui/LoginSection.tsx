@@ -23,7 +23,7 @@ function KakaoLoginButton() {
     <LoginButton
       iconSrc='/icons/icon-kakao.svg'
       iconAlt='kakao'
-      className='bg-[#FEE500] text-[#191919] hover:bg-[#e8d102]'
+      className='bg-[#FEE500] text-grey-900 hover:bg-[#e8d102]'
       iconClassName='mr-2'
       onClick={login}
     >

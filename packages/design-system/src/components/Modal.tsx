@@ -38,7 +38,7 @@ export default function Modal({
             type='button'
             onClick={onClose}
             disabled={closeDisabled}
-            className='absolute top-4 right-4 flex size-8 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 disabled:opacity-50'
+            className='absolute top-4 right-4 flex size-8 items-center justify-center rounded-full bg-grey-100 text-grey-500 hover:bg-grey-200 disabled:opacity-50'
             aria-label='닫기'
           >
             ✕
@@ -47,7 +47,7 @@ export default function Modal({
           <Link
             href={href ?? '/'}
             replace
-            className='absolute top-4 right-4 flex size-8 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200'
+            className='absolute top-4 right-4 flex size-8 items-center justify-center rounded-full bg-grey-100 text-grey-500 hover:bg-grey-200'
           >
             ✕
           </Link>
@@ -69,7 +69,7 @@ function ModalHeader({
   return (
     <p className='flex flex-col'>
       <span className='font-semibold'>{title}</span>
-      {subtitle && <span className='text-sm text-gray-600'>{subtitle}</span>}
+      {subtitle && <span className='text-sm text-grey-600'>{subtitle}</span>}
     </p>
   );
 }

@@ -21,16 +21,16 @@ export default function CampusMenuListHeader({
         className,
       )}
     >
-      <p className='text-[13px] text-gray-500'>
-        총 <span className='font-semibold text-gray-900'>{totalCount}개</span>
+      <p className='text-[13px] text-grey-500'>
+        총 <span className='font-semibold text-grey-900'>{totalCount}개</span>
       </p>
       {sortHref && (
         <Link
           href={sortHref}
-          className='flex items-center gap-1 py-1 text-[13px] font-medium text-gray-700'
+          className='flex items-center gap-1 py-1 text-[13px] font-medium text-grey-700'
         >
           {sortLabel ?? '정렬'}
-          <ChevronDown size={14} className='text-gray-500' />
+          <ChevronDown size={14} className='text-grey-500' />
         </Link>
       )}
     </div>

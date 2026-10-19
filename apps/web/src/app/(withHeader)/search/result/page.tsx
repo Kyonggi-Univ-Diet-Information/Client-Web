@@ -42,7 +42,7 @@ export default async function SearchPage({
         currentTabKey={restaurantType}
         className='pt-3'
       />
-      <div className='h-2.5 shrink-0 bg-[#F3F4F5]' />
+      <div className='h-2.5 shrink-0 bg-grey-100' />
       <Suspense
         key={`${q}-${restaurantType}-${sort}`}
         fallback={

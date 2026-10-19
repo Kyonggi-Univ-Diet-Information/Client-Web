@@ -54,33 +54,33 @@ export default function HeaderSearchOverlay({
           }}
           className='md:px-gutter px-5 pt-4'
         >
-          <div className='flex items-center gap-2.5 rounded-lg border-2 border-gray-100 px-4 py-3.5'>
-            <Search size={18} className='shrink-0 text-gray-400' />
+          <div className='flex items-center gap-2.5 rounded-lg border-2 border-grey-100 px-4 py-3.5'>
+            <Search size={18} className='shrink-0 text-grey-400' />
             <input
               autoFocus
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder='검색어를 입력하세요'
-              className='w-full text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none'
+              className='w-full text-sm text-grey-900 placeholder:text-grey-400 focus:outline-none'
             />
           </div>
         </form>
 
         {recentSearches.length > 0 && (
           <div className='flex flex-col'>
-            <p className='md:px-gutter px-6 py-2.5 text-[13px] font-semibold text-gray-500'>
+            <p className='md:px-gutter px-6 py-2.5 text-[13px] font-semibold text-grey-500'>
               최근 검색어
             </p>
             <div className='md:px-gutter flex flex-wrap gap-2 px-5'>
               {recentSearches.map(term => (
                 <div
                   key={term}
-                  className='flex items-center gap-0.5 rounded-lg bg-gray-100 py-2 pr-2 pl-3'
+                  className='flex items-center gap-0.5 rounded-lg bg-grey-100 py-2 pr-2 pl-3'
                 >
                   <button
                     type='button'
                     onClick={() => search(term)}
-                    className='text-[13px] font-medium text-gray-900'
+                    className='text-[13px] font-medium text-grey-900'
                   >
                     {term}
                   </button>
@@ -88,7 +88,7 @@ export default function HeaderSearchOverlay({
                     type='button'
                     onClick={() => handleRemove(term)}
                     aria-label={`${term} 삭제`}
-                    className='text-gray-400'
+                    className='text-grey-400'
                   >
                     <X size={18} />
                   </button>

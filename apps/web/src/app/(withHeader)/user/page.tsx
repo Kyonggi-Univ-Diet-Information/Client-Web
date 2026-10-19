@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   return (
-    <PageContainer className='gap-0 bg-[#F3F4F5]'>
+    <PageContainer className='gap-0 bg-grey-100'>
       <UserPage />
     </PageContainer>
   );

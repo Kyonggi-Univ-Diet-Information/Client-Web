@@ -32,7 +32,7 @@ export default async function SearchResult({
 
   if (!results || results.length === 0) {
     return (
-      <div className='flex h-[300px] w-full items-center justify-center text-center text-gray-600'>
+      <div className='flex h-[300px] w-full items-center justify-center text-center text-grey-600'>
         해당 조건에 대한 검색 결과가 없습니다.
       </div>
     );

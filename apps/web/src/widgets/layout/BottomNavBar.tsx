@@ -74,7 +74,7 @@ export default function BottomNavBar() {
   return (
     <div
       className={cn(
-        'fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md',
+        'fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-grey-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md',
         ios && 'pb-[max(env(safe-area-inset-bottom),24px)]',
         androidWebView && 'pb-0',
       )}
@@ -92,13 +92,13 @@ export default function BottomNavBar() {
             prefetch
             className='flex h-14 w-20 flex-col items-center justify-center gap-1'
           >
-            <div className={cn(isActive ? 'text-gray-900' : 'text-gray-400')}>
+            <div className={cn(isActive ? 'text-grey-900' : 'text-grey-400')}>
               {item.icon}
             </div>
             <span
               className={cn(
                 'text-xs font-medium',
-                isActive ? 'text-gray-900' : 'text-gray-400',
+                isActive ? 'text-grey-900' : 'text-grey-400',
               )}
             >
               {item.label}

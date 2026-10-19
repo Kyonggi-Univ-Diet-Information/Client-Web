@@ -5,7 +5,7 @@ import { ExternalLink } from '@/shared/ui';
 
 export default function EntryPolicySection() {
   return (
-    <p className='mt-10 text-center text-[11px] leading-relaxed text-gray-400'>
+    <p className='mt-10 text-center text-[11px] leading-relaxed text-grey-400'>
       시작 시{' '}
       <ExternalLink
         href={POLICY_URL.TERMS_OF_SERVICE}

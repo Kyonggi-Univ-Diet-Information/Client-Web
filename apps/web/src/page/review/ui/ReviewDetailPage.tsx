@@ -54,8 +54,8 @@ export default async function ReviewDetailPage({
     <div className='flex flex-col pb-10'>
       <ReviewRating type={foodCourt} foodId={foodId} />
 
-      <div className='md:px-gutter border-t-6 border-gray-100 px-4 py-4'>
-        <h1 className='text-lg font-semibold text-gray-900'>
+      <div className='md:px-gutter border-t-6 border-grey-100 px-4 py-4'>
+        <h1 className='text-lg font-semibold text-grey-900'>
           전체 리뷰 {reviewCount}
         </h1>
       </div>
@@ -63,10 +63,10 @@ export default async function ReviewDetailPage({
       <div className='md:px-gutter flex justify-end px-4 py-2'>
         <Link
           href={sortHref}
-          className='flex items-center gap-1 py-1 text-[13px] font-medium text-gray-500'
+          className='flex items-center gap-1 py-1 text-[13px] font-medium text-grey-500'
         >
           {SORT_LABEL[sort ?? 'recent']}
-          <ChevronDown size={14} className='text-gray-500' />
+          <ChevronDown size={14} className='text-grey-500' />
         </Link>
       </div>
 

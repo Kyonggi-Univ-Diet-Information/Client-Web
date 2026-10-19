@@ -39,16 +39,16 @@ export default function WeeklyCalendar({
             onClick={() => onSelectDay(day)}
             className={cn(
               'flex flex-1 flex-col items-center gap-1 rounded-2xl py-2.5',
-              isSelected && 'bg-point shadow-[2px_4px_6px_rgba(255,101,46,0.2)]',
+              isSelected && 'bg-primary-500 shadow-[2px_4px_6px_rgba(255,101,46,0.2)]',
             )}
           >
-            <span className={cn('text-xs font-medium', isSelected ? 'text-white' : 'text-gray-400')}>
+            <span className={cn('text-xs font-medium', isSelected ? 'text-white' : 'text-grey-400')}>
               {DORM_DAY_SHORT[day]}
             </span>
             <span
               className={cn(
                 'text-base font-semibold',
-                isSelected ? 'text-white' : weekend ? 'text-gray-400' : 'text-gray-900',
+                isSelected ? 'text-white' : weekend ? 'text-grey-400' : 'text-grey-900',
               )}
             >
               {weekDates[index].getDate()}

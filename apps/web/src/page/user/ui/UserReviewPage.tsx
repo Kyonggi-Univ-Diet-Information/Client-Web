@@ -16,14 +16,14 @@ export default async function UserReviewPage() {
     <>
       <div className='md:px-gutter flex flex-col gap-1 px-4'>
         <Title>작성한 리뷰</Title>
-        <p className='text-sm text-gray-500'>
+        <p className='text-sm text-grey-500'>
           내가 작성한 리뷰를 확인할 수 있습니다.
         </p>
       </div>
 
       <Suspense fallback={<Loader />}>
         {data?.content.length === 0 && (
-          <div className='mt-10 text-center text-gray-500'>
+          <div className='mt-10 text-center text-grey-500'>
             작성한 리뷰가 없어요!
           </div>
         )}

@@ -90,9 +90,9 @@ function ReviewActionSelect({
     <Select value={value} onValueChange={onActionChange} disabled={pending}>
       <SelectTrigger
         icon={false}
-        className='size flex items-center justify-center border-none bg-transparent p-0 hover:bg-gray-100 focus:ring-0 focus:ring-offset-0 active:scale-95'
+        className='size flex items-center justify-center border-none bg-transparent p-0 hover:bg-grey-100 focus:ring-0 focus:ring-offset-0 active:scale-95'
       >
-        <MoreVertical className='size-5 text-gray-400' />
+        <MoreVertical className='size-5 text-grey-400' />
       </SelectTrigger>
       <SelectContent align='end' className='min-w-[120px]'>
         {isMyReview ? (
@@ -174,7 +174,7 @@ function ReviewReportReasonList({
   if (reasons.length === 0) {
     return (
       <div className='flex h-40 items-center justify-center'>
-        <div className='border-t-point size-6 animate-spin rounded-full border-2 border-gray-200' />
+        <div className='border-t-primary-500 size-6 animate-spin rounded-full border-2 border-grey-200' />
       </div>
     );
   }
@@ -191,8 +191,8 @@ function ReviewReportReasonList({
             className={cn(
               'w-full rounded-xl border p-4 text-left text-sm transition-all active:scale-[0.98]',
               selectedReason === reason.type
-                ? 'border-point bg-point/5 text-point font-semibold'
-                : 'border-gray-100 bg-gray-50 text-gray-600 hover:bg-gray-100',
+                ? 'border-primary-500 bg-primary-500/5 text-primary-500 font-semibold'
+                : 'border-grey-100 bg-grey-50 text-grey-600 hover:bg-grey-100',
               pending && 'opacity-50',
             )}
           >
@@ -220,7 +220,7 @@ function ReviewReportDialogFooter({
     <div className='flex justify-end gap-2'>
       <button
         onClick={onClose}
-        className='rounded-xl px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 disabled:opacity-50'
+        className='rounded-xl px-4 py-2 text-sm font-medium text-grey-700 hover:bg-grey-100 disabled:opacity-50'
         disabled={pending}
       >
         취소

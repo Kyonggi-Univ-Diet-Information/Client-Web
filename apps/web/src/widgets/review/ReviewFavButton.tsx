@@ -86,8 +86,8 @@ export default function ReviewLikeButton({
       className={cn(
         'gap-1.5 rounded-md border px-2.5 transition-all active:scale-95',
         optimisticState.isLiked
-          ? 'border-point bg-point/5 text-point'
-          : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50',
+          ? 'border-primary-500 bg-primary-500/5 text-primary-500'
+          : 'border-grey-200 bg-white text-grey-500 hover:bg-grey-50',
       )}
     >
       <motion.div

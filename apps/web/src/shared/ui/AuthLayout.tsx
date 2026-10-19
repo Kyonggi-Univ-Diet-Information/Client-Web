@@ -21,12 +21,12 @@ export function AuthPageWrapper({
   return (
     <main
       className={cn(
-        'relative inset-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#F9FAFB]',
+        'relative inset-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-grey-50',
         className,
       )}
     >
       {showTopGradient && (
-        <div className='bg-point/10 pointer-events-none absolute -top-24 -left-24 h-[40vh] w-screen rounded-full blur-[120px]' />
+        <div className='bg-primary-500/10 pointer-events-none absolute -top-24 -left-24 h-[40vh] w-screen rounded-full blur-[120px]' />
       )}
       {showBottomGradient && (
         <div className='pointer-events-none absolute -right-24 -bottom-24 h-[500px] w-screen rounded-full bg-orange-100 blur-[120px]' />

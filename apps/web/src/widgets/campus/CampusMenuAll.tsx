@@ -27,11 +27,11 @@ export default async function CampusMenuAll() {
             <Card.Content>
               {campusMenu[restaurant].slice(0, 8).map(menu => (
                 <p
-                  className='flex items-center justify-between text-gray-600'
+                  className='flex items-center justify-between text-grey-600'
                   key={menu.id}
                 >
                   <span className='max-w-[70%] truncate'>{menu.name}</span>
-                  <span className='text-sm text-gray-900/40'>
+                  <span className='text-sm text-grey-900/40'>
                     {menu.price}원
                   </span>
                 </p>

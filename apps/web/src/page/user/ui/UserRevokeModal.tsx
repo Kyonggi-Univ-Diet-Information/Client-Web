@@ -125,7 +125,7 @@ function UserRevokeReasonStep({
 }: UserRevokeReasonStepProps) {
   return (
     <>
-      <p className='text-sm text-gray-600'>
+      <p className='text-sm text-grey-600'>
         탈퇴하시는 이유를 알려주시면 서비스 개선에 큰 도움이 됩니다.
       </p>
       <div className='flex flex-col gap-2'>
@@ -139,8 +139,8 @@ function UserRevokeReasonStep({
                 className={cn(
                   'w-full rounded-xl border p-4 text-left text-sm transition-all active:scale-[0.98]',
                   selectedReasonType === reason.type
-                    ? 'border-point bg-point/5 text-point font-semibold'
-                    : 'border-gray-100 bg-gray-50 text-gray-600 hover:bg-gray-100',
+                    ? 'border-primary-500 bg-primary-500/5 text-primary-500 font-semibold'
+                    : 'border-grey-100 bg-grey-50 text-grey-600 hover:bg-grey-100',
                 )}
               >
                 {reason.description}
@@ -148,7 +148,7 @@ function UserRevokeReasonStep({
             ))
         ) : (
           <div className='flex h-40 items-center justify-center'>
-            <div className='border-t-point size-6 animate-spin rounded-full border-2 border-gray-200' />
+            <div className='border-t-primary-500 size-6 animate-spin rounded-full border-2 border-grey-200' />
           </div>
         )}
       </div>
@@ -169,7 +169,7 @@ function UserRevokeConfirmStep() {
           <li>계정 정보는 즉시 파기되며 복구할 수 없습니다.</li>
         </ul>
       </div>
-      <p className='px-1 text-[15px] text-gray-600'>정말로 탈퇴하시겠습니까?</p>
+      <p className='px-1 text-[15px] text-grey-600'>정말로 탈퇴하시겠습니까?</p>
     </div>
   );
 }

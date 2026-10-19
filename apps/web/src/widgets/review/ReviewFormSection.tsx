@@ -28,7 +28,7 @@ const ReviewTextArea = memo(({ register, value }: ReviewTextAreaProps) => {
     <div className='relative flex flex-col gap-2'>
       <textarea
         className={cn(
-          'focus:border-point/20 min-h-[120px] w-full resize-none rounded-2xl bg-white p-4 text-[15px] leading-relaxed text-gray-900 transition-all outline-none placeholder:text-gray-300 focus:border-1',
+          'focus:border-primary-500/20 min-h-[120px] w-full resize-none rounded-2xl bg-white p-4 text-[15px] leading-relaxed text-grey-900 transition-all outline-none placeholder:text-grey-300 focus:border-1',
         )}
         placeholder='맛, 양, 서비스 등 솔직한 후기를 남겨주세요.'
         {...register}
@@ -37,7 +37,7 @@ const ReviewTextArea = memo(({ register, value }: ReviewTextAreaProps) => {
         <span
           className={cn(
             'text-[11px] font-bold',
-            value?.length > 0 ? 'text-point' : 'text-gray-300',
+            value?.length > 0 ? 'text-primary-500' : 'text-grey-300',
           )}
         >
           {value?.length || 0}
@@ -109,10 +109,10 @@ export default function ReviewFormSection({
 
       <div className='flex flex-col gap-4'>
         <div className='space-y-1 px-1'>
-          <h3 className='text-lg leading-none font-bold text-gray-900'>
+          <h3 className='text-lg leading-none font-bold text-grey-900'>
             이 메뉴는 어땠나요?
           </h3>
-          <p className='text-xs font-medium text-gray-400'>
+          <p className='text-xs font-medium text-grey-400'>
             별점을 선택하고 후기를 남겨주세요.
           </p>
         </div>
@@ -135,7 +135,7 @@ export default function ReviewFormSection({
       <ReviewTextArea register={register('content')} value={contentValue} />
 
       <div className='flex items-center justify-between px-1'>
-        <p className='text-[11px] font-medium text-gray-400'>
+        <p className='text-[11px] font-medium text-grey-400'>
           {isFormValid
             ? '멋진 리뷰네요! 이제 등록해보세요.'
             : '최소 2글자 이상 작성해주세요.'}

@@ -49,7 +49,7 @@ export default function Tab({
             className={cn(
               'flex-1 text-center transition-colors',
               styles.button,
-              option.value === value ? 'text-gray-900' : 'text-gray-400',
+              option.value === value ? 'text-grey-900' : 'text-grey-400',
             )}
           >
             {option.label}
@@ -57,11 +57,11 @@ export default function Tab({
         ))}
       </div>
       <div
-        className={cn('relative w-full rounded-full bg-gray-100', styles.track)}
+        className={cn('relative w-full rounded-full bg-grey-100', styles.track)}
       >
         <div
           className={cn(
-            'absolute inset-y-0 rounded-full bg-gray-900 transition-all duration-200',
+            'absolute inset-y-0 rounded-full bg-grey-900 transition-all duration-200',
             styles.track,
           )}
           style={{

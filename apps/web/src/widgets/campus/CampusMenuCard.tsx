@@ -31,7 +31,7 @@ export default async function CampusMenuCard({
   return (
     <Link
       href={`/review/${foodCourtId}/${id}`}
-      className='md:px-gutter flex gap-3 border-t border-gray-100 px-4 py-3.5'
+      className='md:px-gutter flex gap-3 border-t border-grey-100 px-4 py-3.5'
     >
       <CampusMenuImage
         foodCourt={foodCourt}
@@ -42,9 +42,9 @@ export default async function CampusMenuCard({
       <div className='flex flex-col gap-1.5 px-1'>
         <div className='flex flex-col gap-1'>
           <div className='flex flex-col'>
-            <span className='text-base font-medium text-gray-900'>{name}</span>
+            <span className='text-base font-medium text-grey-900'>{name}</span>
             {location && (
-              <span className='flex items-center gap-0.5 text-[13px] text-gray-500'>
+              <span className='flex items-center gap-0.5 text-[13px] text-grey-500'>
                 {location.map((label, index) => (
                   <span key={label} className='flex items-center gap-0.5'>
                     {index > 0 && <ChevronRight size={12} />}
@@ -54,25 +54,25 @@ export default async function CampusMenuCard({
               </span>
             )}
           </div>
-          <span className='text-lg font-semibold text-gray-900'>
+          <span className='text-lg font-semibold text-grey-900'>
             {price.toLocaleString()}원
           </span>
         </div>
         <div className='flex items-center gap-2.5'>
           {averageRating && (
             <div className='flex items-center gap-0.5'>
-              <Star size={20} className='fill-point text-point' />
-              <span className='text-sm font-semibold text-gray-600'>
+              <Star size={20} className='fill-primary-500 text-primary-500' />
+              <span className='text-sm font-semibold text-grey-600'>
                 {averageRating.toFixed(1)}
               </span>
             </div>
           )}
           {reviewCount > 0 ? (
-            <span className='text-sm text-gray-600'>
+            <span className='text-sm text-grey-600'>
               후기 <b className='font-semibold'>{reviewCount}</b>
             </span>
           ) : (
-            <span className='text-sm text-gray-600'>아직 후기가 없어요</span>
+            <span className='text-sm text-grey-600'>아직 후기가 없어요</span>
           )}
         </div>
       </div>

@@ -75,7 +75,7 @@ export default function UserPageClient({
     'flex w-full items-center justify-between px-3.5 py-2.5 text-start';
   const rowContent = (icon: ReactNode, label: string) => (
     <>
-      <span className='flex items-center gap-2.5 text-base text-[#191919]'>
+      <span className='flex items-center gap-2.5 text-base text-grey-900'>
         {icon}
         {label}
       </span>
@@ -86,31 +86,31 @@ export default function UserPageClient({
   return (
     <div className='flex flex-col pt-2.5'>
       <div className='md:pr-gutter flex flex-col items-end gap-3 bg-white pt-2.5 pr-5 pb-5'>
-        <p className='text-xl font-semibold text-[#191919]'>
+        <p className='text-xl font-semibold text-grey-900'>
           {userInfo.name}님
         </p>
-        <p className='text-base font-semibold text-[#767676]'>
+        <p className='text-base font-semibold text-grey-500'>
           {userInfo.email}
         </p>
       </div>
-      <div className='md:px-gutter flex gap-2.5 border-t border-[#efefef] bg-white px-5 pt-[18px] pb-6'>
+      <div className='md:px-gutter flex gap-2.5 border-t border-grey-200 bg-white px-5 pt-[18px] pb-6'>
         {stats.map(stat => (
           <Link
             key={stat.href}
             href={stat.href}
             className='flex w-[110px] flex-col gap-0.5'
           >
-            <span className='text-sm font-semibold text-[#191919]'>
+            <span className='text-sm font-semibold text-grey-900'>
               {stat.label}
             </span>
-            <span className='px-0.5 text-5xl leading-normal text-[#191919]'>
+            <span className='px-0.5 text-5xl leading-normal text-grey-900'>
               {stat.count}
             </span>
           </Link>
         ))}
       </div>
       <div className='md:mx-gutter mx-4 mt-3.5 flex flex-col rounded-[14px] bg-white py-2'>
-        <p className='px-3.5 py-1.5 text-sm font-semibold text-[#1a1a1a]'>
+        <p className='px-3.5 py-1.5 text-sm font-semibold text-grey-900'>
           고객지원
         </p>
         <ExternalLink href={PATCHNOTE_URL} className={rowClassName}>

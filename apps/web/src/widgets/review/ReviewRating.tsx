@@ -33,7 +33,7 @@ export default async function ReviewRating({
     <div className='md:px-gutter flex items-end gap-8 bg-white pr-10 pb-4 pl-8'>
       <div className='flex h-full w-[72px] flex-col justify-center'>
         <div className='flex flex-col items-center justify-center gap-1.5'>
-          <p className='text-[28px] leading-[38px] font-semibold text-gray-900'>
+          <p className='text-[28px] leading-[38px] font-semibold text-grey-900'>
             {(averageRating ?? 0).toFixed(1)}
           </p>
           <div className='flex items-center'>
@@ -43,8 +43,8 @@ export default async function ReviewRating({
                 size={16}
                 className={
                   index < roundedAverage
-                    ? 'fill-point text-point'
-                    : 'fill-[#ebebeb] text-[#ebebeb]'
+                    ? 'fill-primary-500 text-primary-500'
+                    : 'fill-grey-200 text-grey-200'
                 }
               />
             ))}
@@ -59,16 +59,16 @@ export default async function ReviewRating({
 
           return (
             <div key={star} className='flex items-center gap-2'>
-              <span className='w-6 shrink-0 text-xs font-medium text-gray-900'>
+              <span className='w-6 shrink-0 text-xs font-medium text-grey-900'>
                 {star}점
               </span>
-              <div className='h-1 flex-1 overflow-hidden rounded-full bg-[#ebebeb]'>
+              <div className='h-1 flex-1 overflow-hidden rounded-full bg-grey-200'>
                 <div
-                  className='bg-point h-full rounded-full'
+                  className='bg-primary-500 h-full rounded-full'
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className='w-4 shrink-0 text-xs font-medium text-gray-400'>
+              <span className='w-4 shrink-0 text-xs font-medium text-grey-400'>
                 {count}
               </span>
             </div>

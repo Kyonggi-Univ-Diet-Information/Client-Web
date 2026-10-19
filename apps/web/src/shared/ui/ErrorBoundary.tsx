@@ -46,9 +46,9 @@ export default class ErrorBoundary extends React.Component<
           <h2 className='mb-4 text-xl font-bold text-red-600'>
             오류가 발생했습니다
           </h2>
-          <details className='text-sm text-gray-600'>
+          <details className='text-sm text-grey-600'>
             <summary className='cursor-pointer'>에러 세부사항 보기</summary>
-            <pre className='mt-2 overflow-auto rounded bg-gray-100 p-4 text-xs'>
+            <pre className='mt-2 overflow-auto rounded bg-grey-100 p-4 text-xs'>
               {this.state.error?.stack}
             </pre>
           </details>

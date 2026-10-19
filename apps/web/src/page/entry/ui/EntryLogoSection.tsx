@@ -14,20 +14,20 @@ export default function EntryLogoSection() {
           whileTap={{ scale: 0.95 }}
           className='relative mb-8 cursor-pointer'
         >
-          <div className='bg-point/10 absolute inset-0 -m-6 rounded-[48px] blur-2xl' />
-          <div className='bg-point size-26 flex shrink-0 items-center justify-center rounded-[32px] shadow-2xl shadow-orange-200'>
+          <div className='bg-primary-500/10 absolute inset-0 -m-6 rounded-[48px] blur-2xl' />
+          <div className='bg-primary-500 size-26 flex shrink-0 items-center justify-center rounded-[32px] shadow-2xl shadow-orange-200'>
             <span className='font-gyeonggiTitleBold text-4xl text-white'>기밥</span>
           </div>
         </motion.div>
 
         <div className='text-center'>
-          <h1 className='font-gyeonggiTitleBold mb-4 text-3xl tracking-tight text-gray-900'>
+          <h1 className='font-gyeonggiTitleBold mb-4 text-3xl tracking-tight text-grey-900'>
             기룡아 밥먹자!
           </h1>
-          <p className='text-balance leading-relaxed text-gray-500'>
+          <p className='text-balance leading-relaxed text-grey-500'>
             경기대학교 교내식당 정보,
             <br />
-            <span className='text-point font-semibold'>기밥</span>에서 찾아보자!
+            <span className='text-primary-500 font-semibold'>기밥</span>에서 찾아보자!
           </p>
         </div>
       </motion.div>

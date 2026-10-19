@@ -38,7 +38,7 @@ export default async function HomePage() {
   ];
 
   return (
-    <PageContainer className='gap-0 bg-[#F3F4F5] p-0'>
+    <PageContainer className='gap-0 bg-grey-100 p-0'>
       <Section className='md:px-gutter px-4 pt-20'>
         <CampusFoodCourtSwitcher campusFoodCourts={CampusFoodCourts} />
       </Section>
@@ -47,7 +47,7 @@ export default async function HomePage() {
       </Section>
       <div className='flex flex-1 flex-col bg-white pb-[calc(5rem+env(safe-area-inset-bottom))]'>
         <header className='md:px-gutter pt-[18px] pr-5 pb-3.5 pl-6'>
-          <h2 className='text-lg leading-[26px] font-semibold tracking-[-0.36px] text-[#191919]'>
+          <h2 className='text-lg leading-[26px] font-semibold tracking-[-0.36px] text-grey-900'>
             이번주 기숙사 메뉴
           </h2>
         </header>
@@ -64,14 +64,14 @@ function ReviewLinkButton() {
     <ReviewCallout campusHref={campusHref}>
       <AnimatedCard index={0} animationType='spring'>
         <div className='flex items-center gap-3'>
-          <div className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-gray-50'>
-            <ChatIcon className='text-point size-[26px] opacity-80' />
+          <div className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-grey-50'>
+            <ChatIcon className='text-primary-500 size-[26px] opacity-80' />
           </div>
           <div className='flex flex-col'>
-            <span className='text-base font-semibold text-gray-900'>
+            <span className='text-base font-semibold text-grey-900'>
               식사 후기 남기기
             </span>
-            <span className='text-[13px] text-gray-600'>
+            <span className='text-[13px] text-grey-600'>
               최근 본 메뉴에서 골라보세요
             </span>
           </div>
