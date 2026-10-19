@@ -1,17 +1,12 @@
 'use client';
 
 import { ChevronLeftIcon, MessageSquareWarning, Search } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { AuthButton } from '@/features/auth/ui/AuthButton';
 
-import { FOOD_COURT_ID, INQUIRY_URL } from '@/shared/api';
-import {
-  FOOD_COURT_RESTAURANTS,
-  RESTAURANT_ID_BY_NAME,
-} from '@/shared/constants/campus/restaurant';
+import { INQUIRY_URL } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { ExternalLink } from '@/shared/ui';
 
@@ -21,17 +16,6 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
-  const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
-  const defaultCampusHref = `/campus/${defaultFoodCourtId}/${RESTAURANT_ID_BY_NAME[firstRestaurant]}`;
-
-  const navItems = [
-    { href: '/', label: '홈' },
-    { href: defaultCampusHref, label: '교내식당' },
-    { href: '/review', label: '리뷰' },
-    { href: '/user', label: '마이' },
-  ];
 
   const isDepthPage = () => {
     if (pathname.startsWith('/search')) {
@@ -50,62 +34,14 @@ export default function Header() {
           if (isDepthPage()) router.back();
           else router.push('/');
         }}
-        className='flex cursor-pointer items-baseline gap-2 focus:outline-none md:hidden'
+        className='flex cursor-pointer items-baseline gap-2 focus:outline-none'
       >
         {isDepthPage() ? (
           <ChevronLeftIcon />
         ) : (
-          <>
-            <span className='font-gyeonggiTitleBold text-xl font-bold'>
-              기밥
-            </span>
-            <span className='font-gyeonggiTitleBold hidden md:block'>
-              기룡아 밥먹자
-            </span>
-          </>
+          <span className='font-gyeonggiTitleBold text-xl font-bold'>기밥</span>
         )}
       </button>
-    );
-  };
-
-  const DesktopHeader = () => {
-    return (
-      <>
-        <Link
-          href='/'
-          className='hidden cursor-pointer items-baseline gap-2 md:flex'
-        >
-          <span className='font-gyeonggiTitleBold text-2xl font-bold'>
-            기밥
-          </span>
-          <span className='font-gyeonggiTitleBold hidden md:block'>
-            기룡아 밥먹자
-          </span>
-        </Link>
-        <div className='hidden items-baseline gap-4 md:flex'>
-          {navItems.map(item => {
-            const isActive =
-              item.href === '/'
-                ? pathname === '/'
-                : pathname.includes(`${item.href.split('/')[1]}`);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                prefetch
-                className={`text-sm transition-colors ${
-                  isActive
-                    ? 'text-point font-semibold'
-                    : 'text-gray-400 hover:text-gray-600'
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      </>
     );
   };
 
@@ -118,7 +54,6 @@ export default function Header() {
     >
       <div className='mx-auto flex w-full max-w-[770px] items-center justify-between px-4'>
         <MobileHeader />
-        <DesktopHeader />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (
             <button

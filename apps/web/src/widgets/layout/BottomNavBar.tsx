@@ -74,7 +74,7 @@ export default function BottomNavBar() {
   return (
     <div
       className={cn(
-        'fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden',
+        'fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-gray-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md',
         ios && 'pb-[max(env(safe-area-inset-bottom),24px)]',
         androidWebView && 'pb-0',
       )}
