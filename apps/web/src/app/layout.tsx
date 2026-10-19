@@ -8,8 +8,8 @@ import {
   brBold,
   brRegular,
   gyeonggiTitleBold,
+  pretendard,
   tossFace,
-  wantedSans,
 } from '@/app/_styles/font';
 
 import { ErrorProvider, SWRProvider } from '@/widgets/providers';
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html
       lang='ko'
-      className={`${wantedSans.variable} ${brBold.variable} ${brRegular.variable} ${gyeonggiTitleBold.variable} ${tossFace.variable}`}
+      className={`${pretendard.variable} ${brBold.variable} ${brRegular.variable} ${gyeonggiTitleBold.variable} ${tossFace.variable}`}
       suppressHydrationWarning
     >
       <head>

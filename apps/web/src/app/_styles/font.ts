@@ -1,24 +1,9 @@
 import localFont from 'next/font/local';
 
-export const wantedSans = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/WantedSans-Regular.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/WantedSans-SemiBold.ttf',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/WantedSans-Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-wantedSans',
+export const pretendard = localFont({
+  src: '../../../public/fonts/PretendardVariable.woff2',
+  weight: '45 920',
+  variable: '--font-pretendard',
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
