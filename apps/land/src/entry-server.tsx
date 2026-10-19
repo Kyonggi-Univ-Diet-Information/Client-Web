@@ -38,7 +38,7 @@ export default createHandler(() => (
             name='description'
             content='오늘의 학식, 더 이상 고민 말고 기밥하세요!'
           />
-          <link rel='icon' href='/favicon/favicon.ico' sizes='any' />
+          <link rel='icon' href='/favicon/favicon.png' type='image/png' />
           <link rel='manifest' href='/config/manifest.json' />
           <meta property='og:title' content='기룡아 밥먹자!' />
           <meta
