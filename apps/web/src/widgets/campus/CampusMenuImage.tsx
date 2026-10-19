@@ -1,13 +1,11 @@
 'use client';
 
+import { Skeleton } from '@kiryong/design-system';
 import Image from 'next/image';
 import { useState } from 'react';
 
-
 import { FOOD_COURT, type FoodCourt } from '@/shared/api';
 import { cn } from '@/shared/lib';
-import { Skeleton } from '@/shared/ui';
-
 
 interface CampusMenuImageProps {
   menuId: number;

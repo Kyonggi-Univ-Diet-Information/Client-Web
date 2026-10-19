@@ -1,10 +1,9 @@
 'use client';
 
+import { Tab } from '@kiryong/design-system';
 import { useRouter } from 'next/navigation';
 
 import { getCampusMainTabs } from '@/entities/campus/model/campus';
-
-import { Tab } from '@/shared/ui';
 
 export default function CampusMainTabs({
   currentTabKey,

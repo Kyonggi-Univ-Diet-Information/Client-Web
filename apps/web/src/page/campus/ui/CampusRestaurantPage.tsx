@@ -1,3 +1,5 @@
+import { ChipNavigation, Section } from '@kiryong/design-system';
+
 import { CampusMainTabs, CampusMenuByRestaurant } from '@/widgets/campus';
 
 import type { CampusMenuSort } from '@/entities/campus/api/api.type';
@@ -8,11 +10,6 @@ import {
   RESTAURANT_ID_BY_NAME,
   getRestaurantsByFoodCourt,
 } from '@/shared/constants/campus/restaurant';
-import { ChipNavigation, Section } from '@/shared/ui';
-
-
-
-
 
 export interface CampusRestaurantPageProps {
   params: Promise<{

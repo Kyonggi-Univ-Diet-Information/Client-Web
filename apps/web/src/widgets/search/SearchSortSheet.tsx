@@ -1,3 +1,4 @@
+import { BottomSheet } from '@kiryong/design-system';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
 
@@ -8,7 +9,6 @@ import {
 } from '@/entities/search/model/search';
 
 import { cn } from '@/shared/lib';
-import { BottomSheet } from '@/shared/ui';
 
 export default function SearchSortSheet({
   from,
@@ -32,7 +32,7 @@ export default function SearchSortSheet({
               replace
               className={cn(
                 'flex items-center justify-between px-5 py-4 text-lg',
-                isSelected ? 'font-medium text-point' : 'text-gray-900',
+                isSelected ? 'text-point font-medium' : 'text-gray-900',
               )}
             >
               {SORTING_TYPE_NAME[option]}

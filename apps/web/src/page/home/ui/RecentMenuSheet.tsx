@@ -1,5 +1,6 @@
 'use client';
 
+import { BottomSheet } from '@kiryong/design-system';
 import { ChevronRight, X } from 'lucide-react';
 import Link from 'next/link';
 
@@ -9,7 +10,6 @@ import type { RecentMenu } from '@/entities/campus/model/recentMenus';
 
 import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
-import { BottomSheet } from '@/shared/ui';
 
 export default function RecentMenuSheet({
   menus,
@@ -75,7 +75,7 @@ export default function RecentMenuSheet({
 
       <div className='mt-4 border-t border-gray-100 pt-4 text-center text-[13px] text-gray-500'>
         찾는 메뉴가 없나요?{' '}
-        <Link href={campusHref} className='font-medium text-point underline'>
+        <Link href={campusHref} className='text-point font-medium underline'>
           다른 메뉴 찾기
         </Link>
       </div>

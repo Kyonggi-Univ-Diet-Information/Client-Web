@@ -1,5 +1,12 @@
 'use client';
 
+import {
+  Modal,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from '@kiryong/design-system';
 import { AlertCircle, Ban, MoreVertical, Trash2Icon } from 'lucide-react';
 
 import { useReviewAction } from '@/features/review/model/useReviewAction';
@@ -8,14 +15,6 @@ import type { ReportReason } from '@/entities/review/api/api.type';
 
 import { type FoodCourt } from '@/shared/api';
 import { cn } from '@/shared/lib';
-import {
-  Modal,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from '@/shared/ui';
-
 
 interface ReviewActionMenuProps {
   type: FoodCourt;

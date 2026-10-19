@@ -1,3 +1,5 @@
+import { AnimatedCard, Section } from '@kiryong/design-system';
+
 import DormSection from '@/widgets/dorm/DormSection';
 import { PageContainer } from '@/widgets/layout';
 
@@ -5,7 +7,6 @@ import { fetchDormMenu } from '@/features/dorm/api/fetchDormMenu';
 
 import { FOOD_COURT_ID } from '@/shared/api';
 import { RESTAURANT_ID_BY_NAME } from '@/shared/constants/campus/restaurant';
-import { AnimatedCard, Section } from '@/shared/ui';
 
 import CampusFoodCourtSwitcher from './CampusFoodCourtSwitcher';
 import ReviewCallout from './ReviewCallout';

@@ -1,3 +1,4 @@
+import { Modal, Button, AnimatedCard } from '@kiryong/design-system';
 import { ChevronRight, Star } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -15,7 +16,7 @@ import { getReviewsAction } from '@/features/review/api/getReviewsAction';
 import { FOOD_COURT, FOOD_COURT_NAME, getFoodCourtById } from '@/shared/api';
 import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
 import { AuthService } from '@/shared/lib/auth';
-import { Loader, Modal, Button, AnimatedCard } from '@/shared/ui';
+import { Loader } from '@/shared/ui';
 
 import RecordRecentMenu from './RecordRecentMenu';
 import ReviewWriteButton from './ReviewWriteButton';

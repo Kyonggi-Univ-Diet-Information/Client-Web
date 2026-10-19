@@ -1,3 +1,5 @@
+import { ChipNavigation, Section } from '@kiryong/design-system';
+
 import {
   CampusMainTabs,
   CampusMenuByFoodCourt,
@@ -13,11 +15,6 @@ import {
   hasSubRestaurants,
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
-import { ChipNavigation, Section } from '@/shared/ui';
-
-
-
-
 
 export interface CampusFoodCourtPageProps {
   params: Promise<{
@@ -56,12 +53,12 @@ export default async function CampusFoodCourtPage({
         <Section.Header>
           <CampusMainTabs currentTabKey={foodCourtId} />
         </Section.Header>
-          <ChipNavigation
-            tabs={restaurantTabs}
-            currentTabKey={firstRestaurantId}
-            variant='point'
-            size='md'
-          />
+        <ChipNavigation
+          tabs={restaurantTabs}
+          currentTabKey={firstRestaurantId}
+          variant='point'
+          size='md'
+        />
         <CampusMenuByRestaurant
           foodCourtId={foodCourtId}
           restaurantId={firstRestaurantId}

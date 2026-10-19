@@ -1,8 +1,7 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import { useEffect } from 'react';
-
-import { Button } from '@/shared/ui/Button';
 
 export default function Error({
   error,

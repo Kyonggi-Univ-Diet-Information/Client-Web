@@ -1,16 +1,23 @@
+import { ChipNavigation } from '@kiryong/design-system';
+
 import { fetchCampusMenuByCategory } from '@/features/campus/api/fetchCampusMenuByCategory';
 
-import type { CampusMenuSort, CampusMenuWithCategory } from '@/entities/campus/api/api.type';
+import type {
+  CampusMenuSort,
+  CampusMenuWithCategory,
+} from '@/entities/campus/api/api.type';
 import { sortCampusMenus } from '@/entities/campus/model/campus';
 
-import { type FoodCourt, type CampusFoodCourt, FOOD_COURT_ID } from '@/shared/api';
+import {
+  type FoodCourt,
+  type CampusFoodCourt,
+  FOOD_COURT_ID,
+} from '@/shared/api';
 import { CATEGORY_TO_TEXT } from '@/shared/constants/campus/menu';
-import { ChipNavigation } from '@/shared/ui';
 
 import CampusMenuCard from './CampusMenuCard';
 import CampusMenuListHeader from './CampusMenuListHeader';
 import { CAMPUS_SORT_LABEL } from './CampusSortSheet';
-
 
 interface CampusMenuByFoodCourtProps {
   foodCourt: CampusFoodCourt;

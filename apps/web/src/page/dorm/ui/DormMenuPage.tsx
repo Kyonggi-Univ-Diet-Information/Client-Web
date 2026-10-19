@@ -1,11 +1,11 @@
+import { Section } from '@kiryong/design-system';
+
 import { CampusMainTabs } from '@/widgets/campus';
 import DormSection from '@/widgets/dorm/DormSection';
 
 import { fetchDormMenu } from '@/features/dorm/api/fetchDormMenu';
 
 import { DORM_DAY_KEY } from '@/entities/dorm/model/dormDay';
-
-import { Section } from '@/shared/ui';
 
 export interface DormMenuPageProps {
   params: Promise<{ day: number }>;

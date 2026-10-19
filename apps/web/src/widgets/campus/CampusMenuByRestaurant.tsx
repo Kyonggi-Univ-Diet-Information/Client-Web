@@ -1,6 +1,11 @@
+import { ChipNavigation } from '@kiryong/design-system';
+
 import { fetchCampusMenuByCategory } from '@/features/campus/api/fetchCampusMenuByCategory';
 
-import type { CampusMenuSort, CampusMenuWithCategory } from '@/entities/campus/api/api.type';
+import type {
+  CampusMenuSort,
+  CampusMenuWithCategory,
+} from '@/entities/campus/api/api.type';
 import { sortCampusMenus } from '@/entities/campus/model/campus';
 
 import { getFoodCourtById } from '@/shared/api';
@@ -9,12 +14,10 @@ import {
   CAMPUS_RESTAURANT_ID,
   hasSubRestaurants,
 } from '@/shared/constants/campus/restaurant';
-import { ChipNavigation } from '@/shared/ui';
 
 import CampusMenuCard from './CampusMenuCard';
 import CampusMenuListHeader from './CampusMenuListHeader';
 import { CAMPUS_SORT_LABEL } from './CampusSortSheet';
-
 
 interface CampusMenuByRestaurantProps {
   foodCourtId: string;
@@ -65,7 +68,11 @@ export default async function CampusMenuByRestaurant({
   const sortHref = `/campus/sort?from=${encodeURIComponent(currentPath)}${sort ? `&sort=${sort}` : ''}`;
 
   const categoryTabs = [
-    { key: 'all', label: '전체', href: `/campus/${foodCourtId}/${restaurantId}` },
+    {
+      key: 'all',
+      label: '전체',
+      href: `/campus/${foodCourtId}/${restaurantId}`,
+    },
     ...categories.map(key => ({
       key,
       label: categoryTexts[key] || key,

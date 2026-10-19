@@ -1,3 +1,4 @@
+import { AnimatedCard, Card } from '@kiryong/design-system';
 
 import { fetchCampusMenu } from '@/features/campus/api/fetchCampusMenu';
 
@@ -7,9 +8,6 @@ import {
   CAMPUS_RESTAURANT_NAME,
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
-import { AnimatedCard, Card } from '@/shared/ui';
-
-
 
 export default async function CampusMenuAll() {
   const campusMenu = await fetchCampusMenu();

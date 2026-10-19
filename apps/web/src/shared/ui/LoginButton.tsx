@@ -1,8 +1,7 @@
+import { Button } from '@kiryong/design-system';
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib';
-
-import { Button } from './Button';
 
 interface LoginButtonProps {
   iconSrc: string;

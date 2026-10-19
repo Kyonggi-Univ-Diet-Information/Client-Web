@@ -1,12 +1,11 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import { SendIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { memo, useActionState, useEffect, useState } from 'react';
 import { useForm, UseFormRegisterReturn } from 'react-hook-form';
 import { useSWRConfig } from 'swr';
-
-
 
 import { submitReview } from '@/features/review/api/submitReview';
 
@@ -16,10 +15,8 @@ import { type FoodCourt, FOOD_COURT_ID } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
-import { Button } from '@/shared/ui/Button';
 
 import ReviewStarSelector from './ReviewStarSelector';
-
 
 interface ReviewTextAreaProps {
   register: UseFormRegisterReturn<'content'>;
@@ -93,7 +90,16 @@ export default function ReviewFormSection({
       const foodCourtId = FOOD_COURT_ID[foodCourt];
       router.replace(`/review/${foodCourtId}/${foodId}`);
     }
-  }, [state, reset, mutate, router, foodCourt, foodId, selectedStars, contentValue.length]);
+  }, [
+    state,
+    reset,
+    mutate,
+    router,
+    foodCourt,
+    foodId,
+    selectedStars,
+    contentValue.length,
+  ]);
 
   return (
     <form className='flex w-full flex-col gap-4' action={formAction}>

@@ -1,3 +1,4 @@
+import { ChipNavigation } from '@kiryong/design-system';
 import { Suspense } from 'react';
 
 import { SearchResult, SearchSkeleton } from '@/page/search';
@@ -5,7 +6,6 @@ import { SearchResult, SearchSkeleton } from '@/page/search';
 import { SORTING_TYPE, type SortingType } from '@/entities/search/model/search';
 
 import { FOOD_COURT, FOOD_COURT_NAME, type FoodCourt } from '@/shared/api';
-import { ChipNavigation } from '@/shared/ui';
 
 export default async function SearchPage({
   searchParams,

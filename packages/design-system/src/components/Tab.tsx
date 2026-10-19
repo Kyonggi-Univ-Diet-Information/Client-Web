@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/shared/lib';
+import { cn } from '../lib/cn';
 
 interface TabOption {
   value: string;
@@ -56,9 +56,14 @@ export default function Tab({
           </button>
         ))}
       </div>
-      <div className={cn('relative w-full rounded-full bg-gray-100', styles.track)}>
+      <div
+        className={cn('relative w-full rounded-full bg-gray-100', styles.track)}
+      >
         <div
-          className={cn('absolute inset-y-0 rounded-full bg-gray-900 transition-all duration-200', styles.track)}
+          className={cn(
+            'absolute inset-y-0 rounded-full bg-gray-900 transition-all duration-200',
+            styles.track,
+          )}
           style={{
             width: `calc((100% - ${(options.length - 1) * gapPx}px) / ${options.length})`,
             left: `calc(${selectedIndex} * ((100% - ${(options.length - 1) * gapPx}px) / ${options.length} + ${gapPx}px))`,

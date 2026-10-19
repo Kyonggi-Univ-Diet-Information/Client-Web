@@ -1,4 +1,4 @@
-import { Skeleton } from '@/shared/ui';
+import { Skeleton } from '@kiryong/design-system';
 
 export default function SearchSkeleton() {
   return (

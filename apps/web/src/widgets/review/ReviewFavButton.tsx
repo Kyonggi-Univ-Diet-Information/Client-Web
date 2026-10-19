@@ -1,10 +1,10 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import { HeartIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useOptimistic, useTransition } from 'react';
 import { useSWRConfig } from 'swr';
-
 
 import { removeReviewFav } from '@/features/review/api/removeReviewFav';
 import { submitReviewFav } from '@/features/review/api/submitReviewFav';
@@ -13,8 +13,6 @@ import { type FoodCourt } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
-import { Button } from '@/shared/ui';
-
 
 interface ReviewLikeButtonProps {
   type: FoodCourt;

@@ -1,13 +1,12 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import { PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { trackEvent } from '@/shared/lib/ga4';
 import { isNativeApp } from '@/shared/lib/nativeBridge';
-import { Button } from '@/shared/ui';
-
 
 interface ReviewWriteButtonProps {
   foodCourtId: string;

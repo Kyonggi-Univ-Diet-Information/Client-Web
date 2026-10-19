@@ -1,15 +1,12 @@
-
-
+import { Card, Section } from '@kiryong/design-system';
 
 import { fetchTopMenu } from '@/features/campus/api/fetchTopMenu';
 
 import type { CampusTopMenu } from '@/entities/campus/api/api.type';
 
 import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
-import { Card, Section } from '@/shared/ui';
 
 import CampusAnimatedCard from './CampusAnimatedCard';
-
 
 export default async function CampusTopMenu() {
   const topMenus = await fetchTopMenu();

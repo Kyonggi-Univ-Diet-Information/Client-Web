@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -7,8 +8,7 @@ import { Suspense } from 'react';
 
 import { useSocialCode } from '@/features/auth/model/useSocialCode';
 
-import { AuthCard, AuthPageWrapper, Button, Loader } from '@/shared/ui';
-
+import { AuthCard, AuthPageWrapper, Loader } from '@/shared/ui';
 
 export default function AuthPage() {
   return (

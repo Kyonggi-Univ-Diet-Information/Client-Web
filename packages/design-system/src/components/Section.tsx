@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { cn } from '@/shared/lib';
+import { cn } from '../lib/cn';
 
 export default function Section({
   children,

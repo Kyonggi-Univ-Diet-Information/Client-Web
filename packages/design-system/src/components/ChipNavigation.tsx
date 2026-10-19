@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn } from '@/shared/lib';
+import { cn } from '../lib/cn';
 
 interface ChipNavigationTab {
   key: string;
@@ -47,7 +47,7 @@ export default function ChipNavigation({
         className,
       )}
     >
-      <div className='size-4 flex-shrink-0'/>
+      <div className='size-4 flex-shrink-0' />
       {tabs.map(tab => (
         <Link
           prefetch
@@ -57,7 +57,9 @@ export default function ChipNavigation({
           className={cn(
             'shrink-0 rounded-full font-medium whitespace-nowrap transition-colors',
             sizeStyles,
-            currentTabKey === tab.key ? variantStyles.selected : variantStyles.unselected,
+            currentTabKey === tab.key
+              ? variantStyles.selected
+              : variantStyles.unselected,
           )}
         >
           {tab.label}

@@ -1,9 +1,14 @@
 'use client';
 
-import { Title } from '@/shared/ui';
-import { Button } from '@/shared/ui/Button';
+import { Title } from '@kiryong/design-system';
+import { Button } from '@kiryong/design-system';
 
-export default function ReviewPageErrorFallback({ reset }: { error: Error; reset: () => void }) {
+export default function ReviewPageErrorFallback({
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   return (
     <div className='flex min-h-[60vh] w-full flex-col items-center justify-center gap-4'>
       <Title>메뉴 정보를 불러오지 못했어요</Title>

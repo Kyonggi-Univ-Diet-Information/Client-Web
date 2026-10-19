@@ -1,15 +1,11 @@
 'use client';
 
+import { Button } from '@kiryong/design-system';
 import Link from 'next/link';
-
 
 import { useAuth } from '@/features/auth/model/useIsAuthenticated';
 
-import { Button } from '@/shared/ui';
-
 import { logout } from '../model/logout';
-
-
 
 export function AuthButton() {
   const { isAuthenticated, isLoading, refresh } = useAuth();

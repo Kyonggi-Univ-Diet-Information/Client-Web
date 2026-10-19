@@ -1,5 +1,6 @@
 'use client';
 
+import { Section, Tab } from '@kiryong/design-system';
 import { useState } from 'react';
 
 import type { FetchDormMenuResponse } from '@/entities/dorm/api/api.model';
@@ -7,7 +8,6 @@ import { DORM_DAY_KEY, type DormDay } from '@/entities/dorm/model/dormDay';
 import type { DormTime } from '@/entities/dorm/model/dormTime';
 
 import { getCurrentDate } from '@/shared/lib/date';
-import { Section, Tab } from '@/shared/ui';
 
 import DormMenuAll from './DormMenuAll';
 import DormMenuAnimatedWrapper from './DormMenuAnimatedWrapper';

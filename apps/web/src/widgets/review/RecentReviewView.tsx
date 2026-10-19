@@ -1,3 +1,4 @@
+import { Card, Section } from '@kiryong/design-system';
 
 import { fetchCampusMenuName } from '@/features/campus/api/fetchCampusMenuName';
 import { fetchRecentReview } from '@/features/review/api/fetchRecentReview';
@@ -6,7 +7,6 @@ import type { RecentReview } from '@/entities/review/api/api.type';
 
 import { FOOD_COURT_ID, FOOD_COURT_NAME, type FoodCourt } from '@/shared/api';
 import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
-import { Card, Section } from '@/shared/ui';
 
 import ReviewAnimatedCard from './ReviewAnimatedCard';
 

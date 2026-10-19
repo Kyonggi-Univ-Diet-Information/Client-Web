@@ -1,12 +1,12 @@
 'use client';
 
+import { AnimatedCard, Section } from '@kiryong/design-system';
+
 import DormMealCard from '@/widgets/dorm/DormMealCard';
 import DormNoDataMessage from '@/widgets/dorm/DormNoDataMessage';
 
 import type { DormDayMenu, DormMenuStatus } from '@/entities/dorm/api/api.type';
 import type { DormTime } from '@/entities/dorm/model';
-
-import { AnimatedCard, Section } from '@/shared/ui';
 
 interface DormMenuSectionProps {
   dayMenu: DormDayMenu | null;
@@ -40,7 +40,11 @@ export default function DormMenuSection({
   isWeekMenuUploaded,
 }: DormMenuSectionProps) {
   const timeMenu = dayMenu?.[mealTime];
-  const status = getDisplayStatus({ status: timeMenu?.status, isWeekend, isWeekMenuUploaded });
+  const status = getDisplayStatus({
+    status: timeMenu?.status,
+    isWeekend,
+    isWeekMenuUploaded,
+  });
 
   return (
     <Section.Content className='mb-10 flex-1'>

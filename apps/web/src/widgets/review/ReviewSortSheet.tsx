@@ -1,10 +1,10 @@
+import { BottomSheet } from '@kiryong/design-system';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
 
 import type { ReviewSort } from '@/entities/review/api/api.type';
 
 import { cn } from '@/shared/lib';
-import { BottomSheet } from '@/shared/ui';
 
 const SORT_OPTIONS: { value: ReviewSort; label: string }[] = [
   { value: 'recent', label: '최신순' },
@@ -35,7 +35,7 @@ export default function ReviewSortSheet({
               replace
               className={cn(
                 'flex items-center justify-between px-5 py-4 text-lg',
-                isSelected ? 'font-medium text-point' : 'text-gray-900',
+                isSelected ? 'text-point font-medium' : 'text-gray-900',
               )}
             >
               {option.label}

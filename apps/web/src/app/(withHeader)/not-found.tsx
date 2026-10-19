@@ -1,7 +1,6 @@
+import { Title } from '@kiryong/design-system';
+import { Button } from '@kiryong/design-system';
 import Link from 'next/link';
-
-import { Title } from '@/shared/ui';
-import { Button } from '@/shared/ui/Button';
 
 export default function NotFound() {
   return (

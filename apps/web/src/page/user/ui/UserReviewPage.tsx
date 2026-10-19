@@ -1,3 +1,4 @@
+import { Card, Title } from '@kiryong/design-system';
 import React, { Suspense } from 'react';
 
 import { CampusMenuName } from '@/widgets/campus';
@@ -6,7 +7,7 @@ import { fetchUserReview } from '@/features/user/api/fetchUserReview';
 
 import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
-import { Card, Loader, Title } from '@/shared/ui';
+import { Loader } from '@/shared/ui';
 
 export default async function UserReviewPage() {
   const data = await fetchUserReview(0);

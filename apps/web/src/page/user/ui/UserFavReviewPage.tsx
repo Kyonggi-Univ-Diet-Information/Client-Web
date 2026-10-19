@@ -1,3 +1,4 @@
+import { Title } from '@kiryong/design-system';
 import React, { Suspense } from 'react';
 
 import ReviewItem from '@/widgets/review/ReviewItem';
@@ -7,7 +8,7 @@ import { fetchUserFavReview } from '@/features/user/api/fetchUserFavReview';
 
 import { FOOD_COURT } from '@/shared/api';
 import { AuthService } from '@/shared/lib/auth';
-import { Loader, Title } from '@/shared/ui';
+import { Loader } from '@/shared/ui';
 
 export default async function UserFavReviewPage() {
   const [data, isAuthenticated] = await Promise.all([

@@ -1,5 +1,6 @@
 'use client';
 
+import { Avatar, AvatarFallback } from '@kiryong/design-system';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 
@@ -7,7 +8,6 @@ import type { Review } from '@/entities/review/api/api.type';
 
 import { type FoodCourt } from '@/shared/api';
 import { formatShortDate, parseReviewDate } from '@/shared/lib/date';
-import { Avatar, AvatarFallback } from '@/shared/ui';
 
 import ReviewActionMenu from './ReviewActionMenu';
 import ReviewFavButton from './ReviewFavButton';

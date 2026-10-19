@@ -1,7 +1,6 @@
+import { Button } from '@kiryong/design-system';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import { Button } from './Button';
 
 describe('Button Component', () => {
   it('기본 버튼이 올바르게 렌더링된다', () => {

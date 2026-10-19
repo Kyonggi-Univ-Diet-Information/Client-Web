@@ -1,10 +1,11 @@
 'use client';
 
+import { SegmentedControl } from '@kiryong/design-system';
 import { useState } from 'react';
 
-import { SegmentedControl } from '@/shared/ui';
-
-import CampusFoodCourtCard, { type CampusFoodCourt } from './CampusFoodCourtCard';
+import CampusFoodCourtCard, {
+  type CampusFoodCourt,
+} from './CampusFoodCourtCard';
 
 export default function CampusFoodCourtSwitcher({
   campusFoodCourts,
@@ -13,11 +14,12 @@ export default function CampusFoodCourtSwitcher({
 }) {
   const [selectedHref, setSelectedHref] = useState(campusFoodCourts[0].href);
   const selected =
-    campusFoodCourts.find(campusFoodCourt => campusFoodCourt.href === selectedHref) ??
-    campusFoodCourts[0];
+    campusFoodCourts.find(
+      campusFoodCourt => campusFoodCourt.href === selectedHref,
+    ) ?? campusFoodCourts[0];
 
   return (
-    <div className='flex flex-col gap-4 p-4 bg-white rounded-[16px]'>
+    <div className='flex flex-col gap-4 rounded-[16px] bg-white p-4'>
       <SegmentedControl
         options={campusFoodCourts.map(campusFoodCourt => ({
           value: campusFoodCourt.href,

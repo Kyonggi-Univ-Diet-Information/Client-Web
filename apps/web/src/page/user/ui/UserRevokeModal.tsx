@@ -1,16 +1,12 @@
 'use client';
 
+import { Button, Modal } from '@kiryong/design-system';
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useEffect, useState } from 'react';
-
 
 import { fetchRevokeReason } from '@/features/user/api/fetchRevokeReason';
 
 import { cn } from '@/shared/lib/string';
-import { Button, Modal } from '@/shared/ui';
-
-
-
 
 interface UserRevokeModalProps {
   isOpen: boolean;
