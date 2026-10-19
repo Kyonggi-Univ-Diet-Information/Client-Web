@@ -140,10 +140,9 @@ export default function Intro() {
               학교 생활의 즐거움, <br />
               <span class='text-point font-gyeonggiTitleBold'>기밥</span> 하나로 충분하니까
             </h2>
-            <p class='mx-auto max-w-2xl text-lg font-medium text-gray-500'>
-              우리는 경기대 학우들의 식사 시간을 더 가치 있게 만들기 위해{' '}
-              <br class='hidden md:block' />꼭 필요한 기능들을 세심하게
-              담았습니다.
+            <p class='mx-auto max-w-2xl text-lg font-medium text-balance break-keep text-gray-500'>
+              우리는 경기대 학우들의 식사 시간을 더 가치 있게 만들기 위해 꼭
+              필요한 기능들을 세심하게 담았습니다.
             </p>
           </div>
         </div>
