@@ -135,7 +135,7 @@ export default function Intro() {
       {/* Features Section */}
       <section class='relative bg-gray-50/50 px-6 py-24 md:px-12 md:py-40'>
         <div class='mx-auto max-w-7xl'>
-          <div class='mb-24 text-center'>
+          <div class='text-center'>
             <h2 class='mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl'>
               학교 생활의 즐거움, <br />
               <span class='text-point font-gyeonggiTitleBold'>기밥</span> 하나로 충분하니까
@@ -145,36 +145,6 @@ export default function Intro() {
               <br class='hidden md:block' />꼭 필요한 기능들을 세심하게
               담았습니다.
             </p>
-          </div>
-          <div class='grid gap-8 md:grid-cols-2'>
-            {[
-              {
-                title: '다양한 학식 메뉴 확인',
-                desc: '기숙사 식당 식단 뿐 아니라, 교내 식당의 메뉴를 모두 확인할 수 있어요.',
-                icon: '🍱',
-                color: 'bg-orange-50',
-                textColor: 'text-orange-600',
-              },
-              {
-                title: '생생한 메뉴 리뷰',
-                desc: '학우들의 솔직한 평가와 리뷰를 통해 실패 없는 메뉴 선택이 가능해요.',
-                icon: '⭐',
-                color: 'bg-blue-50',
-                textColor: 'text-blue-600',
-              },
-            ].map(feature => (
-              <div class='group relative cursor-pointer overflow-hidden rounded-[2.5rem] bg-white p-10 transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-100'>
-                <div
-                  class={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl text-3xl ${feature.color}`}
-                >
-                  {feature.icon}
-                </div>
-                <h3 class='mb-4 text-2xl font-bold'>{feature.title}</h3>
-                <p class='text-lg leading-relaxed text-gray-500'>
-                  {feature.desc}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
