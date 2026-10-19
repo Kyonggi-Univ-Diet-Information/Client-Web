@@ -40,6 +40,7 @@ export default function UserPageClient({
   const router = useRouter();
   const [isRevokeModalOpen, setIsRevokeModalOpen] = useState(false);
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+  const [isRevokeDialogOpen, setIsRevokeDialogOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [selectedReasonType, setSelectedReasonType] = useState<string>('');
   const [isRevoking, setIsRevoking] = useState(false);
@@ -127,7 +128,7 @@ export default function UserPageClient({
           {rowContent(<LogOut />, '로그아웃')}
         </button>
         <button
-          onClick={() => setIsRevokeModalOpen(true)}
+          onClick={() => setIsRevokeDialogOpen(true)}
           className={rowClassName}
         >
           {rowContent(<UserDelete />, '탈퇴하기')}
@@ -146,6 +147,18 @@ export default function UserPageClient({
           setIsLoggingOut(false);
         }}
         pending={isLoggingOut}
+      />
+
+      <Dialog
+        open={isRevokeDialogOpen}
+        title='탈퇴하기'
+        description='정말 탈퇴할까요?'
+        confirmText='탈퇴하기'
+        onClose={() => setIsRevokeDialogOpen(false)}
+        onConfirm={() => {
+          setIsRevokeDialogOpen(false);
+          setIsRevokeModalOpen(true);
+        }}
       />
 
       <UserRevokeModal
