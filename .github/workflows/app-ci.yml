@@ -10,6 +10,8 @@ on:
     paths:
       - 'apps/land/**'
       - 'apps/web/**'
+      - 'packages/**'
+      - '.github/workflows/app-ci.yml'
       - 'pnpm-lock.yaml'
       - 'package.json'
       - 'pnpm-workspace.yaml'
@@ -18,6 +20,8 @@ on:
     paths:
       - 'apps/land/**'
       - 'apps/web/**'
+      - 'packages/**'
+      - '.github/workflows/app-ci.yml'
       - 'pnpm-lock.yaml'
       - 'package.json'
       - 'pnpm-workspace.yaml'
@@ -30,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        command: [lint, build]
+        command: [lint, check-types, test, build]
 
     steps:
       - name: Checkout
