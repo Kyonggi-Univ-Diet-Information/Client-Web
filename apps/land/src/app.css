@@ -1,32 +1,16 @@
 @import 'tailwindcss';
 
 @font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'gyeonggiTitleBold';
   src: url('/fonts/gyeonggiTitleBold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Wanted Sans';
-  src: url('/fonts/WantedSans-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Wanted Sans';
-  src: url('/fonts/WantedSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Wanted Sans';
-  src: url('/fonts/WantedSans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -49,7 +33,7 @@
   --radius-xl: calc(0.625rem + 4px);
   --radius-2xl: calc(0.625rem + 8px);
   --font-gyeonggiTitleBold: 'gyeonggiTitleBold', sans-serif;
-  --font-wantedSans: 'Wanted Sans', sans-serif;
+  --font-pretendard: 'Pretendard', sans-serif;
 }
 
 @layer base {
@@ -58,7 +42,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-wantedSans);
+    font-family: var(--font-pretendard);
   }
 }
 
