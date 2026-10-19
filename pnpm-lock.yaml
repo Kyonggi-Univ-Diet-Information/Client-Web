@@ -36,6 +36,9 @@ importers:
 
   apps/land:
     dependencies:
+      '@kiryong/design-system':
+        specifier: workspace:*
+        version: link:../../packages/design-system
       '@solidjs/router':
         specifier: ^0.15.0
         version: 0.15.4(solid-js@1.9.10)

@@ -3,16 +3,16 @@ const DEVELOPER_EMAIL = 'kiryongteam@gmail.com';
 
 export default function DeleteAccount() {
   return (
-    <main class='mx-auto min-h-screen max-w-2xl bg-white px-6 py-16 text-gray-700'>
-      <h1 class='mb-2 text-2xl font-bold text-gray-900'>
+    <main class='mx-auto min-h-screen max-w-2xl bg-white px-6 py-16 text-grey-700'>
+      <h1 class='mb-2 text-2xl font-bold text-grey-900'>
         기룡아 밥먹자 계정 삭제 안내
       </h1>
-      <dl class='mb-10 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-xl bg-gray-50 p-4 text-sm'>
-        <dt class='text-gray-500'>앱 이름</dt>
-        <dd class='font-medium text-gray-900'>기룡아 밥먹자</dd>
-        <dt class='text-gray-500'>개발자</dt>
-        <dd class='font-medium text-gray-900'>기룡아 밥먹자 팀</dd>
-        <dt class='text-gray-500'>문의</dt>
+      <dl class='mb-10 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-xl bg-grey-50 p-4 text-sm'>
+        <dt class='text-grey-500'>앱 이름</dt>
+        <dd class='font-medium text-grey-900'>기룡아 밥먹자</dd>
+        <dt class='text-grey-500'>개발자</dt>
+        <dd class='font-medium text-grey-900'>기룡아 밥먹자 팀</dd>
+        <dt class='text-grey-500'>문의</dt>
         <dd>
           <a href={`mailto:${DEVELOPER_EMAIL}`} class='underline'>
             {DEVELOPER_EMAIL}
@@ -21,7 +21,7 @@ export default function DeleteAccount() {
       </dl>
 
       <section class='mb-10'>
-        <h2 class='mb-3 text-lg font-bold text-gray-900'>
+        <h2 class='mb-3 text-lg font-bold text-grey-900'>
           앱에서 직접 삭제하기
         </h2>
         <ol class='list-decimal space-y-1 pl-5'>
@@ -33,7 +33,7 @@ export default function DeleteAccount() {
       </section>
 
       <section class='mb-10'>
-        <h2 class='mb-3 text-lg font-bold text-gray-900'>
+        <h2 class='mb-3 text-lg font-bold text-grey-900'>
           앱 없이 삭제 요청하기
         </h2>
         <p>
@@ -42,14 +42,14 @@ export default function DeleteAccount() {
             href={INQUIRY_URL}
             target='_blank'
             rel='noopener noreferrer'
-            class='text-orange-500 underline'
+            class='text-primary-500 underline'
           >
             카카오톡 채널 문의하기
           </a>{' '}
           또는{' '}
           <a
             href={`mailto:${DEVELOPER_EMAIL}`}
-            class='text-orange-500 underline'
+            class='text-primary-500 underline'
           >
             {DEVELOPER_EMAIL}
           </a>
@@ -59,7 +59,7 @@ export default function DeleteAccount() {
       </section>
 
       <section class='mb-10'>
-        <h2 class='mb-3 text-lg font-bold text-gray-900'>
+        <h2 class='mb-3 text-lg font-bold text-grey-900'>
           탈퇴 즉시 삭제되는 데이터
         </h2>
         <ul class='list-disc space-y-1 pl-5'>
@@ -67,13 +67,13 @@ export default function DeleteAccount() {
           <li>작성한 모든 리뷰</li>
           <li>좋아요한 리뷰 목록</li>
         </ul>
-        <p class='mt-3 text-sm text-gray-500'>
+        <p class='mt-3 text-sm text-grey-500'>
           삭제된 데이터는 복구할 수 없어요.
         </p>
       </section>
 
       <section>
-        <h2 class='mb-3 text-lg font-bold text-gray-900'>
+        <h2 class='mb-3 text-lg font-bold text-grey-900'>
           보관되는 데이터와 보관 기간
         </h2>
         <ul class='list-disc space-y-1 pl-5'>
@@ -86,7 +86,7 @@ export default function DeleteAccount() {
             보관한 뒤 파기해요.
           </li>
         </ul>
-        <p class='mt-3 text-sm text-gray-500'>
+        <p class='mt-3 text-sm text-grey-500'>
           그 밖의 개인정보는 탈퇴 즉시 파기하며 따로 보관하지 않아요.
         </p>
       </section>

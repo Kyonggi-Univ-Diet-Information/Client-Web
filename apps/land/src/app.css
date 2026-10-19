@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '@kiryong/design-system/tokens.css';
 
 @font-face {
   font-family: 'Pretendard';
@@ -17,7 +18,6 @@
 }
 
 @theme inline {
-  --color-point: #ff690b;
   --color-background: oklch(1 0 0);
   --color-foreground: oklch(0.145 0 0);
   --color-primary: oklch(0.205 0 0);
