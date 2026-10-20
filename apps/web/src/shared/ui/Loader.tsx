@@ -12,17 +12,16 @@ export default function Loader() {
   }, []);
 
   useEffect(() => {
-    if (lottie && ref.current) {
-      const animation = lottie.loadAnimation({
-        container: ref.current,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: '/lottie/loading.json',
-      });
+    if (!lottie || !ref.current) return;
+    const animation = lottie.loadAnimation({
+      container: ref.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/lottie/loading.json',
+    });
 
-      return () => animation.destroy();
-    }
+    return () => animation.destroy();
   }, [lottie]);
 
   return <div ref={ref} />;
