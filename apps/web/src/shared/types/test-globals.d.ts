@@ -7,7 +7,7 @@ import type { SWRResponse } from 'swr';
 declare global {
   var __SWR_MOCK__:
     | Partial<
-        SWRResponse<{ isAuthenticated: boolean }, Error> & {
+        Omit<SWRResponse<{ isAuthenticated: boolean }, Error>, 'error'> & {
           error: Error | null;
         }
       >

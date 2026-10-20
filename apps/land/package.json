@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@kiryong/design-system": "workspace:*",

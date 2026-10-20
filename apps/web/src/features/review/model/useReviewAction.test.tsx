@@ -65,6 +65,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );
@@ -96,6 +97,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );
@@ -118,6 +120,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );
@@ -143,6 +146,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );
@@ -175,6 +179,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );
@@ -201,6 +206,7 @@ describe('useReviewAction', () => {
             type: mockType,
             foodId: mockFoodId,
             reviewId: mockReviewId,
+            isMyReview: false,
           }),
         { wrapper },
       );

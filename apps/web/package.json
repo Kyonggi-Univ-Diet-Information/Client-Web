@@ -10,7 +10,8 @@
     "lint:fix": "eslint --fix",
     "format": "eslint --fix",
     "analyze": "ANALYZE=true pnpm build",
-    "test": "jest",
+    "test": "TZ=Asia/Seoul jest",
+    "check-types": "next typegen && tsc --noEmit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
