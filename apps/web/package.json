@@ -11,7 +11,7 @@
     "format": "eslint --fix",
     "analyze": "ANALYZE=true pnpm build",
     "test": "TZ=Asia/Seoul jest",
-    "check-types": "tsc --noEmit",
+    "check-types": "next typegen && tsc --noEmit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
