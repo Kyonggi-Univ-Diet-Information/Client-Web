@@ -33,6 +33,7 @@ jobs:
   Pipelines:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         command: [lint, check-types, test, build]
 
