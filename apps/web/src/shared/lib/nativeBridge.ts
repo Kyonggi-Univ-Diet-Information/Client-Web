@@ -3,8 +3,10 @@ const REFRESH_TIMEOUT_MS = 10_000;
 
 let pendingRefresh: Promise<boolean> | null = null;
 
-export const isNativeApp = () =>
-  typeof window !== 'undefined' && !!window.Android;
+export const getNativeBridge = () =>
+  typeof window === 'undefined' ? undefined : (window.Bridge ?? window.Android);
+
+export const isNativeApp = () => !!getNativeBridge();
 
 // 동시에 401이 여러 건 나도 네이티브 재발급은 한 번만 요청해요
 export function refreshNativeToken(): Promise<boolean> {
@@ -17,7 +19,7 @@ export function refreshNativeToken(): Promise<boolean> {
       resolve(ok);
     };
     window[REFRESH_CALLBACK] = finish;
-    window.Android?.refreshToken(REFRESH_CALLBACK);
+    getNativeBridge()?.refreshToken(REFRESH_CALLBACK);
   });
   return pendingRefresh;
 }
