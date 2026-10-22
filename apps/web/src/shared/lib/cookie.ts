@@ -1,12 +1,12 @@
 import { NextRequest } from 'next/server';
 
+import { isAppUserAgent } from './platform';
+
 /**
  * 웹뷰 환경인지 확인합니다.
  */
-export function isReactNativeWebView(request: NextRequest): boolean {
-  const userAgent = request.headers.get('user-agent') || '';
-  const customHeader = request.headers.get('x-react-native-webview');
-  return userAgent.includes('ReactNative') || customHeader === 'true';
+export function isAppWebView(request: NextRequest): boolean {
+  return isAppUserAgent(request.headers.get('user-agent') || '');
 }
 
 /**
@@ -14,7 +14,7 @@ export function isReactNativeWebView(request: NextRequest): boolean {
  * 웹뷰 환경에서는 sameSite를 'lax'로 설정하여 쿠키가 정상적으로 작동하도록 합니다.
  */
 export function getCookieOptions(request?: NextRequest) {
-  const isWebView = request ? isReactNativeWebView(request) : false;
+  const isWebView = request ? isAppWebView(request) : false;
   const isProduction = process.env.NODE_ENV === 'production';
 
   return {
