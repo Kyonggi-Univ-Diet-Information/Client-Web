@@ -26,7 +26,7 @@ export function refreshNativeToken(): Promise<boolean> {
 
 const GALLERY_CALLBACK = '__onNativeGalleryPicked';
 
-// 2.1.0 앱은 취소·실패 시에도 null로 콜백해 줘요. picker가 떠 있는 동안 재호출하면 앞 요청 결과가 유실돼요
+// 2.1.0 앱은 취소·실패 시에도 null로 콜백해 줘요
 export function pickNativePhoto(): Promise<string | null> {
   return new Promise(resolve => {
     window[GALLERY_CALLBACK] = (dataUrl: string | null) => {
