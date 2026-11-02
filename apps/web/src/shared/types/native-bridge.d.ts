@@ -13,6 +13,7 @@ declare global {
     Android?: NativeBridge;
     APP_VERSION?: string;
     __onNativeTokenRefreshed?: (ok: boolean) => void;
+    __onNativeGalleryPicked?: (dataUrl: string | null) => void;
   }
 }
 
