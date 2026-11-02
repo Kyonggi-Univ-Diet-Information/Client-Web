@@ -57,6 +57,24 @@ describe('submitReview', () => {
     expect(result).toEqual({ success: true });
   });
 
+  it('imageKeys가 있으면 요청 body에 실어 보낸다', async () => {
+    (Http.post as jest.Mock).mockResolvedValue({});
+    const formData = new FormData();
+    mockFormData.forEach((v, k) => formData.append(k, v));
+    formData.append('imageKeys', 'tmp/a.jpg');
+    formData.append('imageKeys', 'tmp/b.png');
+
+    await submitReview(null, formData);
+
+    expect(Http.post).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({
+          imageKeys: ['tmp/a.jpg', 'tmp/b.png'],
+        }),
+      }),
+    );
+  });
+
   it('리뷰 작성 실패 시 에러를 반환하고 revalidation하지 않는다', async () => {
     // Given: Http.post가 에러를 throw
     const mockError = new Error('서버 오류');

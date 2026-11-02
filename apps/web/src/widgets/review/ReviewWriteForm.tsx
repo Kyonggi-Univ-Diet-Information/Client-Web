@@ -13,12 +13,14 @@ import {
 import { useSWRConfig } from 'swr';
 
 import { submitReview } from '@/features/review/api/submitReview';
+import { uploadReviewImages } from '@/features/review/api/uploadReviewImages';
 
 import { type FoodCourt, FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { isNativeApp, pickNativePhoto } from '@/shared/lib/nativeBridge';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
+import type { ServerActionResult } from '@/shared/lib/serverAction';
 import { isPhotoReviewEnabled } from '@/shared/utils/version';
 
 import CameraIcon from '../../../public/icons/icon-camera.svg';
@@ -61,7 +63,25 @@ export default function ReviewWriteForm({
   // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
   const [canAttachPhoto, setCanAttachPhoto] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [state, formAction, isPending] = useActionState(submitReview, null);
+  const [state, formAction, isPending] = useActionState(
+    async (prev: ServerActionResult | null, formData: FormData) => {
+      try {
+        const images = await Promise.all(
+          photos.map(async src => (await fetch(src)).blob()),
+        );
+        const keys = await uploadReviewImages(images);
+        keys.forEach(key => formData.append('imageKeys', key));
+      } catch (error) {
+        return {
+          success: false,
+          error:
+            error instanceof Error ? error.message : '사진 업로드에 실패했어요',
+        };
+      }
+      return submitReview(prev, formData);
+    },
+    null,
+  );
 
   useEffect(() => {
     setCanAttachPhoto(isPhotoReviewEnabled());
@@ -223,7 +243,7 @@ export default function ReviewWriteForm({
             <input
               ref={fileInputRef}
               type='file'
-              accept='image/*'
+              accept='image/jpeg,image/png,image/webp'
               multiple
               hidden
               onChange={handleFileChange}

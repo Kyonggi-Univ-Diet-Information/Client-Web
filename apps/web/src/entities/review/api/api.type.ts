@@ -20,7 +20,9 @@ export type RecentReview = Pick<
   restaurantType: FoodCourt;
 };
 
-export type ReviewPost = Pick<Review, 'rating' | 'title' | 'content'>;
+export type ReviewPost = Pick<Review, 'rating' | 'title' | 'content'> & {
+  imageKeys?: string[];
+};
 
 export type ReviewSort = 'recent' | 'rating-desc' | 'rating-asc';
 
