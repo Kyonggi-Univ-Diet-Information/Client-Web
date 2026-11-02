@@ -19,6 +19,7 @@ export const submitReview = async (
   const title = '';
   const content = String(formData.get('content'));
   const type = formData.get('foodCourt') as FoodCourt;
+  const imageKeys = formData.getAll('imageKeys').map(String);
 
   return runServerAction(async () => {
     await Http.post<ReviewPost>({
@@ -27,6 +28,7 @@ export const submitReview = async (
         rating: rating,
         title: title,
         content: content,
+        ...(imageKeys.length > 0 && { imageKeys }),
       },
       authorize: true,
     });

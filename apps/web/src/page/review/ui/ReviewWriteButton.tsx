@@ -23,7 +23,7 @@ export default function ReviewWriteButton({
 
   return (
     <Link
-      href={`/review/${foodCourtId}/${foodId}?reviewMode=true`}
+      href={`/review/${foodCourtId}/${foodId}/write`}
       className='flex justify-center'
       onClick={e => {
         trackEvent('review_write_click', {
@@ -38,7 +38,7 @@ export default function ReviewWriteButton({
         }
       }}
     >
-      <Button className='flex h-11 items-center gap-2 rounded-full bg-grey-900 px-4! text-white shadow-lg transition-all hover:bg-grey-900 active:scale-95'>
+      <Button className='bg-grey-900 hover:bg-grey-900 flex h-11 items-center gap-2 rounded-full px-4! text-white shadow-lg transition-all active:scale-95'>
         <PencilIcon size={16} />
         <span className='text-[13px] font-semibold'>리뷰 작성</span>
       </Button>

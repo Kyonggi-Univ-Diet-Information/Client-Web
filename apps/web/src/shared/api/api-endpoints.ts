@@ -114,6 +114,7 @@ export const ENDPOINT = {
       `/review/${foodCourt}/modify/${reviewId}`,
     DELETE: (foodCourt: FoodCourt, reviewId: number) =>
       `/review/${foodCourt}/delete/${reviewId}`,
+    IMAGE_PRESIGNED_URL: '/review/images/presigned-url',
   },
   REVIEW_LIKE: {
     LIKE: (foodCourt: FoodCourt, reviewId: number) =>

@@ -1,3 +1,5 @@
+import { getNativeBridge } from '@/shared/lib/nativeBridge';
+
 export async function logout(): Promise<{ success: boolean; error?: string }> {
   try {
     const response = await fetch('/api/auth/logout', { method: 'POST' });
@@ -10,7 +12,7 @@ export async function logout(): Promise<{ success: boolean; error?: string }> {
       };
     }
 
-    window.Android?.logout();
+    getNativeBridge()?.logout();
     return { success: true };
   } catch (error) {
     console.error('Logout failed:', error);

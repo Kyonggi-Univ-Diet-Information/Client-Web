@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { submitRefresh } from '@/features/auth/api/submitRefresh';
 
 import { COOKIE_KEYS } from '@/shared/api';
-import { isReactNativeWebView, getCookieOptions } from '@/shared/lib/cookie';
+import { isAppWebView, getCookieOptions } from '@/shared/lib/cookie';
 
 
 function isAuthenticated(request: NextRequest): boolean {
@@ -15,7 +15,7 @@ export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 앱 출시로 웹 브라우저 접속 차단 및 랜딩 페이지로 리다이렉트
-  // if (!isReactNativeWebView(request) && !pathname.includes('/auth')) {
+  // if (!isAppWebView(request) && !pathname.includes('/auth')) {
   //   return NextResponse.redirect('https://www.kiryong.kr/');
   // }
 
@@ -25,7 +25,7 @@ export default async function middleware(request: NextRequest) {
     }
   }
 
-  if (isReactNativeWebView(request)) {
+  if (isAppWebView(request)) {
     // 엔트리 페이지 아닌 경우 패스
     if (pathname !== '/entry') {
       return NextResponse.next();

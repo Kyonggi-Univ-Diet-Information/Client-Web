@@ -2,18 +2,15 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { mutate } from 'swr';
 
-
 import { submitAppleLogin } from '@/features/auth/api/submitAppleLogin';
 import { submitGoogleLogin } from '@/features/auth/api/submitGoogleLogin';
 import { submitKakaoLogin } from '@/features/auth/api/submitKakaoLogin';
 
 import { getLoginState, isAndroid } from '@/shared/lib';
+import { isNativeApp } from '@/shared/lib/nativeBridge';
 import { authKeys } from '@/shared/lib/queryKey';
 
 import { setAuthCookies } from './setAuthCookies';
-
-
-
 
 function getAppDeepLink(): string {
   if (typeof window === 'undefined') return '';
@@ -52,7 +49,7 @@ export const useSocialCode = () => {
           result = await submitKakaoLogin(code);
           break;
         case 'google':
-          if (isAndroid() && !window.IS_REACT_NATIVE_WEBVIEW && !window.Android) {
+          if (isAndroid() && !isNativeApp()) {
             window.location.href = getAppDeepLink();
             return;
           }
