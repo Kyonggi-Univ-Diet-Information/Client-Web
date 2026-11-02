@@ -123,4 +123,27 @@ describe('ReviewItem', () => {
 
     expect(screen.getByTestId('review-fav-button')).toBeInTheDocument();
   });
+
+  it('사진이 있으면 본문 위에 순서대로 보여줘요', () => {
+    render(
+      <ReviewItem
+        {...defaultProps}
+        images={[
+          { id: 1, url: 'https://s3/a.jpg' },
+          { id: 2, url: 'https://s3/b.png' },
+        ]}
+      />,
+    );
+
+    const imgs = screen.getAllByRole('img', { name: /리뷰 사진/ });
+    expect(imgs.map(img => img.getAttribute('src'))).toEqual([
+      'https://s3/a.jpg',
+      'https://s3/b.png',
+    ]);
+  });
+
+  it('사진이 없으면 사진 영역을 그리지 않아요', () => {
+    render(<ReviewItem {...defaultProps} />);
+    expect(screen.queryByRole('img', { name: /리뷰 사진/ })).toBeNull();
+  });
 });

@@ -33,6 +33,7 @@ export default function ReviewItem({
   likedCount,
   isAuthenticated,
   myReview,
+  images,
 }: ReviewItemProps) {
   const maskedMemberName = memberName
     ? memberName.length > 1
@@ -71,6 +72,22 @@ export default function ReviewItem({
           />
         )}
       </div>
+
+      {images && images.length > 0 && (
+        <ul className='md:-mr-gutter -mr-4 flex gap-0.5 overflow-x-auto rounded-l-lg [scrollbar-width:none]'>
+          {images.map(({ id, url }, i) => (
+            <li key={id} className='size-[154px] shrink-0'>
+              {/* S3 presigned URL이 10분 뒤 만료돼서 next/image 캐시를 쓰면 깨져요 */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={url}
+                alt={`리뷰 사진 ${i + 1}`}
+                className='size-full object-cover'
+              />
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className='flex flex-col gap-2'>
         <div className='flex items-center justify-between'>

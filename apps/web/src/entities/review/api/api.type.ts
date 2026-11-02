@@ -9,6 +9,7 @@ export type Review = {
   createdAt: string;
   updatedAt: string;
   myReview: boolean;
+  images?: { id: number; url: string }[];
 };
 
 export type RecentReview = Pick<
