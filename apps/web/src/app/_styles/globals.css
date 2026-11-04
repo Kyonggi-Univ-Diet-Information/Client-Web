@@ -136,6 +136,15 @@ html {
   overscroll-behavior-y: none;
 }
 
+/* iOS WebView에서 input/textarea 포커스 시 자동 줌인 방지 (font-size < 16px 트리거) */
+@supports (-webkit-touch-callout: none) {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
