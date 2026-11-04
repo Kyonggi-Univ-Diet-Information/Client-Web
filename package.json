@@ -7,7 +7,11 @@
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "test": "turbo test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "web:dev": "turbo dev --filter=@kiryong/web",
+    "web:build": "turbo build --filter=@kiryong/web",
+    "land:dev": "turbo dev --filter=@kiryong/land",
+    "design-system:storybook": "turbo storybook --filter=@kiryong/design-system"
   },
   "devDependencies": {
     "@kiryong/config": "workspace:*",
