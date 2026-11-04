@@ -56,7 +56,7 @@ export default function ReviewWriteForm({
 }: ReviewWriteFormProps) {
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
   const [content, setContent] = useState('');
   const [photos, setPhotos] = useState<string[]>([]);
   const [isPicking, setIsPicking] = useState(false);
@@ -198,6 +198,11 @@ export default function ReviewWriteForm({
                 / {MAX_CONTENT_LENGTH.toLocaleString()}
               </span>
             </p>
+            {content.trim().length === 0 && (
+              <p className='absolute left-3 bottom-3 text-xs leading-[18px] text-[#999]'>
+                1자 이상 작성해야 등록할 수 있어요
+              </p>
+            )}
           </div>
         </div>
 
