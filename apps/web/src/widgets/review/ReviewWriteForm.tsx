@@ -19,6 +19,7 @@ import { type FoodCourt, FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { isNativeApp, pickNativePhoto } from '@/shared/lib/nativeBridge';
+import { isAndroidWebView } from '@/shared/lib/platform';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
 import type { ServerActionResult } from '@/shared/lib/serverAction';
 import { isPhotoReviewEnabled } from '@/shared/utils/version';
@@ -62,6 +63,7 @@ export default function ReviewWriteForm({
   const [isPicking, setIsPicking] = useState(false);
   // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
   const [canAttachPhoto, setCanAttachPhoto] = useState(false);
+  const [androidWebView, setAndroidWebView] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [state, formAction, isPending] = useActionState(
     async (prev: ServerActionResult | null, formData: FormData) => {
@@ -85,6 +87,7 @@ export default function ReviewWriteForm({
 
   useEffect(() => {
     setCanAttachPhoto(isPhotoReviewEnabled());
+    setAndroidWebView(isAndroidWebView());
   }, []);
 
   useEffect(() => {
@@ -261,7 +264,12 @@ export default function ReviewWriteForm({
         )}
       </section>
 
-      <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white/35 px-5 pt-3 pb-[calc(24px+env(safe-area-inset-bottom))]'>
+      <div
+        className={cn(
+          'sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white/35 px-5 pt-3 pb-[calc(24px+env(safe-area-inset-bottom))]',
+          androidWebView && 'pb-6',
+        )}
+      >
         <button
           type='submit'
           disabled={!isFormValid || isPending}
