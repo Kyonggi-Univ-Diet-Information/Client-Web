@@ -1,0 +1,27 @@
+[data-sonner-toaster][data-x-position='center'][data-y-position='bottom'] {
+  left: 50% !important;
+  right: auto !important;
+  width: auto !important;
+}
+
+.kiryong-snackbar {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) var(--y) !important;
+  margin-bottom: 80px;
+  /* sonner 컨테이너 폭이 0이라 fit-content를 쓰면 한 글자씩 줄바꿈돼요. 긴 문구는 화면 폭에서 줄바꿈해요 */
+  width: max-content !important;
+  max-width: calc(100vw - 32px) !important;
+  padding: 8px 24px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background-color: #333d4b !important;
+  color: #fff !important;
+  font-family:
+    var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+}

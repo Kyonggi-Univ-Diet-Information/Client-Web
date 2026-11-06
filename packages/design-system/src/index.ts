@@ -2,6 +2,7 @@ export { cn } from './lib/cn';
 
 export * from './components/Avatar';
 export * from './components/Button';
+export * from './components/Snackbar';
 
 export { default as AnimatedCard } from './components/AnimatedCard';
 export { default as BottomSheet } from './components/BottomSheet';

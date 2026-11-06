@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+import { snackbar } from '@kiryong/design-system';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SWRConfig } from 'swr';
@@ -35,6 +36,10 @@ jest.mock('@/features/review/api/submitReviewBlock', () => ({
     revalidateReviewCache({ type, foodId });
     return { success: true };
   }),
+}));
+jest.mock('@kiryong/design-system', () => ({
+  ...jest.requireActual('@kiryong/design-system'),
+  snackbar: { error: jest.fn() },
 }));
 jest.mock('@/features/review/api/removeReview');
 jest.mock('@/features/review/api/submitReviewReport');
@@ -305,7 +310,7 @@ describe('ReviewItem Integration - Block 기능', () => {
 
     // Then: 에러 알림 표시
     await waitFor(() => {
-      expect(mockAlert).toHaveBeenCalledWith('차단에 실패했습니다');
+      expect(snackbar.error).toHaveBeenCalledWith('차단에 실패했습니다');
     });
 
     // Then: 리뷰가 여전히 화면에 표시됨

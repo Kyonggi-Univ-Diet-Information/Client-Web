@@ -1,4 +1,5 @@
 import '@/app/_styles/globals.css';
+import { Snackbar } from '@kiryong/design-system';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: Props) {
         <ErrorProvider>
           <VercelAnalytics />
           <SWRProvider>{children}</SWRProvider>
+          <Snackbar />
         </ErrorProvider>
       </body>
     </html>

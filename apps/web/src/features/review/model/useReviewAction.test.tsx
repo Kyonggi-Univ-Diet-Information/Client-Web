@@ -1,3 +1,4 @@
+import { snackbar } from '@kiryong/design-system';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { SWRConfig } from 'swr';
 
@@ -11,6 +12,10 @@ import { FOOD_COURT } from '@/shared/api';
 import { useReviewAction } from './useReviewAction';
 
 
+
+jest.mock('@kiryong/design-system', () => ({
+  snackbar: { error: jest.fn() },
+}));
 
 // API 모듈 모킹
 jest.mock('@/features/review/api/removeReview');
@@ -107,7 +112,7 @@ describe('useReviewAction', () => {
       });
 
       await waitFor(() => {
-        expect(mockAlert).toHaveBeenCalledWith('차단에 실패했습니다');
+        expect(snackbar.error).toHaveBeenCalledWith('차단에 실패했습니다');
       });
     });
 
@@ -195,6 +200,45 @@ describe('useReviewAction', () => {
           mockType,
         );
       });
+      expect(snackbar.error).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      [
+        '서버가 실패를 반환하면',
+        () =>
+          (removeReview as jest.Mock).mockResolvedValue({
+            success: false,
+            error: '요청에 실패했습니다.',
+          }),
+      ],
+      [
+        '요청 자체가 실패하면',
+        () =>
+          (removeReview as jest.Mock).mockRejectedValue(
+            new Error('Network Error'),
+          ),
+      ],
+    ])('%s 실패 스낵바를 띄운다', async (_, mockFailure) => {
+      mockFailure();
+
+      const { result } = renderHook(
+        () =>
+          useReviewAction({
+            type: mockType,
+            foodId: mockFoodId,
+            reviewId: mockReviewId,
+            isMyReview: true,
+          }),
+        { wrapper },
+      );
+
+      await act(async () => {
+        await result.current.handleAction('delete');
+      });
+
+      expect(snackbar.error).toHaveBeenCalledWith('리뷰 삭제에 실패했습니다.');
+      expect(result.current.pending).toBe(false);
     });
   });
 

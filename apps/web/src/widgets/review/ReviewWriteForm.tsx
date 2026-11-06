@@ -1,5 +1,6 @@
 'use client';
 
+import { snackbar } from '@kiryong/design-system';
 import { XIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
@@ -90,7 +91,7 @@ export default function ReviewWriteForm({
   useEffect(() => {
     if (state?.error) {
       trackEvent('review_submit_error', { error_message: state.error });
-      alert(state.error);
+      snackbar.error(state.error);
     } else if (state?.success) {
       trackEvent('review_submit_success', {
         menu_id: String(foodId),
