@@ -1,3 +1,4 @@
+import { snackbar } from '@kiryong/design-system';
 import { useEffect, useState } from 'react';
 import { useSWRConfig } from 'swr';
 
@@ -50,7 +51,11 @@ export function useReviewAction({
 
     setPending(true);
     try {
-      await removeReview(reviewId, foodId, type);
+      const result = await removeReview(reviewId, foodId, type);
+      if (!result.success) {
+        snackbar.error('리뷰 삭제에 실패했습니다.');
+        return;
+      }
       trackEvent('review_action', {
         action: 'delete',
         review_id: String(reviewId),
@@ -63,6 +68,8 @@ export function useReviewAction({
           reviewKeys.paged(type, foodId),
         ),
       );
+    } catch {
+      snackbar.error('리뷰 삭제에 실패했습니다.');
     } finally {
       setPending(false);
     }
@@ -93,7 +100,7 @@ export function useReviewAction({
         );
         alert('사용자를 차단했습니다.');
       } else {
-        alert(result.error || '차단에 실패했습니다.');
+        snackbar.error(result.error || '차단에 실패했습니다.');
       }
     } finally {
       setPending(false);
@@ -128,7 +135,7 @@ export function useReviewAction({
         alert('신고가 접수되었습니다.');
         setShowReportDialog(false);
       } else {
-        alert(result.error || '신고에 실패했습니다.');
+        snackbar.error(result.error || '신고에 실패했습니다.');
       }
     } finally {
       setPending(false);
