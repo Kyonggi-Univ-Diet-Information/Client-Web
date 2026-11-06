@@ -23,7 +23,7 @@ export default async function CampusMenuSet({
       : '단품 + 탄산음료';
 
   return (
-    <div className='flex flex-col'>
+    <div className='md:px-gutter border-grey-100 flex flex-col border-t-6 px-4 pt-4'>
       <h3 className='text-lg font-semibold mb-4'>연관 세트 메뉴</h3>
       <div className='flex flex-col gap-2.5'>
         {setMenus.map(setMenu => (
