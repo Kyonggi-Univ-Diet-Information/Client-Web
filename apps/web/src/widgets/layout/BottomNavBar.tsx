@@ -10,7 +10,7 @@ import {
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
 import { cn } from '@/shared/lib';
-import { isAndroid, isIos } from '@/shared/lib/platform';
+import { isAndroidWebView, isIos } from '@/shared/lib/platform';
 
 import Home from '../../../public/icons/icon-home.svg';
 import Restaurant2 from '../../../public/icons/icon-restaurant2.svg';
@@ -24,7 +24,7 @@ export default function BottomNavBar() {
 
   useEffect(() => {
     setIos(isIos());
-    setAndroidWebView(isAndroid() && navigator.userAgent.includes('; wv)'));
+    setAndroidWebView(isAndroidWebView());
   }, []);
 
   const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
@@ -70,7 +70,6 @@ export default function BottomNavBar() {
   }
 
   // iOS 앱은 네이티브 SafeAreaView가 하단 inset을 일부 상쇄해서(paddingBottom -24) 웹뷰 env()가 0이라 최소 24px을 직접 확보해요
-  // Android 앱 웹뷰(UA의 '; wv)')는 env() 하단 inset을 더하면 내비게이션 바 여백이 이중으로 생겨서 빼요
   return (
     <div
       className={cn(
