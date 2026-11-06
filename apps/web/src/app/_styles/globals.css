@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import '@kiryong/design-system/tokens.css';
+@import '@kiryong/design-system/snackbar.css';
 
 @source '../../../../../packages/design-system/src';
 
