@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@kiryong/design-system';
+import { Button, snackbar } from '@kiryong/design-system';
 import { HeartIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useOptimistic, useTransition } from 'react';
@@ -69,7 +69,7 @@ export default function ReviewLikeButton({
         trackEvent('review_like_error', {
           error_message: '좋아요 등록에 실패했어요',
         });
-        alert(
+        snackbar.error(
           '좋아요 등록에 실패했어요! 계속 문제가 발생할 경우 관리자에게 문의해 주세요!',
         );
         console.error(error);

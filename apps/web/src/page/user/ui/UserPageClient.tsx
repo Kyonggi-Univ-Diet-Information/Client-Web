@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog } from '@kiryong/design-system';
+import { Dialog, snackbar } from '@kiryong/design-system';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { type ReactNode, useState } from 'react';
@@ -63,7 +63,9 @@ export default function UserPageClient({
         await handleLogout();
       }
     } catch (error) {
-      alert('회원 탈퇴에 실패했어요. 오류가 반복되면 관리자에게 문의해주세요.');
+      snackbar.error(
+        '회원 탈퇴에 실패했어요. 오류가 반복되면 관리자에게 문의해주세요.',
+      );
       console.error(error);
     } finally {
       setIsRevoking(false);
