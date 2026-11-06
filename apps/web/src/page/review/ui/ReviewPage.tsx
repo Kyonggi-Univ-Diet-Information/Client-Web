@@ -69,7 +69,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
                 {menuDetail.name}
               </h1>
               {menuDetail.averageRating != null && (
-                <div className='flex items-center -space-x-[3px]'>
+                <div className='flex items-center gap-[1px]'>
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star
                       key={index}
@@ -132,9 +132,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
       <Suspense fallback={<Loader />}>
         {foodCourt === FOOD_COURT.KYONGSUL && (
-          <div className='md:px-gutter border-grey-100 border-t-6 px-4 pt-4'>
-            <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
-          </div>
+          <CampusMenuSet type={foodCourt} baseFoodId={foodId} />
         )}
       </Suspense>
 
