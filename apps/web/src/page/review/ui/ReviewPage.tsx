@@ -44,6 +44,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     getReviewsAction(foodCourt, foodId, 0),
   ]);
 
+  const reviewListHref = `/review/${foodCourtId}/${foodId}/detail`;
+
   return (
     <div className='flex flex-col pb-10'>
       <RecordRecentMenu
@@ -102,7 +104,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           <div className='border-grey-100 mt-5 border-t-6' />
 
           <Link
-            href={`/review/${foodCourtId}/${foodId}/detail`}
+            href={reviewListHref}
             className='md:px-gutter mt-2 flex items-center justify-between px-4 py-2'
           >
             <div className='flex items-center gap-2'>
@@ -122,6 +124,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           {initialReviews.content.length > 0 && (
             <ReviewPreviewCarousel
               reviews={initialReviews.content.slice(0, 5)}
+              href={reviewListHref}
             />
           )}
         </div>

@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import Link from 'next/link';
 
 import type { ReviewWithMetadata } from '@/features/review/api/getReviewsAction';
 
@@ -6,8 +7,10 @@ import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
 
 export default function ReviewPreviewCarousel({
   reviews,
+  href,
 }: {
   reviews: ReviewWithMetadata[];
+  href: string;
 }) {
   return (
     <div className='scrollbar-hide md:px-gutter flex gap-2.5 overflow-x-scroll px-4 pt-2.5 pb-9'>
@@ -19,8 +22,9 @@ export default function ReviewPreviewCarousel({
           : '기**';
 
         return (
-          <div
+          <Link
             key={review.id}
+            href={href}
             className='flex w-[293px] shrink-0 flex-col gap-5 rounded-lg border border-grey-100 px-5 pt-5 pb-11'
           >
             <div className='flex flex-col gap-2.5'>
@@ -44,7 +48,7 @@ export default function ReviewPreviewCarousel({
                 {review.content}
               </p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
