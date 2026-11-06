@@ -30,6 +30,6 @@ description: |
 ```
 
 - type은 영어: `feat`, `fix`, `refactor`, `chore`, `docs`, `style`, `test`, `ci`
-- 요약과 세부 내용도 **영어**로 작성
+- 요약과 세부 내용은 **한글**로 작성
 - 변경 사항이 단순하면 bullet point 생략 가능
 - **Co-authored-by 줄은 절대 포함하지 않는다**
