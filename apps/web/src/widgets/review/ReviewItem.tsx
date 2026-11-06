@@ -44,10 +44,10 @@ export default function ReviewItem({
   const formattedDate = formatShortDate(parseReviewDate(createdAt));
 
   return (
-    <div className='md:px-gutter flex w-full flex-col gap-3 border-t border-grey-100 px-4 py-5'>
+    <div className='md:px-gutter border-grey-100 flex w-full flex-col gap-3 border-t px-4 py-5'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <Avatar className='size-9 bg-grey-100'>
+          <Avatar className='bg-grey-100 size-9'>
             <AvatarFallback className='bg-transparent'>
               <Image
                 src='/images/avatar-default.png'
@@ -58,7 +58,7 @@ export default function ReviewItem({
               />
             </AvatarFallback>
           </Avatar>
-          <p className='text-sm font-medium text-grey-900'>
+          <p className='text-grey-900 text-sm font-medium'>
             {maskedMemberName}
           </p>
         </div>
@@ -73,25 +73,9 @@ export default function ReviewItem({
         )}
       </div>
 
-      {images && images.length > 0 && (
-        <ul className='md:-mr-gutter -mr-4 flex gap-0.5 overflow-x-auto rounded-l-lg [scrollbar-width:none]'>
-          {images.map(({ id, url }, i) => (
-            <li key={id} className='size-[154px] shrink-0'>
-              {/* S3 presigned URL이 10분 뒤 만료돼서 next/image 캐시를 쓰면 깨져요 */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={url}
-                alt={`리뷰 사진 ${i + 1}`}
-                className='size-full object-cover'
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-
       <div className='flex flex-col gap-2'>
         <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-0.5'>
+          <div className='flex items-center gap-[1px]'>
             {Array.from({ length: 5 }).map((_, index) => (
               <Star
                 key={index}
@@ -104,9 +88,24 @@ export default function ReviewItem({
               />
             ))}
           </div>
-          <span className='text-xs text-grey-400'>{formattedDate}</span>
+          <span className='text-grey-400 text-xs'>{formattedDate}</span>
         </div>
-        <p className='text-sm leading-relaxed break-words whitespace-pre-wrap text-grey-700'>
+        {images && images.length > 0 && (
+          <ul className='md:-mr-gutter mt-1 -mr-4 flex gap-0.5 overflow-x-auto rounded-lg [scrollbar-width:none]'>
+            {images.map(({ id, url }, i) => (
+              <li key={id} className='border-grey-100 size-[154px] shrink-0'>
+                {/* S3 presigned URL이 10분 뒤 만료돼서 next/image 캐시를 쓰면 깨져요 */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={url}
+                  alt={`리뷰 사진 ${i + 1}`}
+                  className='size-full rounded-lg object-cover'
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className='text-grey-700 text-sm leading-relaxed break-words whitespace-pre-wrap'>
           {content}
         </p>
       </div>
