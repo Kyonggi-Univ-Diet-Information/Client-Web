@@ -15,6 +15,9 @@ import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
 
 
 
+// 앱 웹뷰에는 window.confirm을 띄울 네이티브 처리가 없어서 항상 취소돼요. 확인은 Dialog로 받아요
+type ConfirmAction = 'delete' | 'block';
+
 interface UseReviewActionProps {
   type: FoodCourt;
   foodId: number;
@@ -34,6 +37,9 @@ export function useReviewAction({
   const [reportReasons, setReportReasons] = useState<ReportReason[]>([]);
   const [selectedReason, setSelectedReason] = useState<string>('');
   const [selectValue, setSelectValue] = useState<string>('');
+  const [confirmAction, setConfirmAction] = useState<ConfirmAction | null>(
+    null,
+  );
 
   useEffect(() => {
     if (showReportDialog) {
@@ -46,9 +52,6 @@ export function useReviewAction({
   }, [showReportDialog, reportReasons.length]);
 
   const handleDelete = async () => {
-    const confirmed = window.confirm('리뷰를 삭제하시겠습니까?');
-    if (!confirmed) return;
-
     setPending(true);
     try {
       const result = await removeReview(reviewId, foodId, type);
@@ -76,11 +79,6 @@ export function useReviewAction({
   };
 
   const handleBlock = async () => {
-    const confirmed = window.confirm(
-      '이 사용자를 차단하시겠습니까?\n차단한 사용자의 게시물은 더 이상 표시되지 않으며, 차단 해제는 불가능합니다.',
-    );
-    if (!confirmed) return;
-
     setPending(true);
     try {
       const result = await submitReviewBlock(reviewId, foodId, type);
@@ -104,6 +102,21 @@ export function useReviewAction({
       }
     } finally {
       setPending(false);
+    }
+  };
+
+  const handleConfirm = async () => {
+    if (confirmAction === 'delete') {
+      await handleDelete();
+    } else if (confirmAction === 'block') {
+      await handleBlock();
+    }
+    setConfirmAction(null);
+  };
+
+  const handleCloseConfirm = () => {
+    if (!pending) {
+      setConfirmAction(null);
     }
   };
 
@@ -142,12 +155,10 @@ export function useReviewAction({
     }
   };
 
-  const handleAction = async (value: string) => {
+  const handleAction = (value: string) => {
     setSelectValue(value);
-    if (value === 'delete') {
-      await handleDelete();
-    } else if (value === 'block') {
-      await handleBlock();
+    if (value === 'delete' || value === 'block') {
+      setConfirmAction(value);
     } else if (value === 'report') {
       handleShowReportDialog();
     }
@@ -156,12 +167,15 @@ export function useReviewAction({
 
   return {
     pending,
+    confirmAction,
     showReportDialog,
     reportReasons,
     selectedReason,
     selectValue,
     setSelectedReason,
     handleAction,
+    handleConfirm,
+    handleCloseConfirm,
     handleReport,
     handleCloseReportDialog,
   };

@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Dialog,
   Modal,
   Select,
   SelectContent,
@@ -47,12 +48,15 @@ export default function ReviewActionMenu({
 }: ReviewActionMenuProps) {
   const {
     pending,
+    confirmAction,
     showReportDialog,
     reportReasons,
     selectedReason,
     selectValue,
     setSelectedReason,
     handleAction,
+    handleConfirm,
+    handleCloseConfirm,
     handleReport,
     handleCloseReportDialog,
   } = useReviewAction({ type, foodId, reviewId, isMyReview });
@@ -64,6 +68,26 @@ export default function ReviewActionMenu({
         pending={pending}
         value={selectValue}
         onActionChange={handleAction}
+      />
+
+      <Dialog
+        open={confirmAction === 'delete'}
+        title='리뷰 삭제'
+        description='리뷰를 삭제하시겠습니까?'
+        confirmText='삭제'
+        pending={pending}
+        onClose={handleCloseConfirm}
+        onConfirm={handleConfirm}
+      />
+
+      <Dialog
+        open={confirmAction === 'block'}
+        title='사용자 차단'
+        description='이 사용자를 차단하시겠습니까? 차단한 사용자의 게시물은 더 이상 표시되지 않으며, 차단 해제는 불가능합니다.'
+        confirmText='차단'
+        pending={pending}
+        onClose={handleCloseConfirm}
+        onConfirm={handleConfirm}
       />
 
       {showReportDialog && (

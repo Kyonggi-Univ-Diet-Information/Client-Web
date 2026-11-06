@@ -84,7 +84,11 @@ jest.mock('./ReviewActionMenu', () => {
 
       const TestActionMenu = () => {
         const [showMenu, setShowMenu] = useState(false);
-        const { handleAction } = useReviewAction({ type, foodId, reviewId });
+        const { confirmAction, handleAction, handleConfirm } = useReviewAction({
+          type,
+          foodId,
+          reviewId,
+        });
 
         return (
           <div data-testid='review-action-menu'>
@@ -121,6 +125,11 @@ jest.mock('./ReviewActionMenu', () => {
                 )}
               </div>
             )}
+            {confirmAction && (
+              <button data-testid='confirm-button' onClick={handleConfirm}>
+                확인
+              </button>
+            )}
           </div>
         );
       };
@@ -135,10 +144,6 @@ jest.mock('./ReviewFavButton', () => ({
   __esModule: true,
   default: jest.fn(() => <div data-testid='review-fav-button'>좋아요</div>),
 }));
-
-// window.confirm 모킹
-const mockConfirm = jest.fn(() => true);
-window.confirm = mockConfirm;
 
 // window.alert 모킹
 const mockAlert = jest.fn();
@@ -168,7 +173,6 @@ describe('ReviewItem Integration - Block 기능', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockConfirm.mockReturnValue(true);
     globalMutate = null; // 각 테스트 전에 초기화
   });
 
@@ -208,6 +212,7 @@ describe('ReviewItem Integration - Block 기능', () => {
     });
 
     await user.click(screen.getByTestId('block-button'));
+    await user.click(screen.getByTestId('confirm-button'));
 
     // Then: submitReviewBlock이 호출됨
     await waitFor(() => {
@@ -299,6 +304,7 @@ describe('ReviewItem Integration - Block 기능', () => {
     });
 
     await user.click(screen.getByTestId('block-button'));
+    await user.click(screen.getByTestId('confirm-button'));
 
     // Then: submitReviewBlock이 호출됨
     await waitFor(() => {

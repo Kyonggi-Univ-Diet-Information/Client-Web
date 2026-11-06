@@ -30,10 +30,6 @@ jest.mock('@/features/review/api/fetchReportReasons', () => ({
   ),
 }));
 
-// window.confirm 모킹
-const mockConfirm = jest.fn(() => true);
-window.confirm = mockConfirm;
-
 // window.alert 모킹
 const mockAlert = jest.fn();
 window.alert = mockAlert;
@@ -57,7 +53,6 @@ describe('useReviewAction', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockConfirm.mockReturnValue(true);
   });
 
   describe('사용자 차단 (block)', () => {
@@ -75,8 +70,11 @@ describe('useReviewAction', () => {
         { wrapper },
       );
 
+      act(() => {
+        result.current.handleAction('block');
+      });
       await act(async () => {
-        await result.current.handleAction('block');
+        await result.current.handleConfirm();
       });
 
       await waitFor(() => {
@@ -107,8 +105,11 @@ describe('useReviewAction', () => {
         { wrapper },
       );
 
+      act(() => {
+        result.current.handleAction('block');
+      });
       await act(async () => {
-        await result.current.handleAction('block');
+        await result.current.handleConfirm();
       });
 
       await waitFor(() => {
@@ -117,8 +118,6 @@ describe('useReviewAction', () => {
     });
 
     it('사용자가 취소하면 차단하지 않는다', async () => {
-      mockConfirm.mockReturnValue(false);
-
       const { result } = renderHook(
         () =>
           useReviewAction({
@@ -130,10 +129,16 @@ describe('useReviewAction', () => {
         { wrapper },
       );
 
-      await act(async () => {
-        await result.current.handleAction('block');
+      act(() => {
+        result.current.handleAction('block');
+      });
+      expect(result.current.confirmAction).toBe('block');
+
+      act(() => {
+        result.current.handleCloseConfirm();
       });
 
+      expect(result.current.confirmAction).toBeNull();
       expect(submitReviewBlock).not.toHaveBeenCalled();
     });
 
@@ -157,8 +162,11 @@ describe('useReviewAction', () => {
       );
 
       let actionPromise: Promise<void>;
+      act(() => {
+        result.current.handleAction('block');
+      });
       await act(async () => {
-        actionPromise = result.current.handleAction('block');
+        actionPromise = result.current.handleConfirm();
       });
 
       await waitFor(() => {
@@ -189,8 +197,11 @@ describe('useReviewAction', () => {
         { wrapper },
       );
 
+      act(() => {
+        result.current.handleAction('delete');
+      });
       await act(async () => {
-        await result.current.handleAction('delete');
+        await result.current.handleConfirm();
       });
 
       await waitFor(() => {
@@ -201,6 +212,26 @@ describe('useReviewAction', () => {
         );
       });
       expect(snackbar.error).not.toHaveBeenCalled();
+    });
+
+    it('확인 전에는 removeReview를 호출하지 않고 다이얼로그 상태만 연다', () => {
+      const { result } = renderHook(
+        () =>
+          useReviewAction({
+            type: mockType,
+            foodId: mockFoodId,
+            reviewId: mockReviewId,
+            isMyReview: true,
+          }),
+        { wrapper },
+      );
+
+      act(() => {
+        result.current.handleAction('delete');
+      });
+
+      expect(result.current.confirmAction).toBe('delete');
+      expect(removeReview).not.toHaveBeenCalled();
     });
 
     it.each([
@@ -233,8 +264,11 @@ describe('useReviewAction', () => {
         { wrapper },
       );
 
+      act(() => {
+        result.current.handleAction('delete');
+      });
       await act(async () => {
-        await result.current.handleAction('delete');
+        await result.current.handleConfirm();
       });
 
       expect(snackbar.error).toHaveBeenCalledWith('리뷰 삭제에 실패했습니다.');
