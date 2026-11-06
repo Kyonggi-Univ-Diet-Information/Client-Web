@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./tokens.css": "./src/tokens.css"
+    "./tokens.css": "./src/tokens.css",
+    "./snackbar.css": "./src/snackbar.css"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.24",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1"
   },
   "peerDependencies": {
@@ -32,13 +34,13 @@
     "@storybook/react": "^8",
     "@storybook/react-vite": "^8",
     "@tailwindcss/vite": "^4",
-    "tailwindcss": "^4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "next": "15.5.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "storybook": "^8",
+    "tailwindcss": "^4",
     "typescript": "^5",
     "vite": "^6"
   }
