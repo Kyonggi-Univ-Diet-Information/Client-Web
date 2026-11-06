@@ -138,13 +138,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         )}
       </Suspense>
 
-      <div className='fixed bottom-12 left-1/2 z-40 w-full max-w-md -translate-x-1/2 px-6'>
-        <ReviewWriteButton
-          foodCourtId={foodCourtId}
-          foodId={foodId}
-          isAuthenticated={isAuthenticated}
-        />
-      </div>
+      <ReviewWriteButton
+        foodCourtId={foodCourtId}
+        foodId={foodId}
+        isAuthenticated={isAuthenticated}
+      />
     </div>
   );
 }
