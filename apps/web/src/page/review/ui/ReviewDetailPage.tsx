@@ -11,6 +11,9 @@ import { getReviewsAction } from '@/features/review/api/getReviewsAction';
 import type { ReviewSort } from '@/entities/review/api/api.type';
 
 import { getFoodCourtById } from '@/shared/api';
+import { AuthService } from '@/shared/lib/auth';
+
+import ReviewWriteButton from './ReviewWriteButton';
 
 const SORT_LABEL: Record<ReviewSort, string> = {
   recent: '최신순',
@@ -27,10 +30,8 @@ export default async function ReviewDetailPage({
   params,
   searchParams,
 }: ReviewDetailPageProps) {
-  const [{ foodCourtId, foodId: foodIdParam }, { sort }] = await Promise.all([
-    params,
-    searchParams,
-  ]);
+  const [{ foodCourtId, foodId: foodIdParam }, { sort }, isAuthenticated] =
+    await Promise.all([params, searchParams, AuthService.isAuthenticated()]);
 
   const foodCourt = getFoodCourtById(foodCourtId);
   if (!foodCourt) {
@@ -51,7 +52,7 @@ export default async function ReviewDetailPage({
   const sortHref = `/review/sort?from=${encodeURIComponent(currentPath)}${sort ? `&sort=${sort}` : ''}`;
 
   return (
-    <div className='flex flex-col pb-10'>
+    <div className='flex flex-col pb-28'>
       <ReviewRating type={foodCourt} foodId={foodId} />
 
       <div className='md:px-gutter border-t-6 border-grey-100 px-4 py-4'>
@@ -75,6 +76,12 @@ export default async function ReviewDetailPage({
         foodId={foodId}
         initialData={initialReviews}
         sort={sort}
+      />
+
+      <ReviewWriteButton
+        foodCourtId={foodCourtId}
+        foodId={foodId}
+        isAuthenticated={isAuthenticated}
       />
     </div>
   );
