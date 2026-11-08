@@ -5,6 +5,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 
 import type { Review } from '@/entities/review/api/api.type';
+import { getReviewKeywordLabels } from '@/entities/review/model/reviewKeywords';
 
 import { type FoodCourt } from '@/shared/api';
 import { formatShortDate, parseReviewDate } from '@/shared/lib/date';
@@ -34,7 +35,17 @@ export default function ReviewItem({
   isAuthenticated,
   myReview,
   images,
+  saltLevel,
+  spicyLevel,
+  portionLevel,
+  valueLevel,
 }: ReviewItemProps) {
+  const keywordLabels = getReviewKeywordLabels({
+    saltLevel,
+    spicyLevel,
+    portionLevel,
+    valueLevel,
+  });
   const maskedMemberName = memberName
     ? memberName.length > 1
       ? memberName.charAt(0) + '**'
@@ -101,6 +112,18 @@ export default function ReviewItem({
                   alt={`리뷰 사진 ${i + 1}`}
                   className='size-full rounded-lg object-cover'
                 />
+              </li>
+            ))}
+          </ul>
+        )}
+        {keywordLabels.length > 0 && (
+          <ul className='flex flex-wrap gap-1.5'>
+            {keywordLabels.map(label => (
+              <li
+                key={label}
+                className='bg-grey-100 text-grey-700 rounded-full px-2.5 py-1 text-xs'
+              >
+                {label}
               </li>
             ))}
           </ul>
