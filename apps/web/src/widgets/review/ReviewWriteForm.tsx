@@ -2,7 +2,7 @@
 
 import { snackbar } from '@kiryong/design-system';
 import { XIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   type ChangeEvent,
   type ReactNode,
@@ -25,6 +25,12 @@ import { useSWRConfig } from 'swr';
 import { submitReview } from '@/features/review/api/submitReview';
 import { uploadReviewImages } from '@/features/review/api/uploadReviewImages';
 
+import type { ReviewKeywords } from '@/entities/review/api/api.type';
+import {
+  EMPTY_REVIEW_KEYWORDS,
+  REVIEW_KEYWORD_GROUPS,
+} from '@/entities/review/model/reviewKeywords';
+
 import { type FoodCourt, FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
@@ -34,12 +40,12 @@ import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
 import type { ServerActionResult } from '@/shared/lib/serverAction';
 import { isPhotoReviewEnabled } from '@/shared/utils/version';
 
-import CameraIcon from '../../../public/icons/icon-camera.svg';
-import MoodGoodIcon from '../../../public/icons/icon-mood-good.svg';
-import StarEmptyIcon from '../../../public/icons/icon-star-empty.svg';
-import StarFilledIcon from '../../../public/icons/icon-star-filled.svg';
+import CameraIcon from '../../../public/icons/icon-camera-lg.svg';
+import CheckIcon from '../../../public/icons/icon-check.svg';
+import StarEmptyLgIcon from '../../../public/icons/icon-star-empty-lg.svg';
+import StarFilledLgIcon from '../../../public/icons/icon-star-filled-lg.svg';
 
-const MAX_CONTENT_LENGTH = 1000;
+const MAX_CONTENT_LENGTH = 100;
 const MAX_PHOTOS = 3;
 
 const readAsDataUrl = (file: File) =>
@@ -62,6 +68,7 @@ interface ReviewWriteValues {
   rating: number;
   content: string;
   photos: string[];
+  keywords: ReviewKeywords;
 }
 
 export default function ReviewWriteForm({
@@ -72,13 +79,21 @@ export default function ReviewWriteForm({
   menuImage,
 }: ReviewWriteFormProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { mutate } = useSWRConfig();
   const form = useForm<ReviewWriteValues>({
     mode: 'onChange',
-    defaultValues: { rating: 3, content: '', photos: [] },
+    defaultValues: {
+      rating: 3,
+      content: '',
+      photos: [],
+      keywords: EMPTY_REVIEW_KEYWORDS,
+    },
   });
   // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
   const [androidWebView, setAndroidWebView] = useState(false);
+  const [canAttachPhoto, setCanAttachPhoto] = useState(false);
   const [state, formAction, isPending] = useActionState(
     async (prev: ServerActionResult | null, values: ReviewWriteValues) => {
       const formData = new FormData();
@@ -86,6 +101,9 @@ export default function ReviewWriteForm({
       formData.append('foodCourt', foodCourt);
       formData.append('rating', String(values.rating));
       formData.append('content', values.content);
+      Object.entries(values.keywords).forEach(([key, level]) => {
+        if (level !== null) formData.append(key, String(level));
+      });
       try {
         const images = await Promise.all(
           values.photos.map(async src => (await fetch(src)).blob()),
@@ -106,6 +124,7 @@ export default function ReviewWriteForm({
 
   useEffect(() => {
     setAndroidWebView(isAndroidWebView());
+    setCanAttachPhoto(isPhotoReviewEnabled());
   }, []);
 
   useEffect(() => {
@@ -135,28 +154,96 @@ export default function ReviewWriteForm({
     startTransition(() => formAction(values));
   });
 
+  const keywords = useWatch({ control: form.control, name: 'keywords' });
+  const hasKeyword = Object.values(keywords).some(level => level !== null);
+  // 키워드 없이 상세 단계 주소로 바로 들어오면 첫 단계부터 시작해요
+  const step =
+    searchParams.get('step') === 'detail' && hasKeyword ? 'detail' : 'keyword';
+
+  const menuSummary = (
+    <div className='flex gap-2.5'>
+      {menuImage}
+      <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-1 px-1'>
+          <div className='flex items-center gap-[9px] text-sm leading-[21px] tracking-[-0.28px] text-[#333]'>
+            <span>{FOOD_COURT_NAME[foodCourt]}</span>
+            <span>{price.toLocaleString()}원</span>
+          </div>
+          <p className='text-base leading-6 font-semibold tracking-[-0.32px] text-[#191919]'>
+            {menuName}
+          </p>
+        </div>
+        <RatingField />
+      </div>
+    </div>
+  );
+
+  if (step === 'keyword') {
+    return (
+      <FormProvider {...form}>
+        <div className='flex flex-1 flex-col'>
+          <section className='flex flex-col gap-[38px] bg-white px-5 pt-[30px] pb-8'>
+            <h2 className='flex gap-0.5 text-[28px] leading-8 font-semibold tracking-[-0.48px] text-[#333]'>
+              <span>
+                식사는
+                <br />
+                어떠셨나요?
+              </span>
+              <span className='text-2xl leading-normal font-bold text-[#ff6b2c]'>
+                *
+              </span>
+            </h2>
+            {menuSummary}
+          </section>
+
+          <section className='border-t-2 border-[#f9f9f9] bg-white px-5 pt-[46px] pb-40'>
+            <KeywordField />
+          </section>
+
+          <div
+            className={cn(
+              'sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white/35 px-5 pt-3 pb-[calc(24px+env(safe-area-inset-bottom))]',
+              androidWebView && 'pb-6',
+            )}
+          >
+            <button
+              type='button'
+              disabled={!hasKeyword}
+              onClick={() => router.push(`${pathname}?step=detail`)}
+              className='flex h-[46px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#25251f] text-base leading-6 font-semibold text-white disabled:cursor-default disabled:opacity-40'
+            >
+              다음
+            </button>
+          </div>
+        </div>
+      </FormProvider>
+    );
+  }
+
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className='flex flex-1 flex-col'>
-        <section className='flex items-center gap-3 border-b border-[#efefef] bg-white px-5 py-[26px]'>
-          {menuImage}
-          <div className='flex flex-col gap-1'>
-            <div className='flex flex-col'>
-              <div className='flex items-center gap-[9px] text-xs leading-[18px] text-[#767676]'>
-                <span>{FOOD_COURT_NAME[foodCourt]}</span>
-                <span>{price.toLocaleString()}원</span>
-              </div>
-              <p className='text-sm leading-[18px] font-semibold tracking-[-0.28px] text-[#191919]'>
-                {menuName}
-              </p>
-            </div>
-            <RatingField />
+        <section className='flex flex-1 flex-col bg-white'>
+          <div className='flex flex-col gap-1.5 px-5 pt-7 pb-[13px]'>
+            <h2 className='text-lg leading-7 font-semibold tracking-[-0.48px] text-[#191919]'>
+              더 남기고 싶은 내용이 있나요?
+            </h2>
+            <p className='text-sm leading-[21px] tracking-[-0.28px] text-[#767676]'>
+              {canAttachPhoto
+                ? '사진과 한줄 후기는 선택이에요.'
+                : '한줄 후기는 선택이에요.'}
+            </p>
           </div>
-        </section>
-
-        <section className='flex flex-col gap-4 bg-white px-5 py-4'>
-          <ContentField />
-          <PhotoField />
+          <div className='h-px bg-[#f3f4f6]' />
+          <div className='flex flex-col gap-7 px-5 pt-[15px] pb-8'>
+            {canAttachPhoto && (
+              <>
+                <PhotoField />
+                <div className='h-px bg-[#f3f4f6]' />
+              </>
+            )}
+            <ContentField />
+          </div>
         </section>
 
         <div
@@ -188,10 +275,56 @@ function RatingField() {
           aria-checked={field.value === i + 1}
           aria-label={`${i + 1}점`}
           onClick={() => field.onChange(i + 1)}
-          className='cursor-pointer'
+          className='-mr-0.5 cursor-pointer last:mr-0'
         >
-          {i < field.value ? <StarFilledIcon /> : <StarEmptyIcon />}
+          {i < field.value ? <StarFilledLgIcon /> : <StarEmptyLgIcon />}
         </button>
+      ))}
+    </div>
+  );
+}
+
+function KeywordField() {
+  const { field } = useController<ReviewWriteValues, 'keywords'>({
+    name: 'keywords',
+    rules: { validate: v => Object.values(v).some(level => level !== null) },
+  });
+
+  return (
+    <div className='flex flex-col gap-11'>
+      {REVIEW_KEYWORD_GROUPS.map(({ key, question, options }) => (
+        <div key={key} className='flex flex-col gap-4'>
+          <h2 className='pl-1 text-xl leading-7 font-semibold tracking-[-0.48px] text-[#333]'>
+            {question}
+          </h2>
+          <div className='flex gap-[7px]' role='group' aria-label={question}>
+            {options.map(({ level, label }) => {
+              const selected = field.value[key] === level;
+              return (
+                <button
+                  key={level}
+                  type='button'
+                  aria-pressed={selected}
+                  onClick={() =>
+                    field.onChange({
+                      ...field.value,
+                      [key]: selected ? null : level,
+                    })
+                  }
+                  className={cn(
+                    'flex flex-1 cursor-pointer items-center justify-center gap-2 border-[1.8px] py-2 text-base leading-5 font-medium',
+                    selected
+                      ? 'border-[#ff652e] text-[#ff652e]'
+                      : 'border-[#ededed] text-[#999]',
+                  )}
+                >
+                  {label}
+                  {selected && <CheckIcon aria-hidden />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -202,34 +335,23 @@ function ContentField() {
   const content = useWatch({ control, name: 'content' });
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-3'>
       <div className='flex items-center gap-1.5'>
         <h2 className='text-lg leading-6 font-semibold tracking-[-0.32px] text-[#191919]'>
-          더 남길 이야기가 있나요?
+          한줄 후기를 남겨주세요
         </h2>
+        <span className='text-xs leading-[18px] text-[#999]'>선택</span>
       </div>
-      <div className='relative h-[152px] rounded-lg border border-[#e5e7eb] bg-white'>
+      <div className='relative h-[126px] rounded-xl border border-[#e5e7eb] bg-white'>
         <textarea
-          {...register('content', {
-            validate: value => value.trim().length > 0,
-          })}
+          {...register('content')}
           maxLength={MAX_CONTENT_LENGTH}
-          placeholder='식감, 재료 등 음식에 대한 리뷰를 자유롭게 적어주세요'
-          className='size-full resize-none rounded-lg px-3.5 pt-3 pb-10 text-sm leading-6 tracking-[-0.28px] text-[#191919] outline-none placeholder:text-[#999]'
+          placeholder='먹어본 느낌을 한 줄로 남겨주세요.'
+          className='size-full resize-none rounded-xl px-4 pt-3 pb-8 text-[15px] leading-6 text-[#191919] outline-none placeholder:text-[#191919]/50'
         />
-        <p className='absolute right-3 bottom-3 text-xs leading-[18px]'>
-          <span className='text-[#767676]'>
-            {content.length.toLocaleString()}{' '}
-          </span>
-          <span className='text-[#ccc]'>
-            / {MAX_CONTENT_LENGTH.toLocaleString()}
-          </span>
+        <p className='absolute right-4 bottom-3 text-xs leading-[18px] text-[#999]'>
+          {content.length}/{MAX_CONTENT_LENGTH}
         </p>
-        {content.trim().length === 0 && (
-          <p className='absolute left-3 bottom-3 text-xs leading-[18px] text-[#999]'>
-            1자 이상 작성해야 등록할 수 있어요
-          </p>
-        )}
       </div>
     </div>
   );
@@ -239,13 +361,7 @@ function PhotoField() {
   const { control, getValues, setValue } = useFormContext<ReviewWriteValues>();
   const photos = useWatch({ control, name: 'photos' });
   const [isPicking, setIsPicking] = useState(false);
-  // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
-  const [canAttachPhoto, setCanAttachPhoto] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setCanAttachPhoto(isPhotoReviewEnabled());
-  }, []);
 
   // 사진은 비동기로 들어오니 그 사이 바뀐 값을 덮어쓰지 않도록 최신 값에 더해요
   const addPhotos = (dataUrls: string[]) => {
@@ -277,10 +393,8 @@ function PhotoField() {
     addPhotos(await Promise.all(files.map(readAsDataUrl)));
   };
 
-  if (!canAttachPhoto) return null;
-
   return (
-    <>
+    <div className='flex flex-col gap-3'>
       {photos.length > 0 && (
         <ul className='flex gap-2'>
           {photos.map((src, i) => (
@@ -313,12 +427,13 @@ function PhotoField() {
         type='button'
         onClick={handleAttachClick}
         disabled={photos.length >= MAX_PHOTOS || isPicking}
-        className='flex h-[46px] cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-[#767676] bg-white text-sm leading-[21px] font-medium text-[#191919] disabled:cursor-default disabled:opacity-50'
+        className='flex w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-[0.8px] border-dashed border-[#e5e7eb] py-8 disabled:cursor-default disabled:opacity-50'
       >
-        <CameraIcon />
-        <span>사진 첨부하기</span>
-        <span className='tracking-[-0.28px]'>
-          {photos.length}/{MAX_PHOTOS}
+        <span className='flex size-12 items-center justify-center rounded-full bg-[#f3f4f6]'>
+          <CameraIcon />
+        </span>
+        <span className='text-[15px] leading-[22.5px] font-medium text-[#6b7280]'>
+          사진 {photos.length}/{MAX_PHOTOS}
         </span>
       </button>
       <input
@@ -329,11 +444,10 @@ function PhotoField() {
         hidden
         onChange={handleFileChange}
       />
-      <p className='flex items-center gap-2 rounded-lg bg-[#f7f8fa] p-3 text-[13px] leading-[19px] tracking-[-0.26px] text-[#767676]'>
-        <MoodGoodIcon />
-        직접 찍은 음식 사진은 메뉴 선택에 도움이 돼요!
+      <p className='text-[13px] leading-[19.5px] text-[#767676]'>
+        실제 메뉴 사진은 다른 학생에게 도움이 돼요!
       </p>
-    </>
+    </div>
   );
 }
 

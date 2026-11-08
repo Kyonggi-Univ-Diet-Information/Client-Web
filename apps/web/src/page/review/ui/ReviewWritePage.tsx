@@ -44,8 +44,8 @@ export default async function ReviewWritePage({
           <CampusMenuImage
             foodCourt={foodCourt}
             menuId={foodId}
-            className='h-[72px] w-[69px] shrink-0 rounded-none'
-            sizes='69px'
+            className='h-[94px] w-[90px] shrink-0 rounded-none'
+            sizes='90px'
           />
         }
       />
