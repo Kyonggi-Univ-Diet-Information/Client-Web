@@ -1,7 +1,6 @@
 'use client';
 
 import { Button, snackbar } from '@kiryong/design-system';
-import { HeartIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useOptimistic, useTransition } from 'react';
 import { useSWRConfig } from 'swr';
@@ -13,6 +12,8 @@ import { type FoodCourt } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
+
+import LikeIcon from '../../../public/icons/icon-like.svg';
 
 interface ReviewLikeButtonProps {
   type: FoodCourt;
@@ -87,7 +88,7 @@ export default function ReviewLikeButton({
         'gap-1.5 rounded-md border px-2.5 transition-all active:scale-95',
         optimisticState.isLiked
           ? 'border-primary-500 bg-primary-500/5 text-primary-500'
-          : 'border-grey-200 bg-white text-grey-500 hover:bg-grey-50',
+          : 'border-[#ecedee] bg-white text-[#767676] hover:bg-grey-50',
       )}
     >
       <motion.div
@@ -96,18 +97,20 @@ export default function ReviewLikeButton({
         }
         transition={{ duration: 0.4, ease: [0.175, 0.885, 0.32, 1.275] }}
       >
-        <HeartIcon
-          size={14}
+        <LikeIcon
           className={cn(
             'transition-colors',
-            optimisticState.isLiked
-              ? 'fill-current'
-              : 'fill-none stroke-[2.5px]',
+            optimisticState.isLiked && '[&_path]:fill-primary-500',
           )}
         />
       </motion.div>
       <span className='text-[13px] font-medium'>도움돼요</span>
-      <span className='text-[13px] font-medium tabular-nums'>
+      <span
+        className={cn(
+          'text-[13px] font-medium tabular-nums',
+          !optimisticState.isLiked && 'text-[#191919]',
+        )}
+      >
         {optimisticState.likedCount}
       </span>
     </Button>
