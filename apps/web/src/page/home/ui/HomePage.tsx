@@ -39,13 +39,13 @@ export default async function HomePage() {
 
   return (
     <PageContainer className='gap-0 bg-grey-100 p-0'>
-      <Section className='md:px-gutter px-4 pt-20'>
+      <Section className='md:px-gutter px-4 pt-[calc(5rem+var(--safe-area-top))]'>
         <CampusFoodCourtSwitcher campusFoodCourts={CampusFoodCourts} />
       </Section>
       <Section className='md:px-gutter p-4'>
         <ReviewLinkButton />
       </Section>
-      <div className='flex flex-1 flex-col bg-white pb-[calc(5rem+env(safe-area-inset-bottom))]'>
+      <div className='flex flex-1 flex-col bg-white pb-[calc(5rem+var(--safe-area-bottom))]'>
         <header className='md:px-gutter pt-[18px] pr-5 pb-3.5 pl-6'>
           <h2 className='text-lg leading-[26px] font-semibold tracking-[-0.36px] text-grey-900'>
             이번주 기숙사 메뉴

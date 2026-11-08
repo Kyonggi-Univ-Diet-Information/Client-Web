@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 import { FOOD_COURT_ID } from '@/shared/api';
 import {
@@ -10,7 +9,6 @@ import {
   RESTAURANT_ID_BY_NAME,
 } from '@/shared/constants/campus/restaurant';
 import { cn } from '@/shared/lib';
-import { isAndroidWebView, isIos } from '@/shared/lib/platform';
 
 import Home from '../../../public/icons/icon-home.svg';
 import Restaurant2 from '../../../public/icons/icon-restaurant2.svg';
@@ -19,13 +17,6 @@ import User from '../../../public/icons/icon-user.svg';
 
 export default function BottomNavBar() {
   const pathname = usePathname();
-  const [ios, setIos] = useState(false);
-  const [androidWebView, setAndroidWebView] = useState(false);
-
-  useEffect(() => {
-    setIos(isIos());
-    setAndroidWebView(isAndroidWebView());
-  }, []);
 
   const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
   const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
@@ -69,15 +60,9 @@ export default function BottomNavBar() {
     return null;
   }
 
-  // iOS 앱은 네이티브 SafeAreaView가 하단 inset을 일부 상쇄해서(paddingBottom -24) 웹뷰 env()가 0이라 최소 24px을 직접 확보해요
+  // 구버전 iOS 앱은 네이티브 SafeAreaView가 하단 inset을 일부 상쇄해서(paddingBottom -24) 최소 24px을 직접 확보해요
   return (
-    <div
-      className={cn(
-        'fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-grey-50 bg-white/70 px-[23px] pb-[env(safe-area-inset-bottom)] backdrop-blur-md',
-        ios && 'pb-[max(env(safe-area-inset-bottom),24px)]',
-        androidWebView && 'pb-0',
-      )}
-    >
+    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-grey-50 bg-white/70 px-[23px] pb-(--safe-area-bottom) backdrop-blur-md [html[data-native-inset=ios]_&]:pb-6'>
       {navItems.map(item => {
         const isActive =
           item.href === '/'

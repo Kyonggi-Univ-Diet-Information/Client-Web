@@ -19,7 +19,7 @@ function LoginContent() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => window.history.back()}
-        className='absolute top-6 left-6 z-30 flex size-10 items-center justify-center rounded-full bg-white/80 ring-1 ring-black/5 backdrop-blur-sm transition-colors hover:bg-white'
+        className='absolute top-[calc(1.5rem+var(--safe-area-top))] left-6 z-30 flex size-10 items-center justify-center rounded-full bg-white/80 ring-1 ring-black/5 backdrop-blur-sm transition-colors hover:bg-white'
         aria-label='뒤로가기'
       >
         <ChevronLeftIcon className='size-5 text-grey-700' />

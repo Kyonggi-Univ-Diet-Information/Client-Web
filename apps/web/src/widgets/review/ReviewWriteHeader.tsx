@@ -8,7 +8,7 @@ export default function ReviewWriteHeader() {
   const router = useRouter();
 
   return (
-    <header className='sticky top-0 z-10 flex h-14 items-center border-b border-[#efefef] bg-white pr-4 pl-3'>
+    <header className='sticky top-0 z-10 flex h-[calc(3.5rem+var(--safe-area-top))] items-center pt-(--safe-area-top) border-b border-[#efefef] bg-white pr-4 pl-3'>
       <button
         type='button'
         onClick={() => router.back()}
