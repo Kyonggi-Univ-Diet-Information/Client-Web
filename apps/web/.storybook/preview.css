@@ -1,0 +1,12 @@
+@import '../src/app/_styles/globals.css';
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 45 920;
+  font-display: swap;
+}
+
+:root {
+  --font-pretendard: 'Pretendard', system-ui, arial;
+}
