@@ -137,6 +137,17 @@ html {
   overscroll-behavior-y: none;
 }
 
+:root {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 구버전 앱은 네이티브가 safe area를 비켜줘서 웹에서는 0으로 둬요 (shared/lib/safeArea.ts) */
+:root[data-native-inset] {
+  --safe-area-top: 0px;
+  --safe-area-bottom: 0px;
+}
+
 /* iOS WebView에서 input/textarea 포커스 시 자동 줌인 방지 (font-size < 16px 트리거) */
 @supports (-webkit-touch-callout: none) {
   input,

@@ -14,6 +14,7 @@ import {
 import { ErrorProvider, SWRProvider } from '@/widgets/providers';
 
 import { GA4_MEASUREMENT_ID } from '@/shared/lib/ga4';
+import { SAFE_AREA_SCRIPT } from '@/shared/lib/safeArea';
 
 export const metadata: Metadata = {
   title: '기룡아 밥먹자',
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: SAFE_AREA_SCRIPT }} />
         <link rel='icon' href='/favicon/favicon.png' type='image/png' />
         <link rel='manifest' href='/config/manifest.json' />
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
