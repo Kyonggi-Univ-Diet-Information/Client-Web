@@ -20,6 +20,8 @@ describe('submitReview', () => {
   mockFormData.append('rating', '5');
   mockFormData.append('content', '정말 맛있어요!');
   mockFormData.append('foodCourt', FOOD_COURT.KYONGSUL);
+  mockFormData.append('saltLevel', 'MID');
+  mockFormData.append('valueLevel', 'HIGH');
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -43,6 +45,8 @@ describe('submitReview', () => {
         rating: 5,
         title: '',
         content: '정말 맛있어요!',
+        saltLevel: 'MID',
+        valueLevel: 'HIGH',
       },
       authorize: true,
     });
@@ -117,6 +121,7 @@ describe('submitReview', () => {
     eSquareFormData.append('rating', '4');
     eSquareFormData.append('content', '괜찮아요');
     eSquareFormData.append('foodCourt', FOOD_COURT.E_SQUARE);
+    eSquareFormData.append('spicyLevel', 'LOW');
 
     (Http.post as jest.Mock).mockResolvedValue({});
 
@@ -135,5 +140,39 @@ describe('submitReview', () => {
       type: FOOD_COURT.E_SQUARE,
       foodId: 456,
     });
+  });
+
+  it('알 수 없는 키워드 값은 보내지 않는다', async () => {
+    (Http.post as jest.Mock).mockResolvedValue({});
+    const formData = new FormData();
+    formData.append('foodId', '123');
+    formData.append('rating', '5');
+    formData.append('content', '정말 맛있어요!');
+    formData.append('foodCourt', FOOD_COURT.KYONGSUL);
+    formData.append('saltLevel', 'HIGH');
+    formData.append('spicyLevel', 'EXTREME');
+
+    await submitReview(null, formData);
+
+    const { data } = (Http.post as jest.Mock).mock.calls[0][0];
+    expect(data.saltLevel).toBe('HIGH');
+    expect(data).not.toHaveProperty('spicyLevel');
+  });
+
+  it('키워드를 하나도 선택하지 않으면 요청 없이 에러를 반환한다', async () => {
+    const formData = new FormData();
+    formData.append('foodId', '123');
+    formData.append('rating', '5');
+    formData.append('content', '정말 맛있어요!');
+    formData.append('foodCourt', FOOD_COURT.KYONGSUL);
+
+    const result = await submitReview(null, formData);
+
+    expect(result).toEqual({
+      success: false,
+      error: '키워드를 1개 이상 선택해주세요',
+    });
+    expect(Http.post).not.toHaveBeenCalled();
+    expect(revalidateReviewCache).not.toHaveBeenCalled();
   });
 });

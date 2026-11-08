@@ -129,7 +129,7 @@ describe('ReviewWriteForm', () => {
     expect(formData.get('foodId')).toBe('7');
     expect(formData.get('foodCourt')).toBe(FOOD_COURT.KYONGSUL);
     expect(formData.get('rating')).toBe('5');
-    expect(formData.get('saltLevel')).toBe('1');
+    expect(formData.get('saltLevel')).toBe('LOW');
     expect(formData.get('spicyLevel')).toBeNull();
     expect(formData.get('content')).toBe('맛있어요');
     await waitFor(() =>

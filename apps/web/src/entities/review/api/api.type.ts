@@ -6,8 +6,11 @@ export type ReviewKeywordKey =
   | 'portionLevel'
   | 'valueLevel';
 
+// 서버가 내려주는 키워드 단계예요
+export type ReviewKeywordLevel = 'LOW' | 'MID' | 'HIGH';
+
 // 값이 없는 기존 리뷰는 null이에요
-export type ReviewKeywords = Record<ReviewKeywordKey, number | null>;
+export type ReviewKeywords = Record<ReviewKeywordKey, ReviewKeywordLevel | null>;
 
 export type Review = Partial<ReviewKeywords> & {
   id: number;

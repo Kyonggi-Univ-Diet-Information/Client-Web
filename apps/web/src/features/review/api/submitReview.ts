@@ -3,8 +3,15 @@
 
 import { revalidateReviewCache } from '@/features/review/model/revalidateReviewCache';
 
-import type { ReviewKeywordKey, ReviewPost } from '@/entities/review/api/api.type';
-import { REVIEW_KEYWORD_GROUPS } from '@/entities/review/model/reviewKeywords';
+import type {
+  ReviewKeywordKey,
+  ReviewKeywordLevel,
+  ReviewPost,
+} from '@/entities/review/api/api.type';
+import {
+  REVIEW_KEYWORD_GROUPS,
+  REVIEW_KEYWORD_LEVELS,
+} from '@/entities/review/model/reviewKeywords';
 
 import { ENDPOINT, FoodCourt } from '@/shared/api';
 import { Http } from '@/shared/api/api-handlers';
@@ -24,8 +31,10 @@ export const submitReview = async (
 
   const keywords = Object.fromEntries(
     REVIEW_KEYWORD_GROUPS.flatMap(({ key }) => {
-      const value = formData.get(key);
-      return value ? [[key, Number(value)] as [ReviewKeywordKey, number]] : [];
+      const value = formData.get(key) as ReviewKeywordLevel;
+      return REVIEW_KEYWORD_LEVELS.includes(value)
+        ? [[key, value] as [ReviewKeywordKey, ReviewKeywordLevel]]
+        : [];
     }),
   );
 
