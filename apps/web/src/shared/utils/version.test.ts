@@ -1,4 +1,10 @@
-import { getAppVersion, isPhotoReviewEnabled } from './version';
+import { MIN_APP_VERSION } from '@/shared/constants/appVersion';
+
+import {
+  getAppVersion,
+  isPhotoReviewEnabled,
+  isVersionAtLeast,
+} from './version';
 
 const setUserAgent = (ua: string) =>
   jest.spyOn(window.navigator, 'userAgent', 'get').mockReturnValue(ua);
@@ -20,10 +26,16 @@ describe('isPhotoReviewEnabled', () => {
     expect(isPhotoReviewEnabled()).toBe(false);
   });
 
-  it('APP_VERSION을 내려주는 앱에서는 켜져요', () => {
+  it('기준 버전 이상 앱에서는 켜져요', () => {
     setUserAgent('Mozilla/5.0 KiryongAndroid');
-    window.APP_VERSION = '2.1.0';
+    window.APP_VERSION = MIN_APP_VERSION.PHOTO_REVIEW;
     expect(isPhotoReviewEnabled()).toBe(true);
+  });
+
+  it('기준 버전보다 낮은 앱에서는 꺼져요', () => {
+    setUserAgent('Mozilla/5.0 KiryongAndroid');
+    window.APP_VERSION = '2.0.9';
+    expect(isPhotoReviewEnabled()).toBe(false);
   });
 
   it('window.Bridge가 없으면 window.Android의 getAppVersion으로 버전을 읽어요', () => {
@@ -35,5 +47,18 @@ describe('isPhotoReviewEnabled', () => {
     };
     expect(getAppVersion()).toBe('2.1.0');
     expect(isPhotoReviewEnabled()).toBe(true);
+  });
+});
+
+describe('isVersionAtLeast', () => {
+  it.each([
+    ['2.1.0', '2.1.0', true],
+    ['2.1.1', '2.1.0', true],
+    ['2.10.0', '2.9.0', true],
+    ['2.1', '2.1.0', true],
+    ['2.0.9', '2.1.0', false],
+    ['1.9.9', '2.0.0', false],
+  ])('%s >= %s 는 %s예요', (version, min, expected) => {
+    expect(isVersionAtLeast(version, min)).toBe(expected);
   });
 });
