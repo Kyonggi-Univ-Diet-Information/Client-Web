@@ -4,7 +4,7 @@ import { PageContainer } from '@/widgets/layout';
 
 export default function SearchLayout({ children }: { children: ReactNode }) {
   return (
-    <PageContainer className='pb-[env(safe-area-inset-bottom)]'>
+    <PageContainer className='pb-(--safe-area-bottom)'>
       {children}
     </PageContainer>
   );

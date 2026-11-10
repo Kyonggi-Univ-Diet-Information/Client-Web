@@ -46,7 +46,7 @@ export default function HeaderSearchOverlay({
         className='absolute inset-0 bg-black/20'
         aria-label='닫기'
       />
-      <div className='absolute inset-x-0 top-0 rounded-b-2xl bg-white pb-4 shadow-lg'>
+      <div className='absolute inset-x-0 top-0 rounded-b-2xl bg-white pt-(--safe-area-top) pb-4 shadow-lg'>
         <form
           onSubmit={e => {
             e.preventDefault();

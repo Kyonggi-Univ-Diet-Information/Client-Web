@@ -22,7 +22,7 @@ export default function ReviewWriteButton({
   const router = useRouter();
 
   return (
-    <div className='pointer-events-none fixed bottom-12 left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-center px-6'>
+    <div className='pointer-events-none fixed bottom-[calc(3rem+var(--safe-area-bottom))] left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-center px-6'>
       <Link
         href={`/review/${foodCourtId}/${foodId}/write`}
         className='pointer-events-auto'
