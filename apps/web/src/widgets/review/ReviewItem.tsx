@@ -5,6 +5,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 
 import type { Review } from '@/entities/review/api/api.type';
+import { getReviewKeywordLabels } from '@/entities/review/model/reviewKeywords';
 
 import { type FoodCourt } from '@/shared/api';
 import { formatShortDate, parseReviewDate } from '@/shared/lib/date';
@@ -19,6 +20,8 @@ interface ReviewItemProps extends Review {
   likedCount: number;
   isAuthenticated: boolean;
   isMyReview: boolean;
+  // BEST 리뷰 선정 기준이 서버에 없어서 값이 올 때만 배지를 보여줘요
+  isBest?: boolean;
 }
 
 export default function ReviewItem({
@@ -34,7 +37,18 @@ export default function ReviewItem({
   isAuthenticated,
   myReview,
   images,
+  saltLevel,
+  spicyLevel,
+  portionLevel,
+  valueLevel,
+  isBest = false,
 }: ReviewItemProps) {
+  const keywordLabels = getReviewKeywordLabels({
+    saltLevel,
+    spicyLevel,
+    portionLevel,
+    valueLevel,
+  });
   const maskedMemberName = memberName
     ? memberName.length > 1
       ? memberName.charAt(0) + '**'
@@ -58,7 +72,7 @@ export default function ReviewItem({
               />
             </AvatarFallback>
           </Avatar>
-          <p className='text-grey-900 text-sm font-medium'>
+          <p className='text-grey-900 text-sm font-semibold'>
             {maskedMemberName}
           </p>
         </div>
@@ -75,23 +89,32 @@ export default function ReviewItem({
 
       <div className='flex flex-col gap-2'>
         <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-[1px]'>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <Star
-                key={index}
-                size={16}
-                className={
-                  index < rating
-                    ? 'fill-primary-500 text-primary-500'
-                    : 'fill-grey-200 text-grey-200'
-                }
-              />
-            ))}
+          <div className='flex items-center gap-2'>
+            <div className='flex items-center'>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Star
+                  key={index}
+                  size={18}
+                  className={
+                    index < rating
+                      ? 'fill-primary-500 text-primary-500'
+                      : 'fill-grey-200 text-grey-200'
+                  }
+                />
+              ))}
+            </div>
+            {isBest && (
+              <span className='border-primary-500 text-primary-500 rounded-[2px] border-[0.4px] bg-white px-1 py-0.5 text-xs font-medium tracking-[-0.72px]'>
+                BEST 리뷰
+              </span>
+            )}
           </div>
-          <span className='text-grey-400 text-xs'>{formattedDate}</span>
+          <span className='text-grey-400 text-xs font-medium'>
+            {formattedDate}
+          </span>
         </div>
         {images && images.length > 0 && (
-          <ul className='md:-mr-gutter mt-1 -mr-4 flex gap-0.5 overflow-x-auto rounded-lg [scrollbar-width:none]'>
+          <ul className='md:-mr-gutter mt-1 -mr-4 flex gap-0.5 overflow-x-auto rounded-l-lg [scrollbar-width:none]'>
             {images.map(({ id, url }, i) => (
               <li key={id} className='border-grey-100 size-[154px] shrink-0'>
                 {/* S3 presigned URL이 10분 뒤 만료돼서 next/image 캐시를 쓰면 깨져요 */}
@@ -99,13 +122,25 @@ export default function ReviewItem({
                 <img
                   src={url}
                   alt={`리뷰 사진 ${i + 1}`}
-                  className='size-full rounded-lg object-cover'
+                  className='size-full object-cover'
                 />
               </li>
             ))}
           </ul>
         )}
-        <p className='text-grey-700 text-sm leading-relaxed break-words whitespace-pre-wrap'>
+        {keywordLabels.length > 0 && (
+          <ul className='flex flex-wrap gap-1.5 pt-1.5 pb-1'>
+            {keywordLabels.map(label => (
+              <li
+                key={label}
+                className='rounded-full bg-[#f2f2f7] px-2.5 py-1 text-xs leading-[18px] text-[#555]'
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className='text-sm leading-[21px] font-medium break-words whitespace-pre-wrap text-[#191919]'>
           {content}
         </p>
       </div>

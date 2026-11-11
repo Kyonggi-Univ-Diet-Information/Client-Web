@@ -1,6 +1,18 @@
 import { FoodCourt } from '@/shared/api';
 
-export type Review = {
+export type ReviewKeywordKey =
+  | 'saltLevel'
+  | 'spicyLevel'
+  | 'portionLevel'
+  | 'valueLevel';
+
+// 서버가 내려주는 키워드 단계예요
+export type ReviewKeywordLevel = 'LOW' | 'MID' | 'HIGH';
+
+// 값이 없는 기존 리뷰는 null이에요
+export type ReviewKeywords = Record<ReviewKeywordKey, ReviewKeywordLevel | null>;
+
+export type Review = Partial<ReviewKeywords> & {
   id: number;
   rating: number;
   title: string;
@@ -21,9 +33,10 @@ export type RecentReview = Pick<
   restaurantType: FoodCourt;
 };
 
-export type ReviewPost = Pick<Review, 'rating' | 'title' | 'content'> & {
-  imageKeys?: string[];
-};
+export type ReviewPost = Pick<Review, 'rating' | 'title' | 'content'> &
+  Partial<ReviewKeywords> & {
+    imageKeys?: string[];
+  };
 
 export type ReviewSort = 'recent' | 'rating-desc' | 'rating-asc';
 

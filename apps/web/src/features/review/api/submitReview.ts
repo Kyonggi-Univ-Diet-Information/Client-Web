@@ -3,7 +3,15 @@
 
 import { revalidateReviewCache } from '@/features/review/model/revalidateReviewCache';
 
-import type { ReviewPost } from '@/entities/review/api/api.type';
+import type {
+  ReviewKeywordKey,
+  ReviewKeywordLevel,
+  ReviewPost,
+} from '@/entities/review/api/api.type';
+import {
+  REVIEW_KEYWORD_GROUPS,
+  REVIEW_KEYWORD_LEVELS,
+} from '@/entities/review/model/reviewKeywords';
 
 import { ENDPOINT, FoodCourt } from '@/shared/api';
 import { Http } from '@/shared/api/api-handlers';
@@ -21,6 +29,20 @@ export const submitReview = async (
   const type = formData.get('foodCourt') as FoodCourt;
   const imageKeys = formData.getAll('imageKeys').map(String);
 
+  const keywords = Object.fromEntries(
+    REVIEW_KEYWORD_GROUPS.flatMap(({ key }) => {
+      const value = formData.get(key) as ReviewKeywordLevel;
+      return REVIEW_KEYWORD_LEVELS.includes(value)
+        ? [[key, value] as [ReviewKeywordKey, ReviewKeywordLevel]]
+        : [];
+    }),
+  );
+
+  // 키워드는 최소 1개가 필수라 없으면 서버 400 전에 막아요
+  if (Object.keys(keywords).length === 0) {
+    return { success: false, error: '키워드를 1개 이상 선택해주세요' };
+  }
+
   return runServerAction(async () => {
     await Http.post<ReviewPost>({
       request: ENDPOINT.REVIEW_CUD.SUBMIT(type, foodId),
@@ -28,6 +50,7 @@ export const submitReview = async (
         rating: rating,
         title: title,
         content: content,
+        ...keywords,
         ...(imageKeys.length > 0 && { imageKeys }),
       },
       authorize: true,
