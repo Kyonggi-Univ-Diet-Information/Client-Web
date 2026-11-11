@@ -48,7 +48,7 @@ export default function ChipNavigation({
         className,
       )}
     >
-      <div className='size-4 flex-shrink-0' />
+      <div className='size-4 flex-shrink-0 lg:w-[calc(var(--spacing-gutter)-0.375rem)]' />
       {tabs.map(tab => (
         <Link
           prefetch
