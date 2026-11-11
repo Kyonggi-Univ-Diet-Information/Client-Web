@@ -1,4 +1,10 @@
-export type ServerActionResult = { success: boolean; error?: string };
+export type ServerActionErrorType = 'network' | 'validation' | 'server' | 'unknown';
+
+export type ServerActionResult = {
+  success: boolean;
+  error?: string;
+  errorType?: ServerActionErrorType;
+};
 
 export async function runServerAction(
   fn: () => Promise<void>,
