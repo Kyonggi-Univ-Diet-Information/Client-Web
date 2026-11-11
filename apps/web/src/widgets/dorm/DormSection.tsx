@@ -7,6 +7,7 @@ import type { FetchDormMenuResponse } from '@/entities/dorm/api/api.model';
 import { DORM_DAY_KEY, type DormDay } from '@/entities/dorm/model/dormDay';
 import type { DormTime } from '@/entities/dorm/model/dormTime';
 
+import { cn } from '@/shared/lib';
 import { getCurrentDate } from '@/shared/lib/date';
 
 import DormMenuAll from './DormMenuAll';
@@ -22,9 +23,11 @@ const MEAL_TIME_OPTIONS: { value: DormTime; label: string }[] = [
 export default function DormSection({
   dormMenu,
   initialDay,
+  className,
 }: {
   dormMenu: FetchDormMenuResponse | null;
   initialDay?: DormDay;
+  className?: string;
 }) {
   const today = getCurrentDate().getDay();
   const [currentDay, setCurrentDay] = useState<DormDay>(
@@ -36,7 +39,7 @@ export default function DormSection({
   );
 
   return (
-    <Section className='md:px-gutter flex-1 px-4'>
+    <Section className={cn('md:px-gutter flex-1 px-4', className)}>
       <WeeklyCalendar currentDay={currentDay} onSelectDay={setCurrentDay} />
       <Tab
         size='sm'
