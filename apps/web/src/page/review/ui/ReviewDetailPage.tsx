@@ -82,6 +82,7 @@ export default async function ReviewDetailPage({
         foodCourtId={foodCourtId}
         foodId={foodId}
         isAuthenticated={isAuthenticated}
+        referrer='menu_detail_review_list'
       />
     </div>
   );
