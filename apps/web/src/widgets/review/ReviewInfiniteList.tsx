@@ -92,6 +92,7 @@ export default function ReviewInfiniteList({
             foodId={foodId}
             {...review}
             isAuthenticated={data?.[0]?.isAuthenticated ?? false}
+            location='review_list'
           />
         ))}
       </div>

@@ -11,6 +11,7 @@ import ReviewPreviewCarousel from '@/widgets/review/ReviewPreviewCarousel';
 import { fetchCampusMenuDetail } from '@/features/campus/api/fetchCampusMenuDetail';
 import { fetchReviewCount } from '@/features/review/api/fetchReviewCount';
 import { getReviewsAction } from '@/features/review/api/getReviewsAction';
+import { parseReviewReferrer } from '@/features/review/model/reviewFunnel';
 
 import { FOOD_COURT, FOOD_COURT_NAME, getFoodCourtById } from '@/shared/api';
 import { CAMPUS_RESTAURANT } from '@/shared/constants/campus/restaurant';
@@ -22,11 +23,15 @@ import ReviewWriteButton from './ReviewWriteButton';
 
 export interface ReviewPageProps {
   params: Promise<{ foodCourtId: string; foodId: string }>;
+  searchParams: Promise<{ referrer?: string }>;
 }
 
-export default async function ReviewPage({ params }: ReviewPageProps) {
-  const [{ foodCourtId, foodId: foodIdParam }, isAuthenticated] =
-    await Promise.all([params, AuthService.isAuthenticated()]);
+export default async function ReviewPage({
+  params,
+  searchParams,
+}: ReviewPageProps) {
+  const [{ foodCourtId, foodId: foodIdParam }, { referrer }, isAuthenticated] =
+    await Promise.all([params, searchParams, AuthService.isAuthenticated()]);
 
   const foodCourt = getFoodCourtById(foodCourtId);
   if (!foodCourt) {
@@ -141,6 +146,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         foodCourtId={foodCourtId}
         foodId={foodId}
         isAuthenticated={isAuthenticated}
+        referrer={parseReviewReferrer(referrer)}
       />
     </div>
   );

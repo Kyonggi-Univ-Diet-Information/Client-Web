@@ -24,6 +24,13 @@ import { useSWRConfig } from 'swr';
 
 import { submitReview } from '@/features/review/api/submitReview';
 import { uploadReviewImages } from '@/features/review/api/uploadReviewImages';
+import {
+  createReviewAttemptId,
+  getReviewErrorType,
+  parseReviewReferrer,
+  REVIEW_REFERRER_QUERY_KEY,
+  REVIEW_FLOW_VERSION,
+} from '@/features/review/model/reviewFunnel';
 
 import type { ReviewKeywords } from '@/entities/review/api/api.type';
 import {
@@ -81,6 +88,20 @@ export default function ReviewWriteForm({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { mutate } = useSWRConfig();
+  const attemptRef = useRef<{
+    id: string;
+    startedAt: number;
+    step1Completed: boolean;
+    submitted: boolean;
+  } | null>(null);
+  const referrer = parseReviewReferrer(
+    searchParams.get(REVIEW_REFERRER_QUERY_KEY),
+  );
+  const getFunnelParams = () => ({
+    referrer: referrer,
+    flow_version: REVIEW_FLOW_VERSION,
+    attempt_id: attemptRef.current?.id ?? '',
+  });
   const form = useForm<ReviewWriteValues>({
     mode: 'onChange',
     defaultValues: {
@@ -109,13 +130,23 @@ export default function ReviewWriteForm({
         const keys = await uploadReviewImages(images);
         keys.forEach(key => formData.append('imageKeys', key));
       } catch (error) {
+        const errorType = getReviewErrorType(error);
         return {
           success: false,
           error:
             error instanceof Error ? error.message : '사진 업로드에 실패했어요',
+          errorType: errorType === 'unknown' ? 'server' : errorType,
         };
       }
-      return submitReview(prev, formData);
+      try {
+        return await submitReview(prev, formData);
+      } catch (error) {
+        return {
+          success: false,
+          error: '리뷰 등록에 실패했습니다',
+          errorType: getReviewErrorType(error),
+        };
+      }
     },
     null,
   );
@@ -125,17 +156,42 @@ export default function ReviewWriteForm({
   }, []);
 
   useEffect(() => {
+    if (attemptRef.current) return;
+    attemptRef.current = {
+      id: createReviewAttemptId(),
+      startedAt: Date.now(),
+      step1Completed: false,
+      submitted: false,
+    };
+    trackEvent('review_start', getFunnelParams());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (state?.error) {
-      trackEvent('review_submit_error', { error_message: state.error });
+      trackEvent('review_submit_error', {
+        ...getFunnelParams(),
+        error_type: state.errorType ?? 'server',
+        error_message: state.error,
+      });
       snackbar.error(state.error);
     } else if (state?.success) {
-      const { rating, content } = form.getValues();
-      trackEvent('review_submit_success', {
-        menu_id: String(foodId),
-        rating,
-        content_length: content.length,
-        language: navigator.language || 'ko',
-      });
+      const { rating, content, photos, keywords } = form.getValues();
+      const attempt = attemptRef.current;
+      if (attempt && !attempt.submitted) {
+        attempt.submitted = true;
+        trackEvent('review_submit_success', {
+          ...getFunnelParams(),
+          menu_id: String(foodId),
+          rating,
+          content_length: content.length,
+          language: navigator.language || 'ko',
+          duration_sec: Math.round((Date.now() - attempt.startedAt) / 1000),
+          keyword_count: Object.values(keywords).filter(level => level !== null)
+            .length,
+          photo_count: photos.length,
+        });
+      }
       mutate(
         createMutateMatcher(
           reviewKeys.all(),
@@ -201,7 +257,16 @@ export default function ReviewWriteForm({
             <button
               type='button'
               disabled={!hasKeyword}
-              onClick={() => router.push(`${pathname}?step=detail`)}
+              onClick={() => {
+                const attempt = attemptRef.current;
+                if (attempt && !attempt.step1Completed) {
+                  attempt.step1Completed = true;
+                  trackEvent('review_step1_complete', getFunnelParams());
+                }
+                const nextParams = new URLSearchParams(searchParams.toString());
+                nextParams.set('step', 'detail');
+                router.push(`${pathname}?${nextParams.toString()}`);
+              }}
               className='flex h-[46px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#25251f] text-base leading-6 font-semibold text-white disabled:cursor-default disabled:opacity-40'
             >
               다음

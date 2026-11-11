@@ -40,7 +40,11 @@ export const submitReview = async (
 
   // 키워드는 최소 1개가 필수라 없으면 서버 400 전에 막아요
   if (Object.keys(keywords).length === 0) {
-    return { success: false, error: '키워드를 1개 이상 선택해주세요' };
+    return {
+      success: false,
+      error: '키워드를 1개 이상 선택해주세요',
+      errorType: 'validation',
+    };
   }
 
   return runServerAction(async () => {

@@ -6,6 +6,7 @@ import { submitReview } from '@/features/review/api/submitReview';
 import { uploadReviewImages } from '@/features/review/api/uploadReviewImages';
 
 import { FOOD_COURT } from '@/shared/api';
+import { trackEvent } from '@/shared/lib/ga4';
 import { isPhotoReviewEnabled } from '@/shared/utils/version';
 
 import ReviewWriteForm from './ReviewWriteForm';
@@ -32,6 +33,7 @@ jest.mock('swr', () => ({
 jest.mock('@/features/review/api/submitReview');
 jest.mock('@/features/review/api/uploadReviewImages');
 jest.mock('@/shared/utils/version');
+jest.mock('@/shared/lib/ga4', () => ({ trackEvent: jest.fn() }));
 jest.mock('../../../public/icons/icon-camera-lg.svg', () => () => null);
 jest.mock('../../../public/icons/icon-check.svg', () => () => null);
 jest.mock('../../../public/icons/icon-star-empty-lg.svg', () => () => null);
@@ -59,6 +61,9 @@ const goToDetailStep = async (user: ReturnType<typeof userEvent.setup>) => {
   await user.click(screen.getByRole('button', { name: '싱거워요' }));
   await user.click(screen.getByRole('button', { name: '다음' }));
 };
+
+const trackedEvents = (name: string) =>
+  (trackEvent as jest.Mock).mock.calls.filter(([event]) => event === name);
 
 const submittedFormData = () =>
   (submitReview as jest.Mock).mock.calls[0][1] as FormData;
@@ -180,5 +185,88 @@ describe('ReviewWriteForm', () => {
     );
     expect(screen.getByRole('textbox')).toHaveValue('맛있어요');
     expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  describe('GA4 리뷰 작성 Funnel', () => {
+    it('작성 시작부터 등록 성공까지 같은 attempt_id와 referrer로 한 번씩 기록한다', async () => {
+      mockSearch = 'referrer=home_recent';
+      const user = userEvent.setup();
+      renderForm();
+
+      expect(trackedEvents('review_start')).toHaveLength(1);
+      const [, startParams] = trackedEvents('review_start')[0];
+      expect(startParams).toEqual({
+        referrer: 'home_recent',
+        flow_version: 'revamp_v1',
+        attempt_id: expect.any(String),
+      });
+
+      await goToDetailStep(user);
+      expect(mockPush).toHaveBeenCalledWith(
+        `${mockPathname}?referrer=home_recent&step=detail`,
+      );
+      expect(trackedEvents('review_step1_complete')).toEqual([
+        ['review_step1_complete', startParams],
+      ]);
+
+      await user.click(
+        await screen.findByRole('button', { name: '리뷰 등록하기' }),
+      );
+
+      await waitFor(() =>
+        expect(trackedEvents('review_submit_success')).toHaveLength(1),
+      );
+      expect(trackedEvents('review_submit_success')[0][1]).toEqual(
+        expect.objectContaining({
+          ...startParams,
+          duration_sec: expect.any(Number),
+          keyword_count: 1,
+          photo_count: 0,
+        }),
+      );
+      expect(trackedEvents('review_start')).toHaveLength(1);
+    });
+
+    it('리뷰 목록에서 들어오면 menu_detail_review_list로 기록한다', () => {
+      mockSearch = 'referrer=menu_detail_review_list';
+      renderForm();
+
+      expect(trackedEvents('review_start')[0][1]).toEqual(
+        expect.objectContaining({ referrer: 'menu_detail_review_list' }),
+      );
+    });
+
+    it('referrer 쿼리가 없으면 menu_detail로 기록한다', () => {
+      renderForm();
+
+      expect(trackedEvents('review_start')[0][1]).toEqual(
+        expect.objectContaining({ referrer: 'menu_detail' }),
+      );
+    });
+
+    it('등록 실패는 error_type과 함께 기록하고 성공 이벤트는 남기지 않는다', async () => {
+      (submitReview as jest.Mock).mockResolvedValue({
+        success: false,
+        error: '리뷰 등록에 실패했습니다',
+      });
+      const user = userEvent.setup();
+      renderForm();
+      await goToDetailStep(user);
+      await user.click(
+        await screen.findByRole('button', { name: '리뷰 등록하기' }),
+      );
+
+      await waitFor(() =>
+        expect(trackedEvents('review_submit_error')).toHaveLength(1),
+      );
+      expect(trackedEvents('review_submit_error')[0][1]).toEqual(
+        expect.objectContaining({
+          referrer: 'menu_detail',
+          error_type: 'server',
+          attempt_id: trackedEvents('review_start')[0][1].attempt_id,
+        }),
+      );
+      expect(trackedEvents('review_submit_success')).toHaveLength(0);
+    });
   });
 });

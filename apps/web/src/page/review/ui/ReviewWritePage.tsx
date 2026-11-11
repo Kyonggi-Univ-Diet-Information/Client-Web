@@ -5,19 +5,25 @@ import ReviewWriteForm from '@/widgets/review/ReviewWriteForm';
 import ReviewWriteHeader from '@/widgets/review/ReviewWriteHeader';
 
 import { fetchCampusMenuDetail } from '@/features/campus/api/fetchCampusMenuDetail';
+import {
+  parseReviewReferrer,
+  withReviewReferrer,
+} from '@/features/review/model/reviewFunnel';
 
 import { getFoodCourtById } from '@/shared/api';
 import { AuthService } from '@/shared/lib/auth';
 
 export interface ReviewWritePageProps {
   params: Promise<{ foodCourtId: string; foodId: string }>;
+  searchParams: Promise<{ referrer?: string }>;
 }
 
 export default async function ReviewWritePage({
   params,
+  searchParams,
 }: ReviewWritePageProps) {
-  const [{ foodCourtId, foodId: foodIdParam }, isAuthenticated] =
-    await Promise.all([params, AuthService.isAuthenticated()]);
+  const [{ foodCourtId, foodId: foodIdParam }, { referrer }, isAuthenticated] =
+    await Promise.all([params, searchParams, AuthService.isAuthenticated()]);
 
   const foodCourt = getFoodCourtById(foodCourtId);
   const foodId = Number(foodIdParam);
@@ -26,7 +32,10 @@ export default async function ReviewWritePage({
   }
 
   if (!isAuthenticated) {
-    const returnUrl = `/review/${foodCourtId}/${foodId}/write`;
+    const returnUrl = withReviewReferrer(
+      `/review/${foodCourtId}/${foodId}/write`,
+      parseReviewReferrer(referrer),
+    );
     redirect(`/auth/login?returnUrl=${encodeURIComponent(returnUrl)}`);
   }
 

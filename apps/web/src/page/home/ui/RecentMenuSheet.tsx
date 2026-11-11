@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 import CampusMenuImage from '@/widgets/campus/CampusMenuImage';
 
+import { withReviewReferrer } from '@/features/review/model/reviewFunnel';
+
 import type { RecentMenu } from '@/entities/campus/model/recentMenus';
 
 import { FOOD_COURT_ID, FOOD_COURT_NAME } from '@/shared/api';
@@ -45,7 +47,10 @@ export default function RecentMenuSheet({
         {menus.map(menu => (
           <Link
             key={`${menu.foodCourt}-${menu.foodId}`}
-            href={`/review/${FOOD_COURT_ID[menu.foodCourt]}/${menu.foodId}`}
+            href={withReviewReferrer(
+              `/review/${FOOD_COURT_ID[menu.foodCourt]}/${menu.foodId}`,
+              'home_recent',
+            )}
             className='flex h-[76px] items-center gap-3 border-t border-grey-100 px-5 active:bg-grey-50'
           >
             <CampusMenuImage

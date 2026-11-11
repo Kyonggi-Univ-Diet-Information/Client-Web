@@ -12,6 +12,7 @@ import { type FoodCourt } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { trackEvent } from '@/shared/lib/ga4';
 import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
+import type { GA4ReviewLocation } from '@/shared/types/ga4';
 
 import LikeIcon from '../../../public/icons/icon-like.svg';
 
@@ -22,6 +23,7 @@ interface ReviewLikeButtonProps {
   initialIsLiked: boolean;
   likedCount: number;
   isDisabled: boolean;
+  location?: GA4ReviewLocation;
 }
 
 export default function ReviewLikeButton({
@@ -31,6 +33,7 @@ export default function ReviewLikeButton({
   initialIsLiked,
   likedCount,
   isDisabled,
+  location,
 }: ReviewLikeButtonProps) {
   const { mutate } = useSWRConfig();
   const [isPending, startTransition] = useTransition();
@@ -60,7 +63,8 @@ export default function ReviewLikeButton({
           });
         } else {
           await submitReviewFav(reviewId, type);
-          trackEvent('review_like', {
+          trackEvent('review_helpful_click', {
+            review_location: location,
             review_id: String(reviewId),
             review_rating: reviewRating,
           });

@@ -171,6 +171,7 @@ describe('submitReview', () => {
     expect(result).toEqual({
       success: false,
       error: '키워드를 1개 이상 선택해주세요',
+      errorType: 'validation',
     });
     expect(Http.post).not.toHaveBeenCalled();
     expect(revalidateReviewCache).not.toHaveBeenCalled();
