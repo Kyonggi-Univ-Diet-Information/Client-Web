@@ -48,11 +48,11 @@ export default function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 flex h-16 w-full items-center bg-white',
+        'fixed top-0 z-50 w-full bg-white pt-(--safe-area-top)',
         pathname === '/' && 'bg-grey-100/70 backdrop-blur-md',
       )}
     >
-      <div className='md:px-gutter flex w-full items-center justify-between px-4'>
+      <div className='md:px-gutter flex h-16 w-full items-center justify-between px-4'>
         <MobileHeader />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (

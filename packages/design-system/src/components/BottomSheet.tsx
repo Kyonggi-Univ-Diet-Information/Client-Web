@@ -58,7 +58,7 @@ export default function BottomSheet({
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-        className='relative z-10 flex w-full flex-col rounded-t-2xl bg-white pb-6 shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-20 after:bg-white'
+        className='relative z-10 flex w-full flex-col rounded-t-2xl bg-white pb-[calc(1.5rem+var(--safe-area-bottom,0px))] shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-20 after:bg-white'
       >
         <div className='flex items-start justify-center pt-3 pb-1'>
           <span className='bg-grey-200 h-1 w-9 rounded-full' />
