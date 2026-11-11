@@ -1,7 +1,7 @@
 import { useKakaoSDK } from '@/features/auth/model/useKakaoSDK';
 import { useSocialLogin } from '@/features/auth/model/useSocialLogin';
 
-import { isAndroid, isIos } from '@/shared/lib';
+import { isAndroid, isInApp, isIos } from '@/shared/lib';
 import { LoginButton } from '@/shared/ui';
 
 
@@ -35,7 +35,7 @@ function KakaoLoginButton() {
 function AppleLoginButton() {
   const { login } = useSocialLogin({ provider: 'apple' });
 
-  if (!isIos()) return null;
+  if (!isIos() || !isInApp()) return null;
 
   return (
     <LoginButton
@@ -54,7 +54,7 @@ function AppleLoginButton() {
 function GoogleLoginButton() {
   const { login } = useSocialLogin({ provider: 'google' });
 
-  if (!isAndroid()) return null;
+  if (!isAndroid() || !isInApp()) return null;
 
   return (
     <LoginButton
