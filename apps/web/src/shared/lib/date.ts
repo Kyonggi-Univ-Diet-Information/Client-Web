@@ -151,3 +151,7 @@ export function getRelativeDate(date: Date): string {
 export function formatShortDate(date: Date): string {
   return dayjs(date).format('YY.MM.DD');
 }
+
+export function formatDotDate(date: Date): string {
+  return dayjs(date).format('YYYY.MM.DD');
+}
