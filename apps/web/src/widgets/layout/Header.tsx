@@ -1,6 +1,7 @@
 'use client';
 
 import { ChevronLeftIcon, MessageSquareWarning, Search } from 'lucide-react';
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
@@ -11,6 +12,7 @@ import { cn } from '@/shared/lib';
 import { ExternalLink } from '@/shared/ui';
 
 import HeaderSearchOverlay from './HeaderSearchOverlay';
+import { isNavItemActive, NAV_ITEMS } from './navItems';
 
 export default function Header() {
   const pathname = usePathname();
@@ -34,7 +36,7 @@ export default function Header() {
           if (isDepthPage()) router.back();
           else router.push('/');
         }}
-        className='flex cursor-pointer items-baseline gap-2 focus:outline-none'
+        className='flex cursor-pointer items-baseline gap-2 focus:outline-none lg:hidden'
       >
         {isDepthPage() ? (
           <ChevronLeftIcon />
@@ -52,8 +54,9 @@ export default function Header() {
         pathname === '/' && 'bg-grey-100/70 backdrop-blur-md',
       )}
     >
-      <div className='md:px-gutter flex h-16 w-full items-center justify-between px-4'>
+      <div className='md:px-gutter flex h-16 w-full items-center justify-between px-4 lg:mx-auto lg:max-w-[1180px]'>
         <MobileHeader />
+        <DesktopNav pathname={pathname} />
         <div className='flex items-center gap-4'>
           {!isDepthPage() && (
             <button
@@ -81,5 +84,32 @@ export default function Header() {
         <HeaderSearchOverlay onClose={() => setIsSearchOpen(false)} />
       )}
     </header>
+  );
+}
+
+function DesktopNav({ pathname }: { pathname: string }) {
+  return (
+    <div className='hidden items-center gap-10 lg:flex'>
+      <Link href='/' className='font-gyeonggiTitleBold text-xl font-bold'>
+        기밥
+      </Link>
+      <nav className='flex items-center gap-6'>
+        {NAV_ITEMS.map(item => (
+          <Link
+            key={item.href}
+            href={item.href}
+            prefetch
+            className={cn(
+              'text-[15px] font-semibold transition-colors hover:text-grey-900',
+              isNavItemActive(pathname, item.href)
+                ? 'text-grey-900'
+                : 'text-grey-400',
+            )}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+    </div>
   );
 }
