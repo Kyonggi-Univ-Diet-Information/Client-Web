@@ -9,6 +9,7 @@ import { getReviewKeywordLabels } from '@/entities/review/model/reviewKeywords';
 
 import { type FoodCourt } from '@/shared/api';
 import { formatShortDate, parseReviewDate } from '@/shared/lib/date';
+import type { GA4ReviewLocation } from '@/shared/types/ga4';
 
 import ReviewActionMenu from './ReviewActionMenu';
 import ReviewFavButton from './ReviewFavButton';
@@ -22,6 +23,7 @@ interface ReviewItemProps extends Review {
   isMyReview: boolean;
   // BEST 리뷰 선정 기준이 서버에 없어서 값이 올 때만 배지를 보여줘요
   isBest?: boolean;
+  location?: GA4ReviewLocation;
 }
 
 export default function ReviewItem({
@@ -42,6 +44,7 @@ export default function ReviewItem({
   portionLevel,
   valueLevel,
   isBest = false,
+  location,
 }: ReviewItemProps) {
   const keywordLabels = getReviewKeywordLabels({
     saltLevel,
@@ -153,6 +156,7 @@ export default function ReviewItem({
           initialIsLiked={isLiked}
           likedCount={likedCount}
           isDisabled={!isAuthenticated}
+          location={location}
         />
       </div>
     </div>
