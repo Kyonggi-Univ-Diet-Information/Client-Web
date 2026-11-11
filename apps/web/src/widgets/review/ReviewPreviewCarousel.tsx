@@ -5,6 +5,8 @@ import type { ReviewWithMetadata } from '@/features/review/api/getReviewsAction'
 
 import { getRelativeDate, parseReviewDate } from '@/shared/lib/date';
 
+import ReviewKeywordChips from './ReviewKeywordChips';
+
 export default function ReviewPreviewCarousel({
   reviews,
   href,
@@ -44,6 +46,7 @@ export default function ReviewPreviewCarousel({
                   </span>
                 </div>
               </div>
+              <ReviewKeywordChips keywords={review} />
               <p className='line-clamp-2 text-sm text-grey-600'>
                 {review.content}
               </p>
