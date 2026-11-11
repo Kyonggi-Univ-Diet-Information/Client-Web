@@ -27,7 +27,8 @@ export type Review = Partial<ReviewKeywords> & {
 export type RecentReview = Pick<
   Review,
   'memberName' | 'rating' | 'title' | 'content' | 'createdAt' | 'myReview'
-> & {
+> &
+  Partial<ReviewKeywords> & {
   foodId: number;
   reviewId: number;
   restaurantType: FoodCourt;
