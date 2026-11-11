@@ -29,17 +29,16 @@ export interface GA4RatingSelectParams extends GA4BaseParams {
   language: string;
 }
 
-export interface GA4ReviewSubmitSuccessParams extends GA4BaseParams {
+export interface GA4ReviewSubmitSuccessParams
+  extends GA4BaseParams,
+    GA4ReviewFunnelParams {
   menu_id: string;
   rating: number;
   content_length: number;
   language: string;
-}
-
-export interface GA4ReviewLikeParams extends GA4BaseParams {
-  review_id: string;
-  review_rating: number;
-  content_length?: number;
+  duration_sec: number;
+  keyword_count: number;
+  photo_count: number;
 }
 
 export interface GA4ReviewUnlikeParams extends GA4BaseParams {
@@ -76,10 +75,45 @@ export interface GA4ReviewActionParams extends GA4BaseParams {
   is_my_review: boolean;
 }
 
-export interface GA4ReviewWriteClickParams extends GA4BaseParams {
-  menu_id: string;
-  food_court_id: string;
-  is_authenticated: boolean;
+export type GA4ReviewReferrer =
+  | 'menu_detail'
+  | 'menu_detail_review_list'
+  | 'home_recent';
+
+export type GA4ReviewFlowVersion = 'legacy' | 'revamp_v1';
+
+export type GA4ReviewErrorType = 'network' | 'validation' | 'server' | 'unknown';
+
+export type GA4ReviewLocation = 'menu_detail' | 'review_list';
+
+export interface GA4ReviewCtaParams extends GA4BaseParams {
+  referrer: GA4ReviewReferrer;
+  flow_version: GA4ReviewFlowVersion;
+  menu_id?: string;
+  food_court_id?: string;
+  is_authenticated?: boolean;
+}
+
+export interface GA4ReviewFunnelParams extends GA4BaseParams {
+  referrer: GA4ReviewReferrer;
+  flow_version: GA4ReviewFlowVersion;
+  attempt_id: string;
+}
+
+export interface GA4ReviewSubmitErrorParams extends GA4ReviewFunnelParams {
+  error_type: GA4ReviewErrorType;
+  error_message?: string;
+}
+
+export interface GA4ReviewPhotoOpenParams extends GA4BaseParams {
+  photo_source: GA4ReviewLocation;
+  review_id: string;
+}
+
+export interface GA4ReviewHelpfulClickParams extends GA4BaseParams {
+  review_location?: GA4ReviewLocation;
+  review_id: string;
+  review_rating: number;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -146,7 +180,6 @@ export type GA4EventName =
   | 'rating_select'
   | 'review_submit_success'
   | 'review_submit_error'
-  | 'review_like'
   | 'review_unlike'
   | 'review_like_error'
   | 'error'
@@ -155,7 +188,12 @@ export type GA4EventName =
   | 'review_button_click'
   // 리뷰
   | 'review_action'
-  | 'review_write_click'
+  | 'review_cta_view'
+  | 'review_cta_click'
+  | 'review_start'
+  | 'review_step1_complete'
+  | 'review_photo_open'
+  | 'review_helpful_click'
   // 검색
   | 'search_filter_change'
   | 'search_sort_change'
@@ -177,15 +215,19 @@ export interface GA4EventParamsMap {
   menu_click: GA4MenuClickParams;
   rating_select: GA4RatingSelectParams;
   review_submit_success: GA4ReviewSubmitSuccessParams;
-  review_submit_error: GA4ErrorParams;
-  review_like: GA4ReviewLikeParams;
+  review_submit_error: GA4ReviewSubmitErrorParams;
   review_unlike: GA4ReviewUnlikeParams;
   review_like_error: GA4ErrorParams;
   error: GA4ErrorParams;
   campus_tab_click: GA4CampusTabClickParams;
   review_button_click: GA4ReviewButtonClickParams;
   review_action: GA4ReviewActionParams;
-  review_write_click: GA4ReviewWriteClickParams;
+  review_cta_view: GA4ReviewCtaParams;
+  review_cta_click: GA4ReviewCtaParams;
+  review_start: GA4ReviewFunnelParams;
+  review_step1_complete: GA4ReviewFunnelParams;
+  review_photo_open: GA4ReviewPhotoOpenParams;
+  review_helpful_click: GA4ReviewHelpfulClickParams;
   search_filter_change: GA4SearchFilterChangeParams;
   search_sort_change: GA4SearchSortChangeParams;
   search_reset: GA4SearchResetParams;
