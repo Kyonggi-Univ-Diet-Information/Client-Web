@@ -124,6 +124,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           {initialReviews.content.length > 0 && (
             <ReviewPreviewCarousel
               reviews={initialReviews.content.slice(0, 5)}
+              menuName={menuDetail.name}
               href={reviewListHref}
             />
           )}

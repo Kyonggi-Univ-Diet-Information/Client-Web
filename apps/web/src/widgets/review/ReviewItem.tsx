@@ -5,13 +5,13 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 
 import type { Review } from '@/entities/review/api/api.type';
-import { getReviewKeywordLabels } from '@/entities/review/model/reviewKeywords';
 
 import { type FoodCourt } from '@/shared/api';
 import { formatShortDate, parseReviewDate } from '@/shared/lib/date';
 
 import ReviewActionMenu from './ReviewActionMenu';
 import ReviewFavButton from './ReviewFavButton';
+import ReviewKeywordChips from './ReviewKeywordChips';
 
 interface ReviewItemProps extends Review {
   type: FoodCourt;
@@ -43,12 +43,6 @@ export default function ReviewItem({
   valueLevel,
   isBest = false,
 }: ReviewItemProps) {
-  const keywordLabels = getReviewKeywordLabels({
-    saltLevel,
-    spicyLevel,
-    portionLevel,
-    valueLevel,
-  });
   const maskedMemberName = memberName
     ? memberName.length > 1
       ? memberName.charAt(0) + '**'
@@ -128,18 +122,10 @@ export default function ReviewItem({
             ))}
           </ul>
         )}
-        {keywordLabels.length > 0 && (
-          <ul className='flex flex-wrap gap-1.5 pt-1.5 pb-1'>
-            {keywordLabels.map(label => (
-              <li
-                key={label}
-                className='rounded-full bg-[#f2f2f7] px-2.5 py-1 text-xs leading-[18px] text-[#555]'
-              >
-                {label}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ReviewKeywordChips
+          keywords={{ saltLevel, spicyLevel, portionLevel, valueLevel }}
+          className='pt-1.5 pb-1'
+        />
         <p className='text-sm leading-[21px] font-medium break-words whitespace-pre-wrap text-[#191919]'>
           {content}
         </p>
