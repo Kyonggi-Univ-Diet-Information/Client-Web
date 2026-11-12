@@ -46,8 +46,9 @@ import { createMutateMatcher, reviewKeys } from '@/shared/lib/queryKey';
 import type { ServerActionResult } from '@/shared/lib/serverAction';
 import { isPhotoReviewEnabled } from '@/shared/utils/version';
 
-import CameraIcon from '../../../public/icons/icon-camera-lg.svg';
+import CameraIcon from '../../../public/icons/icon-camera.svg';
 import CheckIcon from '../../../public/icons/icon-check.svg';
+import MoodGoodIcon from '../../../public/icons/icon-mood-good.svg';
 import StarEmptyLgIcon from '../../../public/icons/icon-star-empty-lg.svg';
 import StarFilledLgIcon from '../../../public/icons/icon-star-filled-lg.svg';
 
@@ -111,8 +112,6 @@ export default function ReviewWriteForm({
       keywords: EMPTY_REVIEW_KEYWORDS,
     },
   });
-  // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
-  const [canAttachPhoto, setCanAttachPhoto] = useState(false);
   const [state, formAction, isPending] = useActionState(
     async (prev: ServerActionResult | null, values: ReviewWriteValues) => {
       const formData = new FormData();
@@ -150,10 +149,6 @@ export default function ReviewWriteForm({
     },
     null,
   );
-
-  useEffect(() => {
-    setCanAttachPhoto(isPhotoReviewEnabled());
-  }, []);
 
   useEffect(() => {
     if (attemptRef.current) return;
@@ -282,30 +277,12 @@ export default function ReviewWriteForm({
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className='flex flex-1 flex-col'>
-        <section className='flex flex-1 flex-col bg-white'>
-          <div className='flex flex-col gap-1.5 px-5 pt-7 pb-[13px]'>
-            <h2 className='text-lg leading-7 font-semibold tracking-[-0.48px] text-[#191919]'>
-              더 남기고 싶은 내용이 있나요?
-            </h2>
-            <p className='text-sm leading-[21px] tracking-[-0.28px] text-[#767676]'>
-              {canAttachPhoto
-                ? '사진과 한줄 후기는 선택이에요.'
-                : '한줄 후기는 선택이에요.'}
-            </p>
-          </div>
-          <div className='h-px bg-[#f3f4f6]' />
-          <div className='flex flex-col gap-7 px-5 pt-[15px] pb-8'>
-            {canAttachPhoto && (
-              <>
-                <PhotoField />
-                <div className='h-px bg-[#f3f4f6]' />
-              </>
-            )}
-            <ContentField />
-          </div>
+        <section className='flex flex-col gap-4 bg-white px-5 py-4'>
+          <ContentField />
+          <PhotoField />
         </section>
 
-        <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white/35 px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
+        <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
           <SubmitButton isPending={isPending} />
         </div>
       </form>
@@ -389,22 +366,26 @@ function ContentField() {
   const content = useWatch({ control, name: 'content' });
 
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-4'>
       <div className='flex items-center gap-1.5'>
         <h2 className='text-lg leading-6 font-semibold tracking-[-0.32px] text-[#191919]'>
-          한줄 후기를 남겨주세요
+          더 남길 이야기가 있나요?
         </h2>
-        <span className='text-xs leading-[18px] text-[#999]'>선택</span>
       </div>
-      <div className='relative h-[126px] rounded-xl border border-[#e5e7eb] bg-white'>
+      <div className='relative h-[152px] rounded-lg border border-[#e5e7eb] bg-white'>
         <textarea
           {...register('content')}
           maxLength={MAX_CONTENT_LENGTH}
-          placeholder='먹어본 느낌을 한 줄로 남겨주세요.'
-          className='size-full resize-none rounded-xl px-4 pt-3 pb-8 text-[15px] leading-6 text-[#191919] outline-none placeholder:text-[#191919]/50'
+          placeholder='식감, 재료 등 음식에 대한 리뷰를 자유롭게 적어주세요'
+          className='size-full resize-none rounded-lg px-3.5 pt-3 pb-10 text-sm leading-6 tracking-[-0.28px] text-[#191919] outline-none placeholder:text-[#999]'
         />
-        <p className='absolute right-4 bottom-3 text-xs leading-[18px] text-[#999]'>
-          {content.length}/{MAX_CONTENT_LENGTH}
+        <p className='absolute right-3 bottom-3 text-xs leading-[18px]'>
+          <span className='text-[#767676]'>
+            {content.length.toLocaleString()}{' '}
+          </span>
+          <span className='text-[#ccc]'>
+            / {MAX_CONTENT_LENGTH.toLocaleString()}
+          </span>
         </p>
       </div>
     </div>
@@ -415,7 +396,13 @@ function PhotoField() {
   const { control, getValues, setValue } = useFormContext<ReviewWriteValues>();
   const photos = useWatch({ control, name: 'photos' });
   const [isPicking, setIsPicking] = useState(false);
+  // 앱 여부는 window로만 알 수 있어서 마운트 후에 판단해요
+  const [canAttachPhoto, setCanAttachPhoto] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setCanAttachPhoto(isPhotoReviewEnabled());
+  }, []);
 
   // 사진은 비동기로 들어오니 그 사이 바뀐 값을 덮어쓰지 않도록 최신 값에 더해요
   const addPhotos = (dataUrls: string[]) => {
@@ -447,8 +434,10 @@ function PhotoField() {
     addPhotos(await Promise.all(files.map(readAsDataUrl)));
   };
 
+  if (!canAttachPhoto) return null;
+
   return (
-    <div className='flex flex-col gap-3'>
+    <>
       {photos.length > 0 && (
         <ul className='flex gap-2'>
           {photos.map((src, i) => (
@@ -481,13 +470,12 @@ function PhotoField() {
         type='button'
         onClick={handleAttachClick}
         disabled={photos.length >= MAX_PHOTOS || isPicking}
-        className='flex w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-[0.8px] border-dashed border-[#e5e7eb] py-8 disabled:cursor-default disabled:opacity-50'
+        className='flex h-[46px] cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-[#767676] bg-white text-sm leading-[21px] font-medium text-[#191919] disabled:cursor-default disabled:opacity-50'
       >
-        <span className='flex size-12 items-center justify-center rounded-full bg-[#f3f4f6]'>
-          <CameraIcon />
-        </span>
-        <span className='text-[15px] leading-[22.5px] font-medium text-[#6b7280]'>
-          사진 {photos.length}/{MAX_PHOTOS}
+        <CameraIcon />
+        <span>사진 첨부하기</span>
+        <span className='tracking-[-0.28px]'>
+          {photos.length}/{MAX_PHOTOS}
         </span>
       </button>
       <input
@@ -498,10 +486,11 @@ function PhotoField() {
         hidden
         onChange={handleFileChange}
       />
-      <p className='text-[13px] leading-[19.5px] text-[#767676]'>
-        실제 메뉴 사진은 다른 학생에게 도움이 돼요!
+      <p className='flex items-center gap-2 rounded-lg bg-[#f7f8fa] p-3 text-[13px] leading-[19px] tracking-[-0.26px] text-[#767676]'>
+        <MoodGoodIcon />
+        직접 찍은 음식 사진은 메뉴 선택에 도움이 돼요!
       </p>
-    </div>
+    </>
   );
 }
 
