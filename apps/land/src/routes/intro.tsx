@@ -54,16 +54,9 @@ export default function Intro() {
         <div class='absolute bottom-0 left-[5%] -z-10 h-80 w-80 rounded-full bg-blue-50/50 blur-[80px]'></div>
 
         <div class='mx-auto max-w-7xl'>
-          <div class='flex flex-col items-center gap-16 lg:flex-row'>
+          <div class='flex flex-col items-center gap-16 lg:flex-row lg:items-start'>
             <div class='flex flex-1 flex-col items-center text-center lg:items-start lg:text-left'>
-              <div class='text-primary-500 mb-8 inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50/50 px-4 py-1.5 text-xs font-bold backdrop-blur-sm'>
-                <span class='relative flex h-2 w-2'>
-                  <span class='bg-primary-500 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75'></span>
-                  <span class='bg-primary-500 relative inline-flex h-2 w-2 rounded-full'></span>
-                </span>
-                2026 경기대학교 학식의 혁신
-              </div>
-              <h1 class='mb-8 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl'>
+              <h1 class='mb-8 text-4xl font-extrabold leading-tight md:text-6xl'>
                 오늘의 학식, <br />
                 더 이상 고민 말고 <br />
                 <span class='text-primary-500 font-gyeonggiTitleBold'>기밥</span>하세요
