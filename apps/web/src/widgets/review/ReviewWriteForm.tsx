@@ -71,7 +71,7 @@ interface ReviewWriteFormProps {
 }
 
 interface ReviewWriteValues {
-  rating: number;
+  rating: number | null;
   content: string;
   photos: string[];
   keywords: ReviewKeywords;
@@ -105,7 +105,7 @@ export default function ReviewWriteForm({
   const form = useForm<ReviewWriteValues>({
     mode: 'onChange',
     defaultValues: {
-      rating: 3,
+      rating: null,
       content: '',
       photos: [],
       keywords: EMPTY_REVIEW_KEYWORDS,
@@ -183,7 +183,7 @@ export default function ReviewWriteForm({
         trackEvent('review_submit_success', {
           ...getFunnelParams(),
           menu_id: String(foodId),
-          rating,
+          rating: rating ?? 0,
           content_length: content.length,
           language: navigator.language || 'ko',
           duration_sec: Math.round((Date.now() - attempt.startedAt) / 1000),
@@ -208,10 +208,12 @@ export default function ReviewWriteForm({
   });
 
   const keywords = useWatch({ control: form.control, name: 'keywords' });
+  const rating = useWatch({ control: form.control, name: 'rating' });
   const hasKeyword = Object.values(keywords).some(level => level !== null);
-  // 키워드 없이 상세 단계 주소로 바로 들어오면 첫 단계부터 시작해요
+  const canProceed = rating !== null && hasKeyword;
+  // 별점·키워드 없이 상세 단계 주소로 바로 들어오면 첫 단계부터 시작해요
   const step =
-    searchParams.get('step') === 'detail' && hasKeyword ? 'detail' : 'keyword';
+    searchParams.get('step') === 'detail' && canProceed ? 'detail' : 'keyword';
 
   const menuSummary = (
     <div className='flex gap-2.5'>
@@ -256,7 +258,7 @@ export default function ReviewWriteForm({
           <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
             <button
               type='button'
-              disabled={!hasKeyword}
+              disabled={!canProceed}
               onClick={() => {
                 const attempt = attemptRef.current;
                 if (attempt && !attempt.step1Completed) {
@@ -314,7 +316,7 @@ export default function ReviewWriteForm({
 function RatingField() {
   const { field } = useController<ReviewWriteValues, 'rating'>({
     name: 'rating',
-    rules: { min: 1 },
+    rules: { validate: v => v !== null },
   });
 
   return (
@@ -329,7 +331,7 @@ function RatingField() {
           onClick={() => field.onChange(i + 1)}
           className='-mr-0.5 cursor-pointer last:mr-0'
         >
-          {i < field.value ? <StarFilledLgIcon /> : <StarEmptyLgIcon />}
+          {i < (field.value ?? 0) ? <StarFilledLgIcon /> : <StarEmptyLgIcon />}
         </button>
       ))}
     </div>
