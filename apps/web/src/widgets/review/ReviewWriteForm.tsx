@@ -305,7 +305,7 @@ export default function ReviewWriteForm({
           </div>
         </section>
 
-        <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
+        <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white/35 px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
           <SubmitButton isPending={isPending} />
         </div>
       </form>
