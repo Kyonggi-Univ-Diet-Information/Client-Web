@@ -13,6 +13,7 @@ import {
 
 import { ErrorProvider, SWRProvider } from '@/widgets/providers';
 
+import { ADSENSE_CLIENT_ID } from '@/shared/lib/adsense';
 import { GA4_MEASUREMENT_ID } from '@/shared/lib/ga4';
 import { SAFE_AREA_SCRIPT } from '@/shared/lib/safeArea';
 
@@ -54,6 +55,10 @@ export default function RootLayout({ children }: Props) {
         <meta
           name='naver-site-verification'
           content='93445f88fb84c2015b74933d1b6deabbba65014e'
+        />
+        <meta
+          name='google-adsense-account'
+          content={ADSENSE_CLIENT_ID}
         />
         <meta
           name='google-site-verification'
