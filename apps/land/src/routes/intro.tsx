@@ -75,12 +75,12 @@ export default function Intro() {
                 만나보세요.
               </p>
 
-              <div class='flex w-full flex-col gap-4 sm:w-auto sm:flex-row'>
+              <div class='flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-3 md:gap-4'>
                 <a
                   href={APP_STORE_URL}
                   target='_blank'
                   rel='noopener noreferrer'
-                  class='bg-primary-500 py-4.5 flex flex-1 cursor-pointer items-center justify-center gap-3 rounded-2xl px-8 font-bold text-white shadow-lg shadow-primary-100 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary-200 active:scale-95 sm:flex-none'
+                  class='bg-primary-500 py-4.5 flex cursor-pointer items-center justify-center gap-3 rounded-2xl whitespace-nowrap px-5 font-bold md:px-8 text-white shadow-lg shadow-primary-100 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary-200 active:scale-95'
                 >
                   <img
                     src='/icons/app-store.png'
@@ -96,7 +96,7 @@ export default function Intro() {
                   href={PLAY_STORE_URL}
                   target='_blank'
                   rel='noopener noreferrer'
-                  class='py-4.5 flex flex-1 cursor-pointer items-center justify-center gap-3 rounded-2xl bg-grey-900 px-8 font-bold text-white shadow-lg shadow-grey-200 transition-all hover:scale-105 hover:shadow-xl hover:shadow-grey-300 active:scale-95 sm:flex-none'
+                  class='py-4.5 flex cursor-pointer items-center justify-center gap-3 rounded-2xl bg-grey-900 whitespace-nowrap px-5 font-bold md:px-8 text-white shadow-lg shadow-grey-200 transition-all hover:scale-105 hover:shadow-xl hover:shadow-grey-300 active:scale-95'
                 >
                   <img
                     src='/icons/google-play.png'
@@ -106,6 +106,32 @@ export default function Intro() {
                   <div class='flex flex-col items-start leading-none'>
                     <span class='text-[10px] opacity-80'>Get it on</span>
                     <span class='text-lg'>Google Play</span>
+                  </div>
+                </a>
+                <a
+                  href='/web'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='flex cursor-pointer items-center justify-center gap-3 rounded-2xl border border-grey-200 py-[17px] bg-white whitespace-nowrap px-5 font-bold md:px-8 text-grey-900 shadow-lg shadow-grey-100 transition-all hover:scale-105 hover:shadow-xl hover:shadow-grey-200 active:scale-95'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='size-5'
+                    aria-hidden='true'
+                  >
+                    <circle cx='12' cy='12' r='10' />
+                    <path d='M2 12h20' />
+                    <path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z' />
+                  </svg>
+                  <div class='flex flex-col items-start leading-none'>
+                    <span class='text-[10px] opacity-60'>설치 없이 바로</span>
+                    <span class='text-lg'>웹에서 사용하기</span>
                   </div>
                 </a>
               </div>
@@ -125,7 +151,7 @@ export default function Intro() {
               </div> */}
             </div>
 
-            <div class='relative flex flex-1 items-center justify-center lg:justify-end'>
+            <div class='relative flex flex-1 items-center justify-center lg:flex-none lg:justify-end'>
               <ScreenshotCarousel />
             </div>
           </div>

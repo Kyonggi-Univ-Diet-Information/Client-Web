@@ -3,5 +3,12 @@
   "outputDirectory": ".output/public",
   "installCommand": "pnpm install",
   "framework": null,
-  "devCommand": "pnpm run dev"
+  "devCommand": "pnpm run dev",
+  "redirects": [
+    {
+      "source": "/web",
+      "destination": "https://kiryong-app.vercel.app/",
+      "permanent": false
+    }
+  ]
 }
