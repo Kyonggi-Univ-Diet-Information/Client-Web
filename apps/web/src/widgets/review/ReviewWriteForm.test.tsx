@@ -34,8 +34,9 @@ jest.mock('@/features/review/api/submitReview');
 jest.mock('@/features/review/api/uploadReviewImages');
 jest.mock('@/shared/utils/version');
 jest.mock('@/shared/lib/ga4', () => ({ trackEvent: jest.fn() }));
-jest.mock('../../../public/icons/icon-camera-lg.svg', () => () => null);
+jest.mock('../../../public/icons/icon-camera.svg', () => () => null);
 jest.mock('../../../public/icons/icon-check.svg', () => () => null);
+jest.mock('../../../public/icons/icon-mood-good.svg', () => () => null);
 jest.mock('../../../public/icons/icon-star-empty-lg.svg', () => () => null);
 jest.mock('../../../public/icons/icon-star-filled-lg.svg', () => () => null);
 
@@ -56,8 +57,12 @@ const renderForm = () => {
   return result;
 };
 
-// 첫 단계에서 키워드를 고르고 다음 단계로 넘어가요
-const goToDetailStep = async (user: ReturnType<typeof userEvent.setup>) => {
+// 첫 단계에서 별점과 키워드를 고르고 다음 단계로 넘어가요
+const goToDetailStep = async (
+  user: ReturnType<typeof userEvent.setup>,
+  rating = 3,
+) => {
+  await user.click(screen.getByRole('radio', { name: `${rating}점` }));
   await user.click(screen.getByRole('button', { name: '싱거워요' }));
   await user.click(screen.getByRole('button', { name: '다음' }));
 };
@@ -81,7 +86,13 @@ describe('ReviewWriteForm', () => {
     (isPhotoReviewEnabled as jest.Mock).mockReturnValue(false);
   });
 
-  it('키워드를 하나 이상 골라야 다음 단계로 넘어갈 수 있다', async () => {
+  it('별점을 고르지 않은 상태로 시작한다', () => {
+    renderForm();
+
+    expect(screen.queryAllByRole('radio', { checked: true })).toHaveLength(0);
+  });
+
+  it('별점과 키워드를 모두 골라야 다음 단계로 넘어갈 수 있다', async () => {
     const user = userEvent.setup();
     renderForm();
     const nextButton = screen.getByRole('button', { name: '다음' });
@@ -89,6 +100,9 @@ describe('ReviewWriteForm', () => {
     expect(nextButton).toBeDisabled();
 
     await user.click(screen.getByRole('button', { name: '싱거워요' }));
+    expect(nextButton).toBeDisabled();
+
+    await user.click(screen.getByRole('radio', { name: '4점' }));
     expect(nextButton).toBeEnabled();
 
     await user.click(nextButton);
@@ -114,18 +128,25 @@ describe('ReviewWriteForm', () => {
       name: '리뷰 등록하기',
     });
     await waitFor(() => expect(submitButton).toBeEnabled());
-    expect(screen.getByText('0/100')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (_, el) => el?.tagName === 'P' && el.textContent === '0 / 100',
+      ),
+    ).toBeInTheDocument();
 
     await user.type(screen.getByRole('textbox'), '맛있어요');
-    expect(screen.getByText('4/100')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (_, el) => el?.tagName === 'P' && el.textContent === '4 / 100',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('입력한 별점, 키워드, 내용을 제출하고 상세 화면으로 돌아간다', async () => {
     const user = userEvent.setup();
     renderForm();
 
-    await user.click(screen.getByRole('radio', { name: '5점' }));
-    await goToDetailStep(user);
+    await goToDetailStep(user, 5);
     await user.type(await screen.findByRole('textbox'), '맛있어요');
     await user.click(screen.getByRole('button', { name: '리뷰 등록하기' }));
 
