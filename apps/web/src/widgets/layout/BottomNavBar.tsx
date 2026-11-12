@@ -3,51 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { FOOD_COURT_ID } from '@/shared/api';
-import {
-  FOOD_COURT_RESTAURANTS,
-  RESTAURANT_ID_BY_NAME,
-} from '@/shared/constants/campus/restaurant';
 import { cn } from '@/shared/lib';
 
-import Home from '../../../public/icons/icon-home.svg';
-import Restaurant2 from '../../../public/icons/icon-restaurant2.svg';
-import Review from '../../../public/icons/icon-review.svg';
-import User from '../../../public/icons/icon-user.svg';
+import { isNavItemActive, NAV_ITEMS } from './navItems';
 
 export default function BottomNavBar() {
   const pathname = usePathname();
-
-  const defaultFoodCourtId = FOOD_COURT_ID.KYONGSUL;
-  const firstRestaurant = FOOD_COURT_RESTAURANTS.KYONGSUL[0];
-  const defaultCampusHref = `/campus/${defaultFoodCourtId}/${RESTAURANT_ID_BY_NAME[firstRestaurant]}`;
-
-  const navItems = [
-    {
-      href: '/',
-      label: '홈',
-      icon: <Home className='size-6' />,
-      alt: 'home',
-    },
-    {
-      href: defaultCampusHref,
-      label: '교내식당',
-      icon: <Restaurant2 className='size-6' />,
-      alt: 'restaurant2',
-    },
-    {
-      href: '/review',
-      label: '리뷰',
-      icon: <Review className='size-6' />,
-      alt: 'review',
-    },
-    {
-      href: '/user',
-      label: '마이',
-      icon: <User className='size-6' />,
-      alt: 'user',
-    },
-  ];
 
   if (pathname.startsWith('/search')) {
     return null;
@@ -62,12 +23,9 @@ export default function BottomNavBar() {
 
   // 구버전 iOS 앱은 네이티브 SafeAreaView가 하단 inset을 일부 상쇄해서(paddingBottom -24) 최소 24px을 직접 확보해요
   return (
-    <div className='fixed bottom-0 z-50 grid w-full grid-cols-4 items-center justify-items-center border-t border-grey-50 bg-white/70 px-[23px] pb-(--safe-area-bottom) backdrop-blur-md [html[data-native-inset=ios]_&]:pb-6'>
-      {navItems.map(item => {
-        const isActive =
-          item.href === '/'
-            ? pathname === '/'
-            : pathname.startsWith(`/${item.href.split('/')[1]}`);
+    <div className='fixed bottom-0 z-50 grid lg:hidden w-full grid-cols-4 items-center justify-items-center border-t border-grey-50 bg-white/70 px-[23px] pb-(--safe-area-bottom) backdrop-blur-md [html[data-native-inset=ios]_&]:pb-6'>
+      {NAV_ITEMS.map(item => {
+        const isActive = isNavItemActive(pathname, item.href);
 
         return (
           <Link

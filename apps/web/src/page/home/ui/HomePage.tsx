@@ -7,7 +7,9 @@ import { fetchDormMenu } from '@/features/dorm/api/fetchDormMenu';
 
 import { FOOD_COURT_ID } from '@/shared/api';
 import { RESTAURANT_ID_BY_NAME } from '@/shared/constants/campus/restaurant';
+import { GoogleAdSlot } from '@/shared/ui';
 
+import CampusFoodCourtGrid from './CampusFoodCourtGrid';
 import CampusFoodCourtSwitcher from './CampusFoodCourtSwitcher';
 import ReviewCallout from './ReviewCallout';
 
@@ -38,20 +40,33 @@ export default async function HomePage() {
   ];
 
   return (
-    <PageContainer className='gap-0 bg-grey-100 p-0'>
-      <Section className='md:px-gutter px-4 pt-[calc(5rem+var(--safe-area-top))]'>
-        <CampusFoodCourtSwitcher campusFoodCourts={CampusFoodCourts} />
-      </Section>
-      <Section className='md:px-gutter p-4'>
-        <ReviewLinkButton />
-      </Section>
-      <div className='flex flex-1 flex-col bg-white pb-[calc(5rem+var(--safe-area-bottom))]'>
-        <header className='md:px-gutter pt-[18px] pr-5 pb-3.5 pl-6'>
-          <h2 className='text-lg leading-[26px] font-semibold tracking-[-0.36px] text-grey-900'>
-            이번주 기숙사 메뉴
-          </h2>
-        </header>
-        <DormSection dormMenu={dormMenu} />
+    <PageContainer className='gap-0 bg-grey-100 p-0 lg:px-0'>
+      <div className='lg:px-gutter flex flex-1 flex-col lg:mx-auto lg:grid lg:w-full lg:max-w-[1180px] lg:grid-cols-3 lg:content-start lg:gap-x-4 lg:gap-y-6 lg:pt-[calc(6rem+var(--safe-area-top))] lg:pb-16'>
+        <Section className='md:px-gutter px-4 pt-[calc(5rem+var(--safe-area-top))] lg:col-span-3 lg:p-0'>
+          <div className='lg:hidden'>
+            <CampusFoodCourtSwitcher campusFoodCourts={CampusFoodCourts} />
+          </div>
+          <div className='hidden lg:flex lg:flex-col lg:gap-3'>
+            <h2 className='px-1 text-lg leading-[26px] font-semibold tracking-[-0.36px] text-grey-900'>
+              교내 식당
+            </h2>
+            <CampusFoodCourtGrid campusFoodCourts={CampusFoodCourts} />
+          </div>
+        </Section>
+        <Section className='md:px-gutter p-4 lg:sticky lg:top-[calc(5rem+var(--safe-area-top))] lg:col-start-3 lg:row-start-2 lg:p-0'>
+          <ReviewLinkButton />
+          <GoogleAdSlot
+            slotId={process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT_ID}
+          />
+        </Section>
+        <div className='flex flex-1 flex-col bg-white pb-[calc(5rem+var(--safe-area-bottom))] lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:overflow-hidden lg:rounded-2xl lg:pb-6'>
+          <header className='md:px-gutter pt-[18px] pr-5 pb-3.5 pl-6 lg:px-6'>
+            <h2 className='text-lg leading-[26px] font-semibold tracking-[-0.36px] text-grey-900'>
+              이번주 기숙사 메뉴
+            </h2>
+          </header>
+          <DormSection dormMenu={dormMenu} className='lg:px-6' />
+        </div>
       </div>
     </PageContainer>
   );

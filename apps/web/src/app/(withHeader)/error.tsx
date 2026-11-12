@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className='min-h-screen p-8'>
+    <div className='min-h-screen p-8 lg:mx-auto lg:w-full lg:max-w-[1180px] lg:px-gutter'>
       <div className='flex flex-col gap-4'>
         <h2 className='text-2xl font-bold'>예상치 못한 오류가 발생했어요</h2>
         <p className='text-grey-600'>
