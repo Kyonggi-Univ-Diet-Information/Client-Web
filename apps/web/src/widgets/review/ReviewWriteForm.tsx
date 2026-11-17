@@ -231,26 +231,28 @@ export default function ReviewWriteForm({
   if (step === 'keyword') {
     return (
       <FormProvider {...form}>
-        <div className='flex flex-1 flex-col'>
-          <section className='flex flex-col gap-[38px] bg-white px-5 pt-[30px] pb-8'>
-            <h2 className='flex gap-0.5 text-[28px] leading-8 font-semibold tracking-[-0.48px] text-[#333]'>
-              <span>
-                식사는
-                <br />
-                어떠셨나요?
-              </span>
-              <span className='text-2xl leading-normal font-bold text-[#ff6b2c]'>
-                *
-              </span>
-            </h2>
-            {menuSummary}
-          </section>
+        <div className='flex min-h-0 flex-1 flex-col'>
+          <div className='min-h-0 flex-1 overflow-y-auto overscroll-contain'>
+            <section className='flex flex-col gap-[38px] bg-white px-5 pt-[30px] pb-8'>
+              <h2 className='flex gap-0.5 text-[28px] leading-8 font-semibold tracking-[-0.48px] text-[#333]'>
+                <span>
+                  식사는
+                  <br />
+                  어떠셨나요?
+                </span>
+                <span className='text-2xl leading-normal font-bold text-[#ff6b2c]'>
+                  *
+                </span>
+              </h2>
+              {menuSummary}
+            </section>
 
-          <section className='border-t-2 border-[#f9f9f9] bg-white px-5 pt-[46px] pb-40'>
-            <KeywordField />
-          </section>
+            <section className='border-t-2 border-[#f9f9f9] bg-white px-5 pt-[46px] pb-40'>
+              <KeywordField />
+            </section>
+          </div>
 
-          <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
+          <div className='shrink-0 border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
             <button
               type='button'
               disabled={!canProceed}
@@ -276,13 +278,15 @@ export default function ReviewWriteForm({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={onSubmit} className='flex flex-1 flex-col'>
-        <section className='flex flex-col gap-4 bg-white px-5 py-4'>
-          <ContentField />
-          <PhotoField />
-        </section>
+      <form onSubmit={onSubmit} className='flex min-h-0 flex-1 flex-col'>
+        <div className='min-h-0 flex-1 overflow-y-auto overscroll-contain'>
+          <section className='flex flex-col gap-4 bg-white px-5 py-4'>
+            <ContentField />
+            <PhotoField />
+          </section>
+        </div>
 
-        <div className='sticky bottom-0 mt-auto border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
+        <div className='shrink-0 border-t border-[#f1f1f1] bg-white px-5 pt-3 pb-[calc(24px+var(--safe-area-bottom))]'>
           <SubmitButton isPending={isPending} />
         </div>
       </form>

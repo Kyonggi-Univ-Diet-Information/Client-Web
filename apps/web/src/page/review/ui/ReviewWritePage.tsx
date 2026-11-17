@@ -42,7 +42,9 @@ export default async function ReviewWritePage({
   const menuDetail = await fetchCampusMenuDetail(foodCourt, foodId);
 
   return (
-    <div className='mx-auto flex min-h-dvh w-full max-w-md flex-col bg-[#fefefe]'>
+    // iOS WKWebView에서 문서 스크롤 + sticky 하단바는 바운스·키보드 노출 때 페이지 전체가 밀려서
+    // 화면 높이에 고정하고 본문만 내부에서 스크롤해요
+    <div className='mx-auto flex h-dvh w-full max-w-md flex-col overflow-hidden bg-[#fefefe]'>
       <ReviewWriteHeader />
       <ReviewWriteForm
         foodCourt={foodCourt}
